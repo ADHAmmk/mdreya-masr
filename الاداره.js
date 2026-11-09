@@ -574,12 +574,22 @@ function getFilteredSchools() {
 }
 
 function renderSchoolCard(school) {
-    const siteUrl = `school.html?id=${encodeURIComponent(school.id)}`;
+    const configuredLink = typeof school.link === "string" ? school.link.trim() : "";
+    const keepExistingSite = String(school.id) === "4" &&
+        /^https:\/\/al-edara-esnblawen\.vercel\.app(?:\/|$)/i.test(configuredLink);
+    const siteUrl = keepExistingSite
+        ? configuredLink
+        : `school.html?id=${encodeURIComponent(school.id)}`;
+    const targetAttr = keepExistingSite ? 'target="_blank" rel="noopener noreferrer"' : "";
+    const adminLogo = school.type === "administration"
+        ? window.dakahliaAdministrationLogos[String(school.id)]
+        : "";
 
     return `
         <article class="school-card" data-id="${school.id}">
             <div class="card-media">
                 <img src="${school.image}" alt="${school.imageAlt || school.name}" loading="lazy" onerror="this.onerror=null;this.src='re.jpg'">
+                ${adminLogo ? `<img class="admin-logo-badge" src="${adminLogo}" alt="شعار ${school.name}" loading="lazy">` : ""}
                 <span class="card-type-tag">
                     <i class="fa-solid fa-graduation-cap"></i>
                     ${school.typeName}
@@ -591,7 +601,7 @@ function renderSchoolCard(school) {
             </div>
             
             <div class="card-body">
-                <h3 class="card-title" title="${school.name}"><a href="${siteUrl}">${school.name}</a></h3>
+                <h3 class="card-title" title="${school.name}"><a href="${siteUrl}" ${targetAttr}>${school.name}</a></h3>
                 
                 <div class="card-meta-list">
                     <div class="meta-item">
@@ -609,9 +619,9 @@ function renderSchoolCard(school) {
                 </div>
 
                 <div class="card-actions">
-                    <a href="${siteUrl}" class="btn-card-visit" title="عرض موقع ${school.name}">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        عرض الموقع
+                    <a href="${siteUrl}" ${targetAttr} class="btn-card-visit" title="عرض موقع ${school.name}">
+                        <i class="fa-solid ${keepExistingSite ? "fa-arrow-up-right-from-square" : "fa-building-columns"}"></i>
+                        ${keepExistingSite ? "زيارة الموقع الحالي" : "عرض صفحة الإدارة"}
                     </a>
                 </div>
             </div>

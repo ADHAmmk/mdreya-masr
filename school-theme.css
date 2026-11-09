@@ -1,0 +1,341 @@
+.scroll-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 10000;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--primary-light), var(--gold));
+    box-shadow: 0 0 12px rgba(var(--gold-rgb), 0.6);
+    transform: scaleX(0);
+    transform-origin: right center;
+    pointer-events: none;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+}
+
+.top-notice-bar {
+    background: var(--primary-dark);
+    border-bottom-color: rgba(var(--gold-rgb), 0.35);
+}
+
+.notice-badge {
+    color: var(--primary-dark);
+}
+
+.header-main {
+    background: var(--primary-dark);
+    border-bottom-color: rgba(var(--gold-rgb), 0.4);
+}
+
+.brand-logo {
+    border-color: var(--gold);
+}
+
+.hero-section {
+    background-image:
+        linear-gradient(135deg,
+            rgba(var(--primary-dark-rgb), 0.95) 0%,
+            rgba(var(--primary-rgb), 0.88) 55%,
+            rgba(var(--primary-dark-rgb), 0.78) 100%),
+        var(--admin-background-image);
+}
+
+.hero-section::before {
+    background: radial-gradient(circle at 15% 20%, rgba(var(--gold-rgb), 0.18) 0%, transparent 45%);
+    animation: hero-glow-drift 12s ease-in-out infinite alternate;
+}
+
+.hero-content,
+.hero-emblem-card {
+    animation: hero-arrive 750ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.hero-emblem-card {
+    transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
+}
+
+.hero-emblem-card:hover {
+    transform: translateY(-7px) rotate(0.5deg);
+    border-color: rgba(var(--gold-rgb), 0.7);
+    box-shadow: 0 26px 56px rgba(0, 0, 0, 0.32), 0 0 24px rgba(var(--gold-rgb), 0.16);
+}
+
+.hero-pill {
+    border-color: rgba(var(--gold-rgb), 0.4);
+    color: var(--gold);
+}
+
+.hero-title > .hero-primary-title {
+    color: #fff;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+}
+
+.hero-title > span:not(.hero-primary-title) {
+    color: var(--gold);
+    background: linear-gradient(135deg, var(--gold-hover), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+    color: var(--primary-dark);
+}
+
+.hero-buttons a,
+.btn-header-cta,
+.btn-card-visit,
+.back-to-top {
+    transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease, background-color 220ms ease;
+}
+
+.hero-buttons a:hover,
+.btn-header-cta:hover,
+.btn-card-visit:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+}
+
+.hero-buttons a:active,
+.btn-header-cta:active,
+.btn-card-visit:active,
+.category-chip:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.hero-buttons a:focus-visible,
+.btn-header-cta:focus-visible,
+.btn-card-visit:focus-visible,
+.category-chip:focus-visible,
+.view-btn:focus-visible,
+.back-to-top:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+.btn-header-cta {
+    background: var(--primary);
+}
+
+.nav-links li a.active {
+    background: rgba(var(--gold-rgb), 0.16);
+}
+
+.nav-links li a.active::after {
+    background: var(--gold);
+}
+
+.card-type-tag {
+    color: var(--primary-dark);
+    border-color: rgba(var(--primary-rgb), 0.28);
+}
+
+.administration-media {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.administration-media > i {
+    color: rgba(255, 255, 255, 0.62);
+    transition: transform 350ms ease, color 350ms ease;
+}
+
+.school-card:hover .administration-media > i {
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-4px) scale(1.12);
+}
+
+.card-status-badge {
+    border-color: rgba(var(--gold-rgb), 0.35);
+}
+
+.stat-icon {
+    background: var(--primary-soft);
+}
+
+.filter-count-badge {
+    background: var(--primary-soft);
+}
+
+.filter-count-badge span {
+    color: var(--gold);
+}
+
+.service-icon-wrap {
+    background: var(--primary-soft);
+}
+
+.service-card:hover .service-link i {
+    color: var(--gold);
+}
+
+.about-overlay-card {
+    background: rgba(var(--primary-rgb), 0.9);
+    border-color: rgba(var(--gold-rgb), 0.3);
+}
+
+.about-overlay-card i {
+    color: var(--gold);
+}
+
+.footer-main {
+    background: var(--primary-dark);
+}
+
+.footer-bottom {
+    background: rgba(var(--primary-rgb), 0.82);
+}
+
+.back-to-top {
+    box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.28);
+}
+
+.data-notice {
+    margin: 0 0 20px;
+    padding: 13px 16px;
+    border: 1px solid var(--border-color);
+    border-right: 4px solid var(--gold);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.unassigned-schools-section {
+    margin-top: 32px;
+}
+
+.unassigned-schools-section > .section-main-title {
+    margin-bottom: 14px;
+}
+
+.unassigned-notice {
+    margin-bottom: 16px;
+}
+
+.school-source {
+    align-items: flex-start;
+    font-size: 11px;
+}
+
+.school-source i {
+    margin-top: 4px;
+}
+
+.footer-home-link {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.hero-emblem-card img {
+    max-height: 120px;
+    object-fit: contain;
+}
+
+.category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.category-chip {
+    transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.category-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(var(--primary-rgb), 0.2);
+}
+
+.custom-select,
+.search-input-wrap input,
+.view-btn {
+    transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.search-input-wrap input:focus,
+.custom-select:focus {
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.14);
+}
+
+.view-btn:hover {
+    color: var(--gold);
+    transform: translateY(-1px);
+}
+
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 650ms cubic-bezier(0.2, 0.7, 0.25, 1), transform 650ms cubic-bezier(0.2, 0.7, 0.25, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.count-updated {
+    animation: count-pop 320ms ease-out;
+}
+
+.school-card {
+    transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.school-card .card-title,
+.school-card .meta-item,
+.stat-icon,
+.service-icon-wrap {
+    transition: color 220ms ease, transform 220ms ease;
+}
+
+.school-card:hover .card-title {
+    color: var(--gold);
+}
+
+.service-card:hover .service-icon-wrap,
+.stat-item:hover .stat-icon {
+    transform: translateY(-3px) rotate(-4deg);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+@keyframes hero-arrive {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-glow-drift {
+    from { transform: translate3d(-1%, -1%, 0) scale(0.96); }
+    to { transform: translate3d(2%, 2%, 0) scale(1.05); }
+}
+
+@keyframes count-pop {
+    50% { transform: scale(1.14); color: var(--gold); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+}
