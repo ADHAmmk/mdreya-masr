@@ -175,32 +175,7 @@
                 }
             }
 
-            // Navigation links
-            const adminNav = JSON.parse(localStorage.getItem('admin_navLinks') || 'null');
-            if (adminNav && Array.isArray(adminNav)) {
-                const navUl = document.querySelector('.nav-links');
-                if (navUl) {
-                    // Keep mobile header and mobile CTA, replace middle items
-                    const mobileHeader = navUl.querySelector('.mobile-drawer-header');
-                    const mobileCTA = navUl.querySelector('.mobile-drawer-cta');
-                    const homeLink = adminNav.find(link => link.href === '#hero');
-                    const homeNavItem = homeLink ? `
-                        <li><a href="${homeLink.href}" class="active">
-                            <i class="fa-solid ${homeLink.icon || 'fa-house'}"></i> ${homeLink.text}
-                        </a></li>
-                    ` : `
-                        <li><a href="#hero" class="active">
-                            <i class="fa-solid fa-house"></i> الرئيسية
-                        </a></li>
-                    `;
-                    const newLinks = adminNav.filter(link => link.href !== '#hero' && !/^(?:\.\/)?admin\.html(?:[?#].*)?$/i.test(link.href || '')).map(link => `
-                        <li><a href="${link.href}" class="awas">
-                            <i class="fa-solid ${link.icon || 'fa-circle'}"></i> ${link.text}
-                        </a></li>
-                    `).join('');
-                    navUl.innerHTML = (mobileHeader ? mobileHeader.outerHTML : '') + homeNavItem + newLinks + (mobileCTA ? mobileCTA.outerHTML : '');
-                }
-            }
+            // Navigation links handled cleanly by static HTML template with responsive drawer
 
             // Footer quick links
             const footerQL = JSON.parse(localStorage.getItem('admin_footerQuickLinks') || 'null');
@@ -523,6 +498,7 @@ let schoolsData = (function() {
 const filterState = {
     searchQuery: "",
     category: "all",
+    region: "all",
     area: "all",
     sort: "default",
     viewMode: "grid" // 'grid' | 'list'
@@ -549,11 +525,26 @@ function getFilteredSchools() {
             const locNorm = normalizeArabic(school.location);
             const typeNorm = normalizeArabic(school.typeName);
             const descNorm = normalizeArabic(school.description);
+            const areaNorm = normalizeArabic(school.area);
             return nameNorm.includes(queryNorm) || 
                    locNorm.includes(queryNorm) || 
                    typeNorm.includes(queryNorm) ||
-                   descNorm.includes(queryNorm);
+                   descNorm.includes(queryNorm) ||
+                   areaNorm.includes(queryNorm);
         });
+    }
+
+    if (filterState.region && filterState.region !== "all") {
+        const regionMap = {
+            center: ["المنصورة", "طلخا", "نبروه"],
+            south: ["السنبلاوين", "أجا", "ميت غمر", "تمي الأمديد"],
+            "north-east": ["بلقاس", "شربين", "دكرنس", "بني عبيد"],
+            lake: ["منية النصر", "الجمالية", "المنزلة", "المطرية", "ميت سلسيل"]
+        };
+        const allowedAreas = regionMap[filterState.region];
+        if (allowedAreas) {
+            result = result.filter(school => allowedAreas.includes(school.area));
+        }
     }
 
     if (filterState.category !== "all") {
@@ -581,47 +572,76 @@ function renderSchoolCard(school) {
         ? configuredLink
         : `school.html?id=${encodeURIComponent(school.id)}`;
     const targetAttr = keepExistingSite ? 'target="_blank" rel="noopener noreferrer"' : "";
-    const adminLogo = school.type === "administration"
+    const adminLogo = school.type === "administration" && window.dakahliaAdministrationLogos
         ? window.dakahliaAdministrationLogos[String(school.id)]
         : "";
+
+    const mapUrl = (school.link && school.link.includes("google.com/maps"))
+        ? school.link
+        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.name + "، محافظة الدقهلية، مصر")}`;
 
     return `
         <article class="school-card" data-id="${school.id}">
             <div class="card-media">
-                <img src="${school.image}" alt="${school.imageAlt || school.name}" loading="lazy" onerror="this.onerror=null;this.src='re.jpg'">
-                ${adminLogo ? `<img class="admin-logo-badge" src="${adminLogo}" alt="شعار ${school.name}" loading="lazy">` : ""}
-                <span class="card-type-tag">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    ${school.typeName}
-                </span>
-                <span class="card-status-badge">
-                    <span class="dot"></span>
-                    محافظه الدقهليه
-                </span>
+                <img src="${school.image}" alt="${school.name}" loading="lazy" onerror="this.onerror=null;this.src='re.jpg'">
+                <div class="card-media-overlay"></div>
+                ${adminLogo ? `
+                    <div class="admin-logo-wrapper" title="شعار ${school.name}">
+                        <img class="admin-logo-badge" src="${adminLogo}" alt="شعار ${school.name}" loading="lazy">
+                    </div>
+                ` : ""}
+                <div class="card-badges-top">
+                    <span class="card-type-tag">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        ${school.typeName || "إدارة تعليمية"}
+                    </span>
+                    <span class="card-status-badge">
+                        <span class="status-dot"></span>
+                        محافظة الدقهلية
+                    </span>
+                </div>
             </div>
             
             <div class="card-body">
-                <h3 class="card-title" title="${school.name}"><a href="${siteUrl}" ${targetAttr}>${school.name}</a></h3>
+                <div class="card-header-info">
+                    <span class="card-number-badge">إدارة رقم #${school.id}</span>
+                    <h3 class="card-title" title="${school.name}">
+                        <a href="${siteUrl}" ${targetAttr}>${school.name}</a>
+                    </h3>
+                </div>
                 
                 <div class="card-meta-list">
                     <div class="meta-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>${school.location}</span>
+                        <div class="meta-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="meta-text">
+                            <span class="meta-label">المقر والمدينة</span>
+                            <strong>${school.location}</strong>
+                        </div>
                     </div>
                     <div class="meta-item">
-                        <i class="fa-solid fa-id-card"></i>
-                        <span>نطاق الإدارة: <strong>${school.area}</strong></span>
+                        <div class="meta-icon"><i class="fa-solid fa-map-pin"></i></div>
+                        <div class="meta-text">
+                            <span class="meta-label">نطاق الإدارة</span>
+                            <strong>مركز ومدينة ${school.area}</strong>
+                        </div>
                     </div>
                     <div class="meta-item">
-                        <i class="fa-solid fa-landmark"></i>
-                        <span>إدارة تعليمية بمحافظة الدقهلية</span>
+                        <div class="meta-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="meta-text">
+                            <span class="meta-label">التبعية الإدارية</span>
+                            <span>مديرية التربية والتعليم بالدقهلية</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card-actions">
-                    <a href="${siteUrl}" ${targetAttr} class="btn-card-visit" title="عرض موقع ${school.name}">
+                    <a href="${siteUrl}" ${targetAttr} class="btn-card-visit" title="عرض صفحة وموقع ${school.name}">
                         <i class="fa-solid ${keepExistingSite ? "fa-arrow-up-right-from-square" : "fa-building-columns"}"></i>
-                        ${keepExistingSite ? "زيارة الموقع الحالي" : "عرض صفحة الإدارة"}
+                        <span>${keepExistingSite ? "زيارة البوابة المباشرة" : "تصفح الإدارة والمدارس"}</span>
+                    </a>
+                    <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-map" title="عرض موقع ${school.name} على الخريطة">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>الخريطة</span>
                     </a>
                 </div>
             </div>
@@ -644,8 +664,8 @@ function renderSchools() {
         container.innerHTML = `
             <div class="no-results">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <h3>لم نتمكن من العثور على مدارس مطابقة</h3>
-                <p>يرجى تجربة كلمات بحث أخرى أو إعادة ضبط عوامل التصفية.</p>
+                <h3>لم نتمكن من العثور على إدارات مطابقة للبحث</h3>
+                <p>يرجى تجربة كلمات بحث أخرى أو اختيار نطاق جغرافي آخر أو إعادة ضبط عوامل التصفية.</p>
                 <button class="btn-reset-filters" onclick="resetAllFilters()">
                     <i class="fa-solid fa-rotate-right"></i>
                     إعادة ضبط خيارات البحث
@@ -659,14 +679,13 @@ function renderSchools() {
     container.innerHTML = filtered.map(school => renderSchoolCard(school)).join("");
 }
 
-
-
 function openSchoolModal(schoolId) {}
 function closeSchoolModal() {}
 
 function resetAllFilters() {
     filterState.searchQuery = "";
     filterState.category = "all";
+    filterState.region = "all";
     filterState.area = "all";
     filterState.sort = "default";
 
@@ -676,17 +695,14 @@ function resetAllFilters() {
     const searchClear = document.getElementById("searchClearBtn");
     if (searchClear) searchClear.style.display = "none";
 
-    const typeSelect = document.getElementById("typeFilter");
-    if (typeSelect) typeSelect.value = "all";
-
     const areaSelect = document.getElementById("areaFilter");
     if (areaSelect) areaSelect.value = "all";
 
     const sortSelect = document.getElementById("sortFilter");
     if (sortSelect) sortSelect.value = "default";
 
-    document.querySelectorAll(".category-chip").forEach(chip => {
-        if (chip.getAttribute("data-category") === "all") {
+    document.querySelectorAll(".filter-chip").forEach(chip => {
+        if (chip.getAttribute("data-region") === "all") {
             chip.classList.add("active");
         } else {
             chip.classList.remove("active");
@@ -696,7 +712,48 @@ function resetAllFilters() {
     renderSchools();
 }
 
+function initDakahliaTheme() {
+    const savedTheme = localStorage.getItem("dakahlia_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    updateThemeIcons(savedTheme);
+
+    const toggleBtns = document.querySelectorAll(".theme-toggle-btn");
+    toggleBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("dakahlia_theme", newTheme);
+            updateThemeIcons(newTheme);
+        });
+    });
+}
+
+function updateThemeIcons(theme) {
+    document.querySelectorAll(".theme-toggle-btn i").forEach(icon => {
+        if (theme === "dark") {
+            icon.className = "fa-solid fa-sun";
+        } else {
+            icon.className = "fa-solid fa-moon";
+        }
+    });
+}
+
+function initLiveDate() {
+    const dateEl = document.getElementById("arabicDate");
+    if (!dateEl) return;
+    try {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString('ar-EG', options);
+    } catch(e) {
+        dateEl.textContent = "العام الدراسي 2026/2027";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    initDakahliaTheme();
+    initLiveDate();
     renderSchools();
 
     const searchInput = document.getElementById("schoolSearch");
@@ -724,23 +781,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    const typeSelect = document.getElementById("typeFilter");
-    if (typeSelect) {
-        typeSelect.addEventListener("change", (e) => {
-            filterState.category = e.target.value;
-            
-            document.querySelectorAll(".category-chip").forEach(chip => {
-                if (chip.getAttribute("data-category") === e.target.value) {
-                    chip.classList.add("active");
-                } else {
-                    chip.classList.remove("active");
-                }
-            });
-
-            renderSchools();
-        });
-    }
-
     const areaSelect = document.getElementById("areaFilter");
     if (areaSelect) {
         areaSelect.addEventListener("change", (e) => {
@@ -757,18 +797,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    document.querySelectorAll(".category-chip").forEach(chip => {
+    // Geographic Filter Chips
+    document.querySelectorAll(".filter-chip").forEach(chip => {
         chip.addEventListener("click", () => {
-            document.querySelectorAll(".category-chip").forEach(c => c.classList.remove("active"));
+            document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
             chip.classList.add("active");
-
-            const cat = chip.getAttribute("data-category") || "all";
-            filterState.category = cat;
-
-            if (typeSelect) {
-                typeSelect.value = cat;
-            }
-
+            filterState.region = chip.getAttribute("data-region") || "all";
             renderSchools();
         });
     });
@@ -797,7 +831,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const navBackdrop = document.getElementById("navBackdrop");
 
     function closeMobileMenu() {
-        if (navLinks) navLinks.classList.remove("open");
+        if (navLinks) {
+            navLinks.classList.remove("open", "active");
+        }
         if (navBackdrop) navBackdrop.classList.remove("show");
         if (menuToggle) {
             const icon = menuToggle.querySelector("i");
@@ -812,6 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleMobileMenu() {
         if (!navLinks) return;
         const isOpen = navLinks.classList.toggle("open");
+        navLinks.classList.toggle("active", isOpen);
         if (navBackdrop) navBackdrop.classList.toggle("show", isOpen);
         if (menuToggle) {
             const icon = menuToggle.querySelector("i");
@@ -845,7 +882,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const backToTopBtn = document.getElementById("backToTop");
     if (backToTopBtn) {
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 400) {
+            if (window.scrollY > 350) {
                 backToTopBtn.classList.add("show");
             } else {
                 backToTopBtn.classList.remove("show");

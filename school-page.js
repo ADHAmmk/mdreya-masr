@@ -378,6 +378,24 @@
     });
     backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+    const savedTheme = localStorage.getItem("dakahlia_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    const updateThemeIcon = (theme) => {
+        document.querySelectorAll(".theme-toggle-btn i").forEach(i => {
+            i.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        });
+    };
+    updateThemeIcon(savedTheme);
+    document.querySelectorAll(".theme-toggle-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-theme") || "light";
+            const next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("dakahlia_theme", next);
+            updateThemeIcon(next);
+        });
+    });
+
     renderSchools();
     revealVisible();
 })();

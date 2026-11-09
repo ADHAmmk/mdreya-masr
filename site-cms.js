@@ -106,37 +106,6 @@
         if (content.pageTitle) document.title = content.pageTitle;
         const mobileCta = document.querySelector(".mobile-drawer-cta a");
         if (mobileCta && content.heroSecondary) setText(".mobile-drawer-cta a", content.heroSecondary);
-
-        if (Array.isArray(settings.navigation)) {
-            const list = document.querySelector(".nav-links");
-            if (list) {
-                const header = list.querySelector(".mobile-drawer-header");
-                const mobileCtaItem = list.querySelector(".mobile-drawer-cta");
-                const dashboardLabel = document.createElement("li");
-                dashboardLabel.className = "nav-label-only";
-                const dashboardIcon = document.createElement("i");
-                dashboardIcon.className = "fa-solid fa-gauge-high";
-                dashboardLabel.append(dashboardIcon, document.createTextNode(" لوحة التحكم"));
-                list.replaceChildren();
-                if (header) list.append(header);
-                settings.navigation.forEach(item => {
-                    if (!item || !item.text) return;
-                    const target = safeLink(item.href);
-                    if (new URL(target, location.href).pathname.toLowerCase().endsWith("/admin.html")) return;
-                    const li = document.createElement("li");
-                    const link = document.createElement("a");
-                    link.href = target;
-                    link.className = item.href === "#hero" ? "active" : "awas";
-                    const icon = document.createElement("i");
-                    icon.className = `fa-solid ${validIcon(item.icon)}`;
-                    link.append(icon, document.createTextNode(` ${item.text}`));
-                    li.append(link);
-                    list.append(li);
-                });
-                list.append(dashboardLabel);
-                if (mobileCtaItem) list.append(mobileCtaItem);
-            }
-        }
     }
 
     function appendIcon(iconName, className) {
