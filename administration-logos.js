@@ -2,7 +2,7 @@ window.dakahliaAdministrationLogos = {
     1: "download-removebg-preview.png",
     2: "images-removebg-preview.png",
     3: "images-removebg-preview (2).png",
-    4: "images-removebg-preview (1).png",
+    4: "sanbalaween-logo.png",
     5: "images-removebg-preview (3).png",
     6: "664-removebg-preview.png",
     7: "images-removebg-preview (4).png",

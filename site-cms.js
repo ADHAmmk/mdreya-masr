@@ -92,6 +92,14 @@
         Object.entries(textTargets).forEach(([key, selector]) => {
             if (content[key] !== undefined) setText(selector, content[key]);
         });
+        if (content.ctaBtnLink !== undefined) {
+            const button = document.querySelector(".btn-header-cta");
+            if (button) button.href = safeLink(content.ctaBtnLink);
+        }
+        if (content.aboutButtonLink !== undefined) {
+            const button = document.querySelector(".about-content > div a");
+            if (button) button.href = safeLink(content.aboutButtonLink);
+        }
 
         if (content.heroTitle !== undefined || content.heroHighlight !== undefined) {
             const title = document.querySelector(".hero-title");
@@ -165,6 +173,11 @@
             const iconWrap = document.createElement("div");
             iconWrap.className = "service-icon-wrap";
             iconWrap.append(appendIcon(service.icon));
+            const category = service.category ? document.createElement("span") : null;
+            if (category) {
+                category.className = "service-category-tag";
+                category.textContent = service.category;
+            }
             const title = document.createElement("h4");
             title.className = "service-title";
             title.textContent = service.title || "";
@@ -180,8 +193,41 @@
             }
             link.append(document.createTextNode(` ${service.linkText || "عرض الخدمة"} `));
             link.append(appendIcon("fa-arrow-left"));
-            card.append(iconWrap, title, description, link);
+            card.append(iconWrap);
+            if (category) card.append(category);
+            card.append(title, description, link);
             fragment.append(card);
+        });
+        grid.replaceChildren(fragment);
+    }
+
+    function applyQuickAccess() {
+        if (!Array.isArray(settings.quickAccess)) return;
+        const grid = document.querySelector(".services-quick-access .platforms-grid");
+        if (!grid) return;
+        const fragment = document.createDocumentFragment();
+        settings.quickAccess.forEach(item => {
+            const link = document.createElement("a");
+            link.className = "platform-card";
+            link.href = safeLink(item.href);
+            if (/^https?:\/\//i.test(link.href)) {
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+            }
+            const iconWrap = document.createElement("div");
+            iconWrap.className = "platform-icon-box";
+            iconWrap.append(appendIcon(item.icon || "fa-arrow-up-right-from-square"));
+            const info = document.createElement("div");
+            info.className = "platform-info";
+            const title = document.createElement("span");
+            title.className = "platform-name";
+            title.textContent = item.text || "";
+            const description = document.createElement("span");
+            description.className = "platform-sub";
+            description.textContent = item.subtitle || "";
+            info.append(title, description);
+            link.append(iconWrap, info, appendIcon("fa-arrow-up-right-from-square", "platform-arrow"));
+            fragment.append(link);
         });
         grid.replaceChildren(fragment);
     }
@@ -255,6 +301,26 @@
                 hero.style.backgroundPosition = "center";
             }
         }
+    }
+
+    function applyVisibility() {
+        const visibilityTargets = {
+            notice: [".top-notice-bar"],
+            hero: [".hero-section"],
+            stats: [".stats-ribbon"],
+            administrations: [".filter-section", ".schools-section"],
+            services: [".services-section"],
+            about: [".about-section"],
+            footer: [".footer-main"]
+        };
+        Object.entries(settings.visibility || {}).forEach(([key, visible]) => {
+            if (visible !== false) return;
+            (visibilityTargets[key] || []).forEach(selector => {
+                document.querySelectorAll(selector).forEach(element => {
+                    element.hidden = true;
+                });
+            });
+        });
     }
 
     function elementSelector(element) {
@@ -413,9 +479,11 @@
     function applyAll() {
         applyContent();
         applyImages();
+        applyVisibility();
         applyFeatures();
         applyStats();
         applyServices();
+        applyQuickAccess();
         applyFooterLinks();
         applyTextOverrides();
         startVisualEditor();

@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="بوابة مديرية التربية والتعليم بمحافظة الدقهلية — دليل الإدارات التعليمية السبع عشرة بالمحافظة والخدمات الرقمية والمنصات التعليمية المعتمدة.">
+        content="بوابة مديرية التربية والتعليم بمحافظة الدقهلية، وتضم دليل الإدارات التعليمية السبع عشرة بالمحافظة والخدمات التعليمية.">
     <meta name="keywords"
-        content="مديرية التربية والتعليم بالدقهلية, الإدارات التعليمية بالدقهلية, وزارة التربية والتعليم, دليل الإدارات, الخدمات التعليمية, نتائج الامتحانات, تقييمات الوزارة">
-    <meta name="theme-color" content="#0a4b44">
-    <link rel="shortcut icon" href="op-removebg-preview.png" type="image/x-icon">
+        content="مديرية التربية والتعليم بالدقهلية, الإدارات التعليمية بالدقهلية, وزارة التربية والتعليم, دليل الإدارات, الخدمات التعليمية">
+    <meta name="theme-color" content="#004C46">
+    <link rel="shortcut icon" href="مدريه.png" type="image/x-icon">
 
-    <!-- Stylesheets & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+    <link rel="shortcut icon" href="op-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="cd.css">
-    <title>مديرية التربية والتعليم بالدقهلية | البوابة الرقمية ودليل الإدارات</title>
+    <title>مديرية التربية والتعليم بالدقهلية | دليل الادارات والخدمات التعليمية</title>
 </head>
 
 <body>
@@ -33,6 +33,7 @@
                 أهلاً بكم في بوابة مديرية التربية والتعليم بمحافظة الدقهلية
             </span>
         </div>
+        <time class="top-bar-date" id="liveClock" aria-label="الوقت الحالي" dir="ltr"></time>
         <div class="top-bar-links">
             <a href="#schools"><i class="fa-solid fa-school"></i> دليل الإدارات</a>
             <a href="#services"><i class="fa-solid fa-location-dot"></i> خدمات تعليمية بمحافظة الدقهلية</a>
@@ -69,21 +70,30 @@
                 </li>
                 <li><a href="#hero" class="active"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
                 <li><a href="#schools" class="awas"><i class="fa-solid fa-school"></i> دليل الادارات</a></li>
-                <li><a href="#services" class="awas"><i class="fa-solid fa-laptop-code"></i> الخدمات الإلكترونية</a></li>
+                <li><a href="#services" class="awas"><i class="fa-solid fa-laptop-code"></i> بوابة الخدمات التعليمية الذكية</a></li>
                 <li><a href="#about" class="awas"><i class="fa-solid fa-landmark"></i> عن المديرية</a></li>
+                <li><a href="admin.html" class="awas"><i class="fa-solid fa-sliders"></i> إدارة الموقع</a></li>
                 <li class="mobile-drawer-cta">
                     <a href="#services" class="btn-primary"
                         style="width: 100%; justify-content: center; margin-top: 10px;">
                         <i class="fa-solid fa-bolt"></i>
-                        بوابة الخدمات الإلكترونية
+                        بوابة الخدمات التعليمية الذكية
                     </a>
                 </li>
             </ul>
 
             <div class="nav-actions">
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn"
+                    aria-label="التبديل إلى الوضع الليلي" title="وضع الليل">
+                    <span class="theme-toggle-track" aria-hidden="true">
+                        <span class="theme-toggle-thumb"></span>
+                        <i class="fa-solid fa-sun theme-icon-light"></i>
+                        <i class="fa-solid fa-moon theme-icon-dark"></i>
+                    </span>
+                </button>
                 <a href="#services" class="btn-header-cta">
                     <i class="fa-solid fa-bolt"></i>
-                    الخدمات الذكية
+                    بوابة الخدمات التعليمية الذكية
                 </a>
                 <button type="button" class="menu-toggle" id="menuToggle" aria-label="تبديل القائمة">
                     <i class="fa-solid fa-bars"></i>
@@ -94,35 +104,29 @@
 
     <div class="mobile-nav-backdrop" id="navBackdrop"></div>
 
-    <!-- Hero Section -->
     <section class="hero-section" id="hero">
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-pill">
                     <i class="fa-solid fa-shield-halved"></i>
-                    المنظومة الرقمية الموحدة لمديرية التربية والتعليم بالدقهلية
+                    بوابة مديرية التربية والتعليم بمحافظة الدقهلية
                 </div>
                 <h2 class="hero-title">
-                    دليل إدارات الدقهلية التعليمية <span>والخدمات الرقمية الموحدة</span>
+                    دليل إدارات الدقهلية <span>في منصة تعليمية واحدة</span>
                 </h2>
                 <p class="hero-desc">
-                    بوابة متكاملة للتعرّف على الخدمات التعليمية ودليل الإدارات التعليمية السبع عشرة بمحافظة الدقهلية،
-                    مع وصول مباشر إلى مواقع الإدارات على الخرائط والمنصات الوزارية والتقييمات للطلاب والمعلمين وأولياء الأمور.
+                    بوابة للتعرّف على الخدمات التعليمية ودليل الإدارات التعليمية بمحافظة الدقهلية، مع وصول مباشر إلى
+                    مواقع الإدارات على الخريطة والمنصات والخدمات التعليمية للطلاب والمعلمين وأولياء الأمور.
                 </p>
                 <div class="hero-buttons">
                     <a href="#schools" class="btn-primary">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        استكشف الـ 17 إدارة تعليمية
+                        استكشف دليل الادارات
                     </a>
                     <a href="#services" class="btn-secondary">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        بوابة الخدمات الرقمية
+                        <i class="fa-solid fa-grid-2"></i>
+                        بوابة الخدمات الإلكترونية
                     </a>
-                </div>
-                <div class="hero-feature-tags">
-                    <span><i class="fa-solid fa-circle-check"></i> تغطية لكافة مراكز ومدن الدقهلية</span>
-                    <span><i class="fa-solid fa-map-location-dot"></i> مواقع جغرافية دقيقة على الخرائط</span>
-                    <span><i class="fa-solid fa-bolt"></i> وصول مباشر للمدارس والمنصات</span>
                 </div>
             </div>
 
@@ -130,18 +134,13 @@
                 <div class="hero-emblem-glow"></div>
                 <div class="hero-emblem-card">
                     <img src="op-removebg-preview.png" alt="شعار مديرية التربية والتعليم بالدقهلية">
-                    <h4>مديرية التربية والتعليم بالدقهلية</h4>
+                    <h4 style="font-size: 15px;">مديرية التربية والتعليم بالدقهلية</h4>
                     <p>من أجل تعليم أفضل .. لمستقبل مشرق</p>
-                    <span class="hero-emblem-badge">
-                        <i class="fa-solid fa-award"></i>
-                        محافظة الدقهلية • عاصمة التعليم والطب
-                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Key Statistics Ribbon -->
     <div class="stats-ribbon">
         <div class="stats-grid">
             <div class="stat-item">
@@ -150,17 +149,7 @@
                 </div>
                 <div>
                     <div class="stat-number">17</div>
-                    <div class="stat-label">إدارة تعليمية معتمدة بالمحافظة</div>
-                </div>
-            </div>
-
-            <div class="stat-item">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-school"></i>
-                </div>
-                <div>
-                    <div class="stat-number">+3,800</div>
-                    <div class="stat-label">مدرسة بمختلف المراحل التعليمية</div>
+                    <div class="stat-label">إدارة تعليمية بمحافظة الدقهلية</div>
                 </div>
             </div>
 
@@ -169,8 +158,8 @@
                     <i class="fa-solid fa-user-graduate"></i>
                 </div>
                 <div>
-                    <div class="stat-number">+1,500,000</div>
-                    <div class="stat-label">طالب وطالبة بمدارس الدقهلية</div>
+                    <div class="stat-number">+25,000</div>
+                    <div class="stat-label">خدمات تعليمية للطلاب وأولياء الأمور</div>
                 </div>
             </div>
 
@@ -179,67 +168,48 @@
                     <i class="fa-solid fa-chalkboard-user"></i>
                 </div>
                 <div>
-                    <div class="stat-number">+85,000</div>
-                    <div class="stat-label">معلم وإداري بكافة القطاعات</div>
+                    <div class="stat-number">
++2,100</div>
+                    <div class="stat-label">خدمات تعليمية للمعلمين والإداريين</div>
+                </div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div>
+                    <div class="stat-number">
+100%</div>
+                    <div class="stat-label">منصات وخدمات تعليمية</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Search & Filter Section -->
     <section class="filter-section" id="schools">
         <div class="filter-card">
             <div class="filter-header">
-                <div class="filter-title-wrap">
-                    <div class="filter-icon-box">
-                        <i class="fa-solid fa-sliders"></i>
-                    </div>
-                    <div>
-                        <h3 class="filter-title">محرك البحث والتصفية الذكي للإدارات التعليمية</h3>
-                        <p class="filter-desc">استعرض الإدارات الـ 17 وتعرف على مدارسها ومواقعها وخدماتها</p>
-                    </div>
+                <div class="filter-title">
+                    <i class="fa-solid fa-sliders"></i>
+                    محرك البحث والتصفية الذكي للادارات
                 </div>
                 <div class="filter-count-badge">
-                    <i class="fa-solid fa-building-columns"></i>
-                    الإدارات المعروضة: <strong id="schoolsCount">17</strong> إدارة
+                    الإدارات المدرجة: <span id="schoolsCount">17</span> إدارة
                 </div>
             </div>
 
-            <!-- Quick Geographic Filter Chips -->
-            <div class="filter-chips-row">
-                <span class="chips-label"><i class="fa-solid fa-filter"></i> النطاق الجغرافي:</span>
-                <div class="chips-scroll-wrap">
-                    <button type="button" class="filter-chip active" data-region="all">
-                        <i class="fa-solid fa-layer-group"></i> جميع الإدارات (17)
-                    </button>
-                    <button type="button" class="filter-chip" data-region="center">
-                        <i class="fa-solid fa-city"></i> وسط الدقهلية (المنصورة • طلخا • نبروه)
-                    </button>
-                    <button type="button" class="filter-chip" data-region="south">
-                        <i class="fa-solid fa-compass"></i> جنوب الدقهلية (السنبلاوين • أجا • ميت غمر • تمي الأمديد)
-                    </button>
-                    <button type="button" class="filter-chip" data-region="north-east">
-                        <i class="fa-solid fa-location-arrow"></i> شمال وشرق (بلقاس • شربين • دكرنس • بني عبيد)
-                    </button>
-                    <button type="button" class="filter-chip" data-region="lake">
-                        <i class="fa-solid fa-water"></i> قطاع الشمال والبحيرة (منية النصر • الجمالية • المنزلة • المطرية • ميت سلسيل)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Filter Controls Row -->
             <div class="filter-controls-row">
                 <div class="search-input-wrap">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="schoolSearch" placeholder="ابحث باسم الإدارة أو المركز أو المدينة..."
+                    <input type="text" id="schoolSearch" placeholder="ابحث باسم الإدارة أو المدينة..."
                         autocomplete="off">
-                    <button type="button" class="search-clear-btn" id="searchClearBtn" title="مسح البحث" style="display: none;">
+                    <button type="button" class="search-clear-btn" id="searchClearBtn" title="مسح البحث">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </button>
                 </div>
 
                 <div class="select-wrap">
-                    <i class="fa-solid fa-location-dot select-icon"></i>
                     <select id="areaFilter" class="custom-select" aria-label="تصفية حسب المدينة">
                         <option value="all">📍 جميع مدن ومراكز الدقهلية</option>
                         <option value="المنصورة">المنصورة</option>
@@ -263,7 +233,6 @@
 
                 <div class="filter-action-group">
                     <div class="select-wrap sort-select-wrap">
-                        <i class="fa-solid fa-arrow-down-a-z select-icon"></i>
                         <select id="sortFilter" class="custom-select" aria-label="ترتيب النتائج">
                             <option value="default">الترتيب الافتراضي</option>
                             <option value="name-asc">الاسم (أ - ي)</option>
@@ -272,29 +241,29 @@
                     </div>
 
                     <div class="view-toggle-btns">
-                        <button type="button" class="view-btn active" id="viewGridBtn" title="عرض بطاقات شبكية" aria-label="عرض شبكي">
+                        <button type="button" class="view-btn active" id="viewGridBtn" title="عرض شبكي">
                             <i class="fa-solid fa-grip"></i>
                         </button>
-                        <button type="button" class="view-btn" id="viewListBtn" title="عرض قائمة تفصيلية" aria-label="عرض قائمة">
+                        <button type="button" class="view-btn" id="viewListBtn" title="عرض قائمة">
                             <i class="fa-solid fa-list-ul"></i>
                         </button>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- Administrations Cards Section -->
     <main class="schools-section">
         <div class="section-title-wrap">
             <div class="section-heading-group">
                 <span class="section-subtitle">
                     <i class="fa-solid fa-circle-check"></i>
-                    دليل الإدارات التعليمية
+                    دليل الادارات 
                 </span>
                 <h3 class="section-main-title">
                     <i class="fa-solid fa-building-columns"></i>
-                    الإدارات التعليمية الـ 17 بمحافظة الدقهلية
+                    الإدارات المدرجة حاليًا في الدليل
                 </h3>
             </div>
         </div>
@@ -302,7 +271,6 @@
         <div class="schools-grid" id="schoolsGrid"></div>
     </main>
 
-    <!-- Electronic Services Section -->
     <section class="services-section" id="services">
         <div class="services-container">
             <div class="section-title-wrap">
@@ -318,6 +286,55 @@
                 </div>
             </div>
 
+            <div class="services-quick-access">
+                <h4 class="services-quick-access-title">روابط مباشرة للخدمات والمنصات</h4>
+                <div class="platforms-grid">
+                    <a href="https://ellibrary.moe.gov.eg/Performance_Assessments/" target="_blank"
+                        rel="noopener noreferrer" class="platform-card">
+                        <div class="platform-icon-box"><i class="fa-solid fa-book-open-reader"></i></div>
+                        <div class="platform-info">
+                            <span class="platform-name">المكتبة والتقييمات</span>
+                            <span class="platform-sub">التقييمات والأداءات الأسبوعية</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
+                    </a>
+                    <a href="https://emis.gov.eg/" target="_blank" rel="noopener noreferrer" class="platform-card">
+                        <div class="platform-icon-box"><i class="fa-solid fa-file-signature"></i></div>
+                        <div class="platform-info">
+                            <span class="platform-name">التنسيق والتحويلات</span>
+                            <span class="platform-sub">بوابة خدمات وزارة التعليم</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
+                    </a>
+                    <a href="https://edudk.net/" target="_blank" rel="noopener noreferrer" class="platform-card">
+                        <div class="platform-icon-box"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <div class="platform-info">
+                            <span class="platform-name">نتائج الامتحانات</span>
+                            <span class="platform-sub">نتائج طلاب الدقهلية</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
+                    </a>
+                    <a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener noreferrer"
+                        class="platform-card">
+                        <div class="platform-icon-box"><i class="fa-solid fa-tv"></i></div>
+                        <div class="platform-info">
+                            <span class="platform-name">منصة مدرستنا</span>
+                            <span class="platform-sub">حصص ومراجعات تعليمية</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
+                    </a>
+                    <a href="https://academy.emis.gov.eg/" target="_blank" rel="noopener noreferrer"
+                        class="platform-card">
+                        <div class="platform-icon-box"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <div class="platform-info">
+                            <span class="platform-name">بوابة المعلم والأكاديمية</span>
+                            <span class="platform-sub">خدمات المعلمين والتدريب</span>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
+                    </a>
+                </div>
+            </div>
+
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon-wrap">
@@ -326,8 +343,8 @@
                     <span class="service-category-tag">المناهج والتقييمات</span>
                     <h4 class="service-title">المكتبة الإلكترونية والتقييمات الأسبوعية</h4>
                     <p class="service-desc">
-                        الوصول المباشر إلى منصة التقييمات والأداءات الصفية والمصادر التعليمية الرقمية والمناهج المعتمدة من
-                        وزارة التربية والتعليم لكافة المراحل والصفوف.
+                        الوصول المباشر إلى منصة التقييمات والأداءات الصفية والمصادر التعليمية الرقمية والمناهج المعتمدة
+                        من وزارة التربية والتعليم لكافة المراحل والصفوف.
                     </p>
                     <a href="https://ellibrary.moe.gov.eg/Performance_Assessments/" target="_blank"
                         rel="noopener noreferrer" class="service-link">
@@ -342,7 +359,8 @@
                     <span class="service-category-tag">الأنشطة والمسابقات</span>
                     <h4 class="service-title">رعاية الموهوبين والأنشطة الطلابية</h4>
                     <p class="service-desc">
-                        التسجيل في المسابقات الثقافية والعلمية، ودوري أوائل الطلبة، ومسابقات الروبوت والذكاء الاصطناعي، والمعارض الفنية على مستوى المحافظة.
+                        التسجيل في المسابقات الثقافية والعلمية، ودوري أوائل الطلبة، ومسابقات الروبوت والذكاء الاصطناعي،
+                        والمعارض الفنية على مستوى المحافظة.
                     </p>
                     <a href="#schools" class="service-link">
                         استعراض الأنشطة والمسابقات <i class="fa-solid fa-arrow-left"></i>
@@ -356,7 +374,8 @@
                     <span class="service-category-tag">التنسيق والقبول</span>
                     <h4 class="service-title">بوابة التحويلات والتنسيق الإلكتروني</h4>
                     <p class="service-desc">
-                        تقديم طلبات التحويل بين المدارس والإدارات التعليمية داخل وخارج المحافظة، ومتابعة تنسيق رياض الأطفال والصف الأول الابتدائي إلكترونيًا.
+                        تقديم طلبات التحويل بين المدارس والإدارات التعليمية داخل وخارج المحافظة، ومتابعة تنسيق رياض
+                        الأطفال والصف الأول الابتدائي إلكترونيًا.
                     </p>
                     <a href="https://emis.gov.eg/" target="_blank" rel="noopener noreferrer" class="service-link">
                         بوابة التنسيق والتحويلات <i class="fa-solid fa-arrow-left"></i>
@@ -370,9 +389,10 @@
                     <span class="service-category-tag">النتائج والشهادات</span>
                     <h4 class="service-title">كشوف وبيانات نتائج الامتحانات</h4>
                     <p class="service-desc">
-                        الاستعلام الفوري عن نتائج سنوات النقل والشهادة الإعدادية بمحافظة الدقهلية برقم الجلوس، واستخراج بيانات الدرجات والشهادات الرسمية.
+                        الاستعلام عن نتائج سنوات النقل والشهادة الإعدادية بمحافظة الدقهلية برقم الجلوس، واستخراج بيانات
+                        الدرجات والشهادات الرسمية.
                     </p>
-                    <a href="http://dakahlia.gov.eg/" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <a href="https://edudk.net/" target="_blank" rel="noopener noreferrer" class="service-link">
                         استعلام النتائج <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
@@ -384,9 +404,10 @@
                     <span class="service-category-tag">التعليم عن بعد</span>
                     <h4 class="service-title">منصة مدرستنا والبث المباشر</h4>
                     <p class="service-desc">
-                        حصص تعليمية مرئية ومراجعات نهائية لكافة المراحل يقدمها نخبة من أفضل المعلمين عبر منصة وقنوات مدرستنا الرسمية المعتمدة.
+                        حصص تعليمية مرئية ومراجعات نهائية لكافة المراحل عبر منصة وقنوات مدرستنا الرسمية المعتمدة.
                     </p>
-                    <a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener noreferrer"
+                        class="service-link">
                         مشاهدة الحصص التعليمية <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
@@ -398,9 +419,11 @@
                     <span class="service-category-tag">خدمات الكادر التعليمي</span>
                     <h4 class="service-title">الخدمات الإلكترونية للمعلم والإداري</h4>
                     <p class="service-desc">
-                        طباعة صحيفة الأحوال الإلكترونية للمعلم والإداري، ومتابعة الترقيات والتدريبات المهنية المعتمدة لدى الأكاديمية المهنية للمعلمين.
+                        طباعة صحيفة الأحوال الإلكترونية للمعلم والإداري، ومتابعة الترقيات والتدريبات المهنية المعتمدة
+                        لدى الأكاديمية المهنية للمعلمين.
                     </p>
-                    <a href="https://academy.emis.gov.eg/" target="_blank" rel="noopener noreferrer" class="service-link">
+                    <a href="https://academy.emis.gov.eg/" target="_blank" rel="noopener noreferrer"
+                        class="service-link">
                         بوابة المعلم والأكاديمية <i class="fa-solid fa-arrow-left"></i>
                     </a>
                 </div>
@@ -408,80 +431,6 @@
         </div>
     </section>
 
-    <!-- Official Platforms Section -->
-    <section class="platforms-section" id="platforms">
-        <div class="section-title-wrap">
-            <div class="section-heading-group">
-                <span class="section-subtitle">
-                    <i class="fa-solid fa-globe"></i>
-                    المنظومة الوطنية للتعليم الرقمي
-                </span>
-                <h3 class="section-main-title">
-                    <i class="fa-solid fa-network-wired"></i>
-                    المنصات التعليمية الرسمية لوزارة التربية والتعليم
-                </h3>
-            </div>
-        </div>
-
-        <div class="platforms-grid">
-            <a href="https://moe.gov.eg/" target="_blank" rel="noopener noreferrer" class="platform-card">
-                <div class="platform-icon-box">
-                    <i class="fa-solid fa-landmark"></i>
-                </div>
-                <div class="platform-info">
-                    <span class="platform-name">وزارة التربية والتعليم</span>
-                    <span class="platform-sub">البوابة الرسمية للوزارة</span>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
-            </a>
-
-            <a href="https://www.ekb.eg/" target="_blank" rel="noopener noreferrer" class="platform-card">
-                <div class="platform-icon-box">
-                    <i class="fa-solid fa-book-bookmark"></i>
-                </div>
-                <div class="platform-info">
-                    <span class="platform-name">بنك المعرفة المصري EKB</span>
-                    <span class="platform-sub">أضخم مكتبة معرفية رقمية</span>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
-            </a>
-
-            <a href="https://ellibrary.moe.gov.eg/Performance_Assessments/" target="_blank" rel="noopener noreferrer" class="platform-card">
-                <div class="platform-icon-box">
-                    <i class="fa-solid fa-file-lines"></i>
-                </div>
-                <div class="platform-info">
-                    <span class="platform-name">بوابة التقييمات والأداءات</span>
-                    <span class="platform-sub">المكتبة والواجبات المدرسية</span>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
-            </a>
-
-            <a href="https://emis.gov.eg/" target="_blank" rel="noopener noreferrer" class="platform-card">
-                <div class="platform-icon-box">
-                    <i class="fa-solid fa-database"></i>
-                </div>
-                <div class="platform-info">
-                    <span class="platform-name">مركز المعلومات (EMIS)</span>
-                    <span class="platform-sub">قواعد بيانات التعليم المصري</span>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
-            </a>
-
-            <a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener noreferrer" class="platform-card">
-                <div class="platform-icon-box">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-                <div class="platform-info">
-                    <span class="platform-name">منصة مدرستنا</span>
-                    <span class="platform-sub">حصص ومراجعات فيديو</span>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square platform-arrow"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- About Directorate Section -->
     <section class="about-section" id="about">
         <div class="about-card">
             <div class="about-content">
@@ -489,68 +438,68 @@
                     <i class="fa-solid fa-landmark"></i>
                     الصرح الإداري والتربوي
                 </span>
-                <h3 class="section-main-title">
+                <h3 class="section-main-title" style="margin-bottom: 14px;">
                     عن مديرية التربية والتعليم بالدقهلية
                 </h3>
-                <p>
-                    تتولى مديرية التربية والتعليم بالدقهلية قيادة وتطوير العملية التعليمية ومتابعة الخدمات المقدمة لأكثر من
-                    مليون ونصف طالب وطالبة بمحافظة الدقهلية. وتعمل المديرية بالتنسيق مع الإدارات التعليمية السبع عشرة على
-                    تحقيق معايير الجودة الشاملة والتحول الرقمي ورعاية المبتكرين.
+                <p style="color: #4A6361; line-height: 1.8; font-size: 14.5px;">
+                    تتولى مديرية التربية والتعليم بالدقهلية دعم العملية التعليمية ومتابعة الخدمات المقدمة للطلاب
+                    والمعلمين وأولياء الأمور في المحافظة. تهدف هذه البوابة إلى تسهيل الوصول إلى المعلومات والخدمات
+                    التعليمية، ويعرض دليل الإدارات التعليمية السبع عشرة ومواقعها الجغرافية داخل المحافظة.
                 </p>
 
                 <div class="about-features">
                     <div class="about-feat-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>بنية تحتية وشبكات ألياف ضوئية متطورة</span>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>بنية تحتية وشبكات ألياف ضوئية</span>
                     </div>
                     <div class="about-feat-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>فصول تفاعلية وشاشات ذكية متصلة</span>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>شاشات وفصول تفاعلية ذكية</span>
                     </div>
                     <div class="about-feat-item">
-                        <i class="fa-solid fa-circle-check"></i>
+                        <i class="fa-solid fa-check-circle"></i>
                         <span>مراكز تدريب وتطوير تكنولوجي معتمدة</span>
                     </div>
                     <div class="about-feat-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>رعاية متكاملة للفائقين والنابغين</span>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <span>رعاية متكاملة للفائقين والمبتكرين</span>
                     </div>
                 </div>
 
-                <div>
+                <div style="display: flex; gap: 12px; align-items: center;">
                     <a href="#schools" class="btn-primary">
-                        <i class="fa-solid fa-building-columns"></i>
-                        تصفح دليل الإدارات التعليمية
+                        <i class="fa-solid fa-list-check"></i>
+                        تصفح ادارات المدرجة
                     </a>
                 </div>
             </div>
 
             <div class="about-image-side">
-                <img src="re.jpg" alt="مبنى مديرية التربية والتعليم بمحافظة الدقهلية" loading="lazy">
+                <img src="re.jpg" alt="مبنى تعليمي بمحافظة الدقهلية">
                 <div class="about-overlay-card">
                     <i class="fa-solid fa-shield-halved"></i>
                     <div>
                         <h5>مديرية التربية والتعليم بالدقهلية</h5>
-                        <p>ديوان عام المديرية — مدينة المنصورة</p>
+                        <p>محافظة الدقهلية</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modern Footer -->
     <footer class="footer-main" id="footer">
         <div class="footer-container">
             <div class="footer-col footer-brand-info">
                 <div class="brand-section">
                     <div class="brand-logo-wrap">
                         <img class="brand-logo" src="op-removebg-preview.png" alt="شعار المديرية">
-                        <img class="brand-eagle" src="ف.png" alt="شعار جمهورية مصر العربية">
+                        <img class="brand-eagle" src="ف.png"
+                            alt="شعار النسر">
                     </div>
                 </div>
                 <p>
-                    البوابة الرسمية الموحدة لمديرية التربية والتعليم بمحافظة الدقهلية — دليل الإدارات التعليمية والخدمات
-                    والمنصات الرقمية لخدمة الطلاب والمعلمين وأولياء الأمور.
+                    بوابة تعليمية للتعريف بمديرية التربية والتعليم بالدقهلية وخدماتها ودليل الإدارات المدرجة بالمحافظة.
+                    نسعى إلى تسهيل وصول الطلاب والمعلمين وأولياء الأمور إلى المعلومات التعليمية.
                 </p>
             </div>
 
@@ -558,70 +507,67 @@
                 <h4>روابط سريعة</h4>
                 <ul class="footer-links-list">
                     <li><a href="#hero"><i class="fa-solid fa-chevron-left"></i> الصفحة الرئيسية</a></li>
-                    <li><a href="#schools"><i class="fa-solid fa-chevron-left"></i> دليل الإدارات الـ 17</a></li>
+                    <li><a href="#schools"><i class="fa-solid fa-chevron-left"></i> دليل الادارات</a></li>
                     <li><a href="#services"><i class="fa-solid fa-chevron-left"></i> بوابة الخدمات الإلكترونية</a></li>
-                    <li><a href="#platforms"><i class="fa-solid fa-chevron-left"></i> المنصات التعليمية الرسمية</a></li>
-                    <li><a href="#about"><i class="fa-solid fa-chevron-left"></i> عن المديرية والرؤية</a></li>
+                    <li><a href="#about"><i class="fa-solid fa-chevron-left"></i> الرؤية والرسالة التربوية</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
                 <h4>منصات تعليمية رسمية</h4>
                 <ul class="footer-links-list">
-                    <li><a href="https://moe.gov.eg/" target="_blank" rel="noopener noreferrer"><i
+                    <li><a href="https://moe.gov.eg/" target="_blank" rel="noopener"><i
                                 class="fa-solid fa-arrow-up-right-from-square"></i> وزارة التربية والتعليم</a></li>
                     <li><a href="https://ellibrary.moe.gov.eg/Performance_Assessments/" target="_blank"
-                            rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> المكتبة
+                            rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> المكتبة الإلكترونية
                             والتقييمات</a></li>
-                    <li><a href="https://www.ekb.eg/" target="_blank" rel="noopener noreferrer"><i
+                    <li><a href="https://www.ekb.eg/" target="_blank" rel="noopener"><i
                                 class="fa-solid fa-arrow-up-right-from-square"></i> بنك المعرفة المصري</a></li>
-                    <li><a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener noreferrer"><i
+                    <li><a href="https://madrasetna.moe.gov.eg/" target="_blank" rel="noopener"><i
                                 class="fa-solid fa-arrow-up-right-from-square"></i> منصة مدرستنا التعليمية</a></li>
-                    <li><a href="https://emis.gov.eg/" target="_blank" rel="noopener noreferrer"><i
+                    <li><a href="https://emis.gov.eg/" target="_blank" rel="noopener"><i
                                 class="fa-solid fa-arrow-up-right-from-square"></i> مركز معلومات الوزارة (EMIS)</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>النطاق الجغرافي والتواصل</h4>
+                <h4>نطاق الخدمات</h4>
                 <div class="footer-contact-list">
                     <div class="footer-contact-item">
                         <i class="fa-solid fa-location-dot"></i>
-                        <span>جمهورية مصر العربية — محافظة الدقهلية — ديوان عام المديرية، مدينة المنصورة</span>
-                    </div>
-                    <div class="footer-contact-item">
-                        <i class="fa-solid fa-building-columns"></i>
-                        <span>17 إدارة تعليمية تغطي جميع مراكز ومدن المحافظة</span>
-                    </div>
-                    <div class="footer-contact-item">
-                        <i class="fa-solid fa-clock"></i>
-                        <span>مواعيد العمل الرسمية: 8:00 ص - 2:30 م (الأحد إلى الخميس)</span>
+                        <span>محافظة الدقهلية</span>
                     </div>
                 </div>
             </div>
         </div>
 
+
+
         <div class="footer-bottom">
-            <div class="footer-bottom-inner">
-                <div class="footer-custom-credits">
-                    فكرة وإشراف: <strong>أ/ السيد سالم حسين</strong> · تم التصميم والبرمجة بمحافظة الدقهلية — أكاديمية
-                    <a href="https://www.gcschool.tech/" target="_blank" rel="noopener noreferrer">GC School</a> — تنفيذ
-                    <span class="developer-highlight"><a href="https://technological-adham.vercel.app/" target="_blank" rel="noopener noreferrer">بشمهندس/ أدهم محمد إبراهيم</a></span>
-                    (الصف الثاني الثانوي) · <strong>هدية مجانية من مدرسة السادات الثانوية بنين إلى مديرية التربية والتعليم بالدقهلية</strong>
+            <div class="footer-bottom-inner"
+                style="flex-direction: column; text-align: center; gap: 10px; width: 100%;">
+                <div class="footer-custom-credits"
+                    style="font-size: 13.5px; line-height: 1.9; color: #D3E6E3; padding: 4px 10px;">
+                    فكرة وإشراف: <strong style="color: var(--gold);">أ/ السيد سالم حسين</strong> · تم التصميم والبرمجة
+                    بمحافظة الدقهلية — أكاديمية <a href="https://www.gcschool.tech/" target="_blank"
+                        rel="noopener noreferrer"
+                        style="color: var(--gold); font-weight: 800; text-decoration: underline;">GC School</a> — تنفيذ
+                    <strong style="color: #C58AFF"><a  class="qqq" href="https://technological-adham.vercel.app/" target="_blank">الطالب/ أدهم محمد ابراهيم </a></strong> — الصف الثاني الثانوي · <span
+                        style="color: var(--gold); font-weight: 700;">هدية مجانية من مدرسة السادات الثانوية بنين إلى
+                        مديرية التربية والتعليم بالدقهلية</span>
                 </div>
-                <div class="footer-copyright">
-                    جميع الحقوق محفوظة © 2026 مديرية التربية والتعليم بمحافظة الدقهلية • وزارة التربية والتعليم والتعليم الفني
+                <div style="font-size: 12px; color: #7A9391;">
+                    جميع الحقوق محفوظة © 2026 <span>مديرية التربية والتعليم بمحافظة الدقهلية</span>.
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Back To Top Floating Button -->
     <button type="button" class="back-to-top" id="backToTop" title="الرجوع لأعلى الصفحة" aria-label="الرجوع للأعلى">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts -->
+
     <script src="administration-logos.js"></script>
     <script src="الاداره.js"></script>
     <script src="site-cms.js"></script>

@@ -1,7 +1,4 @@
-/* ==========================================================================
-   مديرية التربية والتعليم بمحافظة الدقهلية — التصميم العصري الشامل الموحد
-   Unified Modern Design System | Dakahlia Directorate of Education
-   ========================================================================== */
+
 
 :root {
     /* Color Palette - Egyptian Emerald & Royal Gold (Light Mode Default) */
@@ -230,6 +227,25 @@ button, input, select {
     text-overflow: ellipsis;
 }
 
+.top-bar-date {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.top-bar-date::before {
+    content: "\f017";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+
 .top-bar-links {
     display: flex;
     align-items: center;
@@ -271,7 +287,7 @@ button, input, select {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 17.5px 20px;
     gap: 16px;
     position: relative;
     box-sizing: border-box;
@@ -438,6 +454,98 @@ button, input, select {
     border-color: var(--primary);
 }
 
+/* ==========================================================================
+   Theme Toggle Button (Day / Night)
+   ========================================================================== */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    outline: none;
+}
+
+.theme-toggle-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    padding: 3px;
+    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.theme-toggle-btn:hover .theme-toggle-track {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(217, 167, 46, 0.3), inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.theme-toggle-thumb {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f9d84a, #f4a825);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
+    right: 3px;
+    z-index: 2;
+}
+
+.theme-icon-light,
+.theme-icon-dark {
+    position: absolute;
+    font-size: 11px;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.theme-icon-light {
+    right: 7px;
+    color: #f9d84a;
+    opacity: 1;
+}
+
+.theme-icon-dark {
+    left: 7px;
+    color: #c9d8e8;
+    opacity: 0.4;
+}
+
+/* Dark mode state */
+[data-theme="dark"] .theme-toggle-track {
+    background: rgba(44, 212, 185, 0.1);
+    border-color: rgba(44, 212, 185, 0.3);
+    box-shadow: 0 0 8px rgba(44, 212, 185, 0.15), inset 0 1px 3px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .theme-toggle-thumb {
+    transform: translateX(-28px);
+    background: linear-gradient(135deg, #3a4a6a, #1e2d4a);
+}
+
+[data-theme="dark"] .theme-icon-light {
+    opacity: 0.3;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+    opacity: 1;
+    color: #7ec8e3;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover .theme-toggle-track {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 12px rgba(44, 212, 185, 0.3), inset 0 1px 3px rgba(0,0,0,0.4);
+}
+
 .mobile-nav-backdrop {
     display: none;
     position: fixed;
@@ -485,7 +593,7 @@ button, input, select {
     max-width: 1360px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.35fr 0.95fr;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
     gap: 40px;
     align-items: center;
 }
@@ -621,8 +729,8 @@ button, input, select {
 
 .hero-emblem-glow {
     position: absolute;
-    width: 320px;
-    height: 320px;
+    width: min(320px, 85vw);
+    height: min(320px, 85vw);
     background: radial-gradient(circle, rgba(194, 152, 40, 0.28) 0%, rgba(44, 212, 185, 0.15) 50%, transparent 70%);
     filter: blur(35px);
     pointer-events: none;
@@ -1217,6 +1325,15 @@ button, input, select {
     object-fit: contain;
 }
 
+.card-media img.admin-logo-badge {
+    object-fit: contain;
+    transition: none;
+}
+
+.school-card:hover .card-media img.admin-logo-badge {
+    transform: none;
+}
+
 /* Top Badges over Media */
 .card-badges-top {
     position: absolute;
@@ -1437,6 +1554,8 @@ button, input, select {
     gap: 20px;
 }
 
+
+
 .schools-grid.list-view .school-card {
     flex-direction: row;
     height: auto;
@@ -1554,6 +1673,38 @@ button, input, select {
 .services-container {
     max-width: 1360px;
     margin: 0 auto;
+}
+
+.services-section .section-heading-group,
+.services-section .section-main-title {
+    min-width: 0;
+}
+
+.services-section .section-main-title {
+    flex-wrap: wrap;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.services-section .section-main-title i {
+    flex: 0 0 auto;
+}
+
+.services-quick-access {
+    margin: 0 0 52px;
+    padding: clamp(18px, 3vw, 30px);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.services-quick-access-title {
+    margin-bottom: 14px;
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.5;
 }
 
 .services-grid {
@@ -2051,7 +2202,7 @@ button, input, select {
    ========================================================================== */
 @media (max-width: 1340px) {
     .navbar {
-        padding: 6px 16px;
+        padding: 13.5px 16px;
         gap: 8px;
     }
     .brand-logo {
@@ -2063,7 +2214,7 @@ button, input, select {
     }
     .sub-ministry,
     .tagline {
-        display: none;
+        font-size: 10px;
     }
     .main-title {
         font-size: 15px;
@@ -2119,7 +2270,7 @@ button, input, select {
     }
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1200px) {
     .top-bar-links {
         display: none;
     }
@@ -2280,13 +2431,35 @@ button, input, select {
         padding: 6px 14px;
     }
 
-    .top-bar-date,
     .top-bar-links {
         display: none;
     }
 
     .navbar {
-        padding: 8px 16px;
+        padding: 15.5px 16px;
+    }
+
+    .brand-section {
+        flex: 1 1 0;
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .brand-titles {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .main-title {
+        font-size: clamp(11px, 3.8vw, 15px);
+        overflow-wrap: anywhere;
+        line-height: 1.2;
+    }
+
+    .sub-ministry,
+    .tagline {
+        font-size: clamp(8px, 2.5vw, 10px);
+        overflow-wrap: anywhere;
     }
 
     .brand-logo {
@@ -2300,6 +2473,22 @@ button, input, select {
 
     .hero-section {
         padding: 36px 16px 54px;
+    }
+
+    .hero-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .hero-pill {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .hero-buttons > * {
+        max-width: 100%;
+        justify-content: center;
+        text-align: center;
     }
 
     .stats-ribbon {
@@ -2333,18 +2522,29 @@ button, input, select {
     }
 
     .filter-card {
+        min-width: 0;
         padding: 18px 16px;
     }
 
     .filter-controls-row {
         flex-direction: column;
         align-items: stretch;
+        min-width: 0;
     }
 
     .search-input-wrap,
     .select-wrap,
     .filter-action-group {
         width: 100%;
+        min-width: 0;
+    }
+
+    .filter-action-group {
+        gap: 8px;
+    }
+
+    .sort-select-wrap {
+        min-width: 0;
     }
 
     .filter-action-group {
@@ -2356,7 +2556,40 @@ button, input, select {
     }
 
     .schools-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .school-card,
+    .service-card,
+    .about-card,
+    .footer-col {
+        min-width: 0;
+    }
+
+    .schools-grid.list-view .card-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .schools-grid.list-view .btn-card-visit,
+    .schools-grid.list-view .btn-card-map {
+        width: 100%;
+        min-width: 0;
+        padding-inline: 8px;
+        font-size: 12px;
+    }
+
+    .platforms-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .about-card {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .about-features {
@@ -2364,7 +2597,7 @@ button, input, select {
     }
 
     .footer-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 28px;
     }
 
@@ -2375,4 +2608,304 @@ button, input, select {
         height: 42px;
         font-size: 16px;
     }
+}
+
+@media (max-width: 430px) {
+    .navbar {
+        padding-inline: 12px;
+        gap: 8px;
+    }
+
+    .brand-logo-wrap {
+        gap: 0;
+    }
+
+    .sub-ministry,
+    .tagline {
+        font-size: 8px;
+        line-height: 1.2;
+    }
+
+    .main-title {
+        font-size: 12px;
+    }
+
+    .brand-eagle {
+        display: none;
+    }
+
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .hero-buttons {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .hero-buttons > * {
+        width: 100%;
+    }
+
+    .stats-grid {
+        padding: 14px 12px;
+    }
+
+    .stat-item {
+        gap: 12px;
+        padding-inline: 4px;
+    }
+
+    .filter-section,
+    .schools-section,
+    .services-section,
+    .platforms-section,
+    .about-section {
+        padding-inline: 12px;
+    }
+
+    .filter-card {
+        padding-inline: 12px;
+    }
+
+    .search-input-wrap {
+        min-width: 0;
+    }
+
+    .schools-grid {
+        gap: 16px;
+    }
+
+    .card-body {
+        padding: 20px 16px 18px;
+    }
+
+    .card-meta-list {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card-actions {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .service-card {
+        padding: 22px 18px;
+    }
+
+    .platform-card {
+        padding: 16px 14px;
+        gap: 10px;
+    }
+
+    .about-content {
+        padding: 28px 20px;
+    }
+
+    .about-overlay-card {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        padding: 12px;
+    }
+
+    .footer-container {
+        padding-inline: 16px;
+    }
+
+    .footer-custom-credits {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode — Element-Level Overrides
+   ========================================================================== */
+
+/* Top bar */
+[data-theme="dark"] .top-notice-bar {
+    background: #040d0c;
+    border-bottom-color: rgba(44, 212, 185, 0.18);
+}
+[data-theme="dark"] .notice-badge {
+    color: #040d0c;
+}
+[data-theme="dark"] .top-bar-links a {
+    color: rgba(44, 212, 185, 0.75);
+}
+[data-theme="dark"] .top-bar-links a:hover {
+    color: var(--primary);
+}
+
+/* Header */
+[data-theme="dark"] .header-main {
+    background: #071614;
+    border-bottom-color: rgba(44, 212, 185, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+[data-theme="dark"] .nav-links li a {
+    color: #9fc1bc;
+}
+[data-theme="dark"] .nav-links li a:hover {
+    color: var(--primary);
+    background: rgba(44, 212, 185, 0.08);
+}
+[data-theme="dark"] .nav-links li a.active {
+    color: var(--primary-light);
+    background: rgba(44, 212, 185, 0.12);
+}
+
+/* Stats Ribbon */
+[data-theme="dark"] .stats-ribbon-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .stat-number {
+    color: var(--primary);
+}
+
+/* School / Admin Cards */
+[data-theme="dark"] .school-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .school-card:hover {
+    border-color: rgba(44, 212, 185, 0.35);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+[data-theme="dark"] .school-card-header {
+    background: linear-gradient(135deg, #071a18, #0d2d2a);
+}
+[data-theme="dark"] .school-card-name {
+    color: #d6eeeb;
+}
+[data-theme="dark"] .school-type-badge {
+    background: rgba(44, 212, 185, 0.12);
+    color: var(--primary);
+    border-color: rgba(44, 212, 185, 0.2);
+}
+
+/* Filter */
+[data-theme="dark"] .filter-section {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+[data-theme="dark"] .filter-chip {
+    background: var(--bg-card-secondary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .filter-chip:hover,
+[data-theme="dark"] .filter-chip.active {
+    background: rgba(44, 212, 185, 0.1);
+    border-color: rgba(44, 212, 185, 0.3);
+    color: var(--primary);
+}
+[data-theme="dark"] .search-input {
+    background: var(--bg-card-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+[data-theme="dark"] .search-input:focus {
+    border-color: var(--primary);
+    background: var(--bg-card);
+}
+
+/* Services */
+[data-theme="dark"] .service-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+[data-theme="dark"] .service-card:hover {
+    border-color: rgba(44, 212, 185, 0.3);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+}
+[data-theme="dark"] .service-icon-wrap {
+    background: rgba(44, 212, 185, 0.1);
+}
+[data-theme="dark"] .service-icon-wrap i {
+    color: var(--primary);
+}
+[data-theme="dark"] .service-title {
+    color: var(--text-primary);
+}
+[data-theme="dark"] .service-desc {
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .service-link {
+    color: var(--primary);
+}
+
+/* About */
+[data-theme="dark"] .about-section {
+    background: var(--bg-card-secondary);
+}
+[data-theme="dark"] .about-feat-item {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .about-feat-item i {
+    color: var(--primary);
+}
+[data-theme="dark"] .about-overlay-card {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+/* Footer */
+[data-theme="dark"] footer,
+[data-theme="dark"] .site-footer {
+    background: #030c0b;
+    border-top-color: rgba(44, 212, 185, 0.12);
+}
+[data-theme="dark"] .footer-bottom {
+    background: #020908;
+    border-top-color: rgba(44, 212, 185, 0.08);
+}
+[data-theme="dark"] .footer-links-list a {
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .footer-links-list a:hover {
+    color: var(--primary);
+}
+[data-theme="dark"] .footer-contact-item {
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .footer-custom-credits {
+    color: var(--text-muted);
+}
+[data-theme="dark"] .developer-highlight a {
+    color: var(--primary);
+}
+
+/* Back to Top */
+[data-theme="dark"] .back-to-top {
+    background: rgba(44, 212, 185, 0.15);
+    border-color: rgba(44, 212, 185, 0.3);
+    color: var(--primary);
+}
+[data-theme="dark"] .back-to-top:hover {
+    background: rgba(44, 212, 185, 0.25);
+    box-shadow: 0 8px 24px rgba(44, 212, 185, 0.2);
+}
+
+/* Section headings in dark */
+[data-theme="dark"] .section-main-title {
+    color: var(--text-primary);
+}
+[data-theme="dark"] .section-subtitle {
+    color: var(--primary);
+}
+
+/* Scrollbar in dark */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: #061312;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: rgba(44, 212, 185, 0.2);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(44, 212, 185, 0.4);
 }

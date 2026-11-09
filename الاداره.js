@@ -212,15 +212,7 @@
 // ============================================================
 //  Load schools from admin panel if available
 // ============================================================
-let schoolsData = (function() {
-    try {
-        const cms = JSON.parse(localStorage.getItem('site_cms_v1') || 'null');
-        if (cms && Array.isArray(cms.schools) && cms.schools.length > 0) return cms.schools;
-        const saved = JSON.parse(localStorage.getItem('admin_schools'));
-        if (saved && Array.isArray(saved) && saved.length > 0) return saved;
-    } catch(e) {}
-    return null;
-})() || [
+const defaultSchoolsData = [
     {
         id: 1,
         name: "إدارة شرق المنصورة التعليمية",
@@ -494,6 +486,18 @@ let schoolsData = (function() {
         features: ["محافظة الدقهلية", "نطاق الإدارة: تمي الأمديد"]
     }
 ];
+let schoolsData = (function() {
+    try {
+        const cms = JSON.parse(localStorage.getItem('site_cms_v1') || 'null');
+        if (cms && Array.isArray(cms.administrations)) return cms.administrations;
+        if (cms && Array.isArray(cms.schools) && cms.schools.length > 0) return cms.schools;
+        const saved = JSON.parse(localStorage.getItem('admin_schools'));
+        if (saved && Array.isArray(saved) && saved.length > 0) return saved;
+    } catch(e) {}
+    return defaultSchoolsData;
+})();
+window.dakahliaAdministrationData = schoolsData;
+window.defaultDakahliaAdministrationData = defaultSchoolsData;
 
 const filterState = {
     searchQuery: "",
@@ -564,36 +568,49 @@ function getFilteredSchools() {
     return result;
 }
 
+function escapeCardText(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[char]));
+}
+
 function renderSchoolCard(school) {
     const configuredLink = typeof school.link === "string" ? school.link.trim() : "";
-    const keepExistingSite = String(school.id) === "4" &&
-        /^https:\/\/al-edara-esnblawen\.vercel\.app(?:\/|$)/i.test(configuredLink);
-    const siteUrl = keepExistingSite
-        ? configuredLink
-        : `school.html?id=${encodeURIComponent(school.id)}`;
-    const targetAttr = keepExistingSite ? 'target="_blank" rel="noopener noreferrer"' : "";
+    const hasExternalSite = /^https?:\/\//i.test(configuredLink) && !/google\.com\/maps/i.test(configuredLink);
+    const siteUrl = hasExternalSite ? configuredLink : `school.html?id=${encodeURIComponent(school.id)}`;
+    const safeSiteUrl = escapeCardText(siteUrl);
+    const targetAttr = hasExternalSite ? 'target="_blank" rel="noopener noreferrer"' : "";
     const adminLogo = school.type === "administration" && window.dakahliaAdministrationLogos
         ? window.dakahliaAdministrationLogos[String(school.id)]
         : "";
+    const imagePath = typeof school.image === "string" &&
+        (/^https?:\/\//i.test(school.image) || /^(?:\.{1,2}\/)?[^:<>\"']+\.(?:png|jpe?g|webp|gif)$/i.test(school.image.trim()))
+        ? school.image.trim()
+        : "re.jpg";
+    const name = escapeCardText(school.name);
+    const location = escapeCardText(school.location);
+    const area = escapeCardText(school.area);
+    const id = escapeCardText(school.id);
+    const typeName = escapeCardText(school.typeName || "إدارة تعليمية");
 
-    const mapUrl = (school.link && school.link.includes("google.com/maps"))
-        ? school.link
+    const mapUrl = (school.link && /^https?:\/\//i.test(school.link) && school.link.includes("google.com/maps"))
+        ? escapeCardText(school.link)
         : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.name + "، محافظة الدقهلية، مصر")}`;
 
     return `
-        <article class="school-card" data-id="${school.id}">
+        <article class="school-card" data-id="${id}">
             <div class="card-media">
-                <img src="${school.image}" alt="${school.name}" loading="lazy" onerror="this.onerror=null;this.src='re.jpg'">
+                <img src="${escapeCardText(imagePath)}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='re.jpg'">
                 <div class="card-media-overlay"></div>
                 ${adminLogo ? `
-                    <div class="admin-logo-wrapper" title="شعار ${school.name}">
-                        <img class="admin-logo-badge" src="${adminLogo}" alt="شعار ${school.name}" loading="lazy">
+                    <div class="admin-logo-wrapper" title="شعار ${name}">
+                        <img class="admin-logo-badge" src="${escapeCardText(adminLogo)}" alt="شعار ${name}" loading="lazy">
                     </div>
                 ` : ""}
                 <div class="card-badges-top">
                     <span class="card-type-tag">
                         <i class="fa-solid fa-graduation-cap"></i>
-                        ${school.typeName || "إدارة تعليمية"}
+                        ${typeName}
                     </span>
                     <span class="card-status-badge">
                         <span class="status-dot"></span>
@@ -604,9 +621,9 @@ function renderSchoolCard(school) {
             
             <div class="card-body">
                 <div class="card-header-info">
-                    <span class="card-number-badge">إدارة رقم #${school.id}</span>
-                    <h3 class="card-title" title="${school.name}">
-                        <a href="${siteUrl}" ${targetAttr}>${school.name}</a>
+                    <span class="card-number-badge">إدارة رقم #${id}</span>
+                    <h3 class="card-title" title="${name}">
+                        <a href="${safeSiteUrl}" ${targetAttr}>${name}</a>
                     </h3>
                 </div>
                 
@@ -615,14 +632,14 @@ function renderSchoolCard(school) {
                         <div class="meta-icon"><i class="fa-solid fa-location-dot"></i></div>
                         <div class="meta-text">
                             <span class="meta-label">المقر والمدينة</span>
-                            <strong>${school.location}</strong>
+                            <strong>${location}</strong>
                         </div>
                     </div>
                     <div class="meta-item">
                         <div class="meta-icon"><i class="fa-solid fa-map-pin"></i></div>
                         <div class="meta-text">
                             <span class="meta-label">نطاق الإدارة</span>
-                            <strong>مركز ومدينة ${school.area}</strong>
+                            <strong>مركز ومدينة ${area}</strong>
                         </div>
                     </div>
                     <div class="meta-item">
@@ -635,11 +652,11 @@ function renderSchoolCard(school) {
                 </div>
 
                 <div class="card-actions">
-                    <a href="${siteUrl}" ${targetAttr} class="btn-card-visit" title="عرض صفحة وموقع ${school.name}">
-                        <i class="fa-solid ${keepExistingSite ? "fa-arrow-up-right-from-square" : "fa-building-columns"}"></i>
-                        <span>${keepExistingSite ? "زيارة البوابة المباشرة" : "تصفح الإدارة والمدارس"}</span>
+                    <a href="${safeSiteUrl}" ${targetAttr} class="btn-card-visit" title="عرض صفحة وموقع ${name}">
+                        <i class="fa-solid ${hasExternalSite ? "fa-arrow-up-right-from-square" : "fa-building-columns"}"></i>
+                        <span>${hasExternalSite ? "زيارة البوابة المباشرة" : "تصفح الإدارة والمدارس"}</span>
                     </a>
-                    <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-map" title="عرض موقع ${school.name} على الخريطة">
+                    <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="btn-card-map" title="عرض موقع ${name} على الخريطة">
                         <i class="fa-solid fa-map-location-dot"></i>
                         <span>الخريطة</span>
                     </a>
@@ -653,6 +670,19 @@ function renderSchools() {
     const container = document.getElementById("schoolsGrid");
     const countBadge = document.getElementById("schoolsCount");
     if (!container) return;
+
+    const areaSelect = document.getElementById("areaFilter");
+    if (areaSelect) {
+        const selectedArea = filterState.area;
+        const areas = [...new Set(schoolsData.map(school => school.area).filter(Boolean))];
+        const existingAreas = Array.from(areaSelect.options).map(option => option.value).filter(Boolean);
+        areas.forEach(area => {
+            if (!existingAreas.includes(area)) {
+                areaSelect.add(new Option(area, area));
+            }
+        });
+        if (areas.includes(selectedArea)) areaSelect.value = selectedArea;
+    }
 
     const filtered = getFilteredSchools();
 
@@ -712,47 +742,36 @@ function resetAllFilters() {
     renderSchools();
 }
 
-function initDakahliaTheme() {
-    const savedTheme = localStorage.getItem("dakahlia_theme") || "light";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    updateThemeIcons(savedTheme);
-
-    const toggleBtns = document.querySelectorAll(".theme-toggle-btn");
-    toggleBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", newTheme);
-            localStorage.setItem("dakahlia_theme", newTheme);
-            updateThemeIcons(newTheme);
-        });
-    });
-}
-
-function updateThemeIcons(theme) {
-    document.querySelectorAll(".theme-toggle-btn i").forEach(icon => {
-        if (theme === "dark") {
-            icon.className = "fa-solid fa-sun";
-        } else {
-            icon.className = "fa-solid fa-moon";
-        }
-    });
-}
-
 function initLiveDate() {
     const dateEl = document.getElementById("arabicDate");
-    if (!dateEl) return;
-    try {
+    if (dateEl) {
         const now = new Date();
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        dateEl.textContent = now.toLocaleDateString('ar-EG', options);
-    } catch(e) {
-        dateEl.textContent = "العام الدراسي 2026/2027";
+        try {
+            dateEl.textContent = now.toLocaleDateString('ar-EG', options);
+        } catch (error) {
+            dateEl.textContent = "العام الدراسي 2026/2027";
+        }
     }
+
+    const clockEl = document.getElementById("liveClock");
+    if (!clockEl) return;
+    const updateClock = () => {
+        const now = new Date();
+        clockEl.dateTime = now.toISOString();
+        clockEl.textContent = now.toLocaleTimeString("ar-EG", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+            timeZone: "Africa/Cairo"
+        });
+    };
+    updateClock();
+    window.setInterval(updateClock, 1000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    initDakahliaTheme();
     initLiveDate();
     renderSchools();
 
@@ -905,3 +924,64 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 });
+
+// ============================================================
+//  Theme Toggle — Day / Night Mode
+// ============================================================
+(function() {
+    'use strict';
+
+    const STORAGE_KEY = 'site_theme_v1';
+    const html = document.documentElement;
+
+    // Apply saved theme immediately (before DOM ready to avoid flash)
+    const savedTheme = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('dakahlia_theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem(STORAGE_KEY, theme);
+        localStorage.setItem('dakahlia_theme', theme);
+        updateToggleBtn(theme);
+        // Also update school.html theme if opened side-by-side via postMessage
+        try {
+            if (window.opener && window.opener.document) {
+                window.opener.document.documentElement.setAttribute('data-theme', theme);
+            }
+        } catch(e) {}
+    }
+
+    function updateToggleBtn(theme) {
+        const btn = document.getElementById('themeToggleBtn');
+        if (!btn) return;
+        btn.setAttribute('aria-label', theme === 'dark' ? 'التبديل إلى الوضع النهاري' : 'التبديل إلى الوضع الليلي');
+        btn.setAttribute('title', theme === 'dark' ? 'وضع النهار' : 'وضع الليل');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('themeToggleBtn');
+        if (!btn) return;
+
+        // Set correct state after DOM loads
+        const current = html.getAttribute('data-theme') || 'light';
+        updateToggleBtn(current);
+
+        btn.addEventListener('click', function() {
+            const current = html.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            // Animate thumb
+            btn.classList.add('toggling');
+            setTimeout(() => btn.classList.remove('toggling'), 400);
+            applyTheme(next);
+        });
+    });
+
+    // Listen for preference change from OS
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    mq.addEventListener('change', function(e) {
+        // Only auto-switch if user never manually set a preference
+        if (!localStorage.getItem(STORAGE_KEY) && !localStorage.getItem('dakahlia_theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+})();

@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="theme-color" content="#071311">
+    <title>إدارة الموقع | مديرية الدقهلية</title>
+    <link rel="icon" href="op-removebg-preview.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #071311;
+            --surface: #0c1b18;
+            --surface-2: #10231f;
+            --surface-3: #152b26;
+            --line: rgba(195, 226, 214, .09);
+            --line-bright: rgba(58, 211, 159, .28);
+            --text: #edf6f1;
+            --muted: #91a9a0;
+            --soft: #60766e;
+            --mint: #3bd39f;
+            --mint-dark: #143e31;
+            --gold: #d7b76b;
+            --red: #ff7778;
+            --blue: #7bc8ff;
+            --radius: 18px;
+            --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+        }
+
+        * { box-sizing: border-box; }
+        html { min-width: 320px; background: var(--bg); scroll-behavior: smooth; }
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at 82% -15%, rgba(59, 211, 159, .11), transparent 38%),
+                radial-gradient(ellipse at -10% 70%, rgba(39, 114, 94, .12), transparent 36%),
+                var(--bg);
+            font-family: "Cairo", sans-serif;
+        }
+        button, input, textarea, select { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        button { color: inherit; }
+        a { color: inherit; }
+        [hidden] { display: none !important; }
+
+        .app-shell { min-height: 100vh; }
+        .sidebar {
+            position: fixed;
+            z-index: 20;
+            inset: 0 0 0 auto;
+            display: flex;
+            width: 278px;
+            flex-direction: column;
+            padding: 23px 17px 18px;
+            border-left: 1px solid var(--line);
+            background: rgba(9, 23, 19, .94);
+            backdrop-filter: blur(18px);
+        }
+        .brand { display: flex; align-items: center; gap: 12px; padding: 3px 4px 24px; }
+        .brand-mark {
+            display: grid;
+            width: 45px;
+            height: 45px;
+            flex: 0 0 45px;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid var(--line-bright);
+            border-radius: 15px;
+            background: linear-gradient(145deg, rgba(59, 211, 159, .2), rgba(59, 211, 159, .04));
+            box-shadow: 0 0 32px rgba(59, 211, 159, .08);
+        }
+        .brand-mark img { width: 34px; height: 34px; object-fit: contain; }
+        .brand-copy { min-width: 0; }
+        .brand-copy strong { display: block; font-size: 13px; font-weight: 800; }
+        .brand-copy span { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+        .side-caption { padding: 10px 11px 6px; color: var(--soft); font-size: 9px; font-weight: 800; letter-spacing: 1.4px; }
+        .side-nav { display: grid; gap: 4px; overflow-y: auto; padding: 0 0 14px; }
+        .nav-button {
+            display: flex;
+            min-height: 42px;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 12px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            text-align: right;
+            transition: .2s ease;
+        }
+        .nav-button i { width: 19px; color: #779187; text-align: center; }
+        .nav-button span { flex: 1; font-size: 12px; font-weight: 700; }
+        .nav-button:hover { border-color: var(--line); background: rgba(255,255,255,.025); color: var(--text); }
+        .nav-button.active {
+            border-color: rgba(59, 211, 159, .2);
+            background: linear-gradient(95deg, rgba(59, 211, 159, .14), rgba(59, 211, 159, .035));
+            color: #dff9ee;
+        }
+        .nav-button.active i { color: var(--mint); }
+        .side-bottom { margin-top: auto; border-top: 1px solid var(--line); padding-top: 15px; }
+        .local-note { padding: 11px 12px; border: 1px solid rgba(215,183,107,.14); border-radius: 12px; background: rgba(215,183,107,.045); color: #bcae8c; font-size: 10px; line-height: 1.8; }
+        .local-note i { margin-left: 5px; color: var(--gold); }
+        .side-home { display: flex; align-items: center; gap: 9px; margin-top: 12px; padding: 9px 11px; color: var(--muted); font-size: 11px; text-decoration: none; }
+        .side-home:hover { color: var(--mint); }
+
+        .main { min-height: 100vh; margin-right: 278px; }
+        .topbar {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            display: flex;
+            min-height: 76px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px clamp(16px, 3vw, 36px);
+            border-bottom: 1px solid var(--line);
+            background: rgba(7, 19, 17, .82);
+            backdrop-filter: blur(18px);
+        }
+        .topbar-title { display: flex; min-width: 0; align-items: center; gap: 12px; }
+        .menu-toggle { display: none; }
+        .page-icon { display: grid; width: 39px; height: 39px; flex: 0 0 39px; place-items: center; overflow: hidden; border: 1px solid var(--line-bright); border-radius: 13px; background: rgba(59,211,159,.09); color: var(--mint); }
+        .page-icon img { width: 31px; height: 31px; object-fit: contain; }
+        .page-heading { min-width: 0; }
+        .page-heading h1 { margin: 0; font-size: 16px; font-weight: 800; }
+        .page-heading p { margin: 2px 0 0; color: var(--muted); font-size: 10px; }
+        .top-actions { display: flex; align-items: center; gap: 8px; }
+        .save-state { display: flex; align-items: center; gap: 7px; padding: 7px 10px; color: var(--muted); font-size: 10px; white-space: nowrap; }
+        .save-state i { color: var(--mint); font-size: 8px; }
+        .button {
+            display: inline-flex;
+            min-height: 38px;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 13px;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            background: var(--surface-2);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .18s ease, border-color .18s ease, background .18s ease;
+        }
+        .button:hover { transform: translateY(-1px); border-color: var(--line-bright); }
+        .button.primary { border-color: transparent; background: linear-gradient(120deg, #40d6a1, #28b780); color: #052117; box-shadow: 0 8px 22px rgba(40,183,128,.15); }
+        .button.ghost { background: transparent; color: var(--muted); }
+        .button.danger { border-color: rgba(255,119,120,.2); background: rgba(255,119,120,.07); color: #ffaaaa; }
+        .button.small { min-height: 32px; padding: 5px 9px; font-size: 10px; }
+        .button:disabled { cursor: not-allowed; opacity: .5; transform: none; }
+        .workspace { width: min(100%, 1500px); margin: 0 auto; padding: 27px clamp(16px, 3vw, 36px) 60px; }
+        .panel { display: none; animation: appear .24s ease both; }
+        .panel.active { display: block; }
+        @keyframes appear { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .welcome {
+            position: relative;
+            display: flex;
+            min-height: 190px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            overflow: hidden;
+            padding: clamp(22px, 4vw, 38px);
+            border: 1px solid rgba(83, 208, 163, .16);
+            border-radius: 22px;
+            background:
+                radial-gradient(circle at 18% 0, rgba(81, 222, 169, .15), transparent 36%),
+                linear-gradient(120deg, #102720, #0b1c18 65%, #10231d);
+            box-shadow: var(--shadow);
+        }
+        .welcome::after { position: absolute; top: -105px; left: 21%; width: 240px; height: 240px; border: 1px solid rgba(98,223,174,.09); border-radius: 50%; box-shadow: 0 0 0 25px rgba(98,223,174,.025), 0 0 0 52px rgba(98,223,174,.02); content: ""; pointer-events: none; }
+        .welcome-copy { position: relative; z-index: 1; max-width: 650px; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 10px; color: var(--mint); font-size: 10px; font-weight: 800; }
+        .welcome h2 { margin: 0; font-size: clamp(21px, 3vw, 31px); font-weight: 900; letter-spacing: -.5px; }
+        .welcome p { max-width: 600px; margin: 8px 0 0; color: #a4b9af; font-size: 11px; line-height: 1.9; }
+        .welcome-actions { position: relative; z-index: 1; display: flex; flex: 0 0 auto; flex-direction: column; gap: 8px; }
+        .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 13px; margin-top: 16px; }
+        .metric-card { position: relative; overflow: hidden; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, rgba(16,35,31,.96), rgba(11,26,22,.96)); }
+        .metric-card::after { position: absolute; top: -22px; left: -18px; width: 78px; height: 78px; border-radius: 50%; background: var(--glow, rgba(59,211,159,.08)); content: ""; filter: blur(7px); }
+        .metric-top { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 10px; }
+        .metric-icon { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); color: var(--metric-color, var(--mint)); }
+        .metric-value { margin-top: 12px; font-size: 25px; font-weight: 900; letter-spacing: -.5px; }
+        .metric-hint { margin-top: 1px; color: var(--soft); font-size: 9px; }
+        .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin: 25px 0 12px; }
+        .section-heading h2 { margin: 0; font-size: 15px; font-weight: 800; }
+        .section-heading p { margin: 3px 0 0; color: var(--muted); font-size: 10px; }
+        .dashboard-grid { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(260px,.8fr); gap: 14px; }
+        .card { min-width: 0; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, rgba(13,29,25,.96), rgba(10,23,20,.96)); }
+        .card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 17px; border-bottom: 1px solid var(--line); }
+        .card-head h3 { margin: 0; font-size: 12px; font-weight: 800; }
+        .card-head p { margin: 3px 0 0; color: var(--muted); font-size: 9px; }
+        .card-body { padding: 16px 17px; }
+        .activity-list { display: grid; gap: 11px; }
+        .activity-item { display: flex; align-items: center; gap: 10px; color: #c1d1c9; font-size: 10px; }
+        .activity-dot { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 11px rgba(59,211,159,.4); }
+        .activity-item time { margin-right: auto; color: var(--soft); font-size: 9px; }
+        .quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+        .quick-action { display: flex; min-height: 68px; align-items: center; gap: 10px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.018); color: var(--muted); cursor: pointer; text-align: right; transition: .18s ease; }
+        .quick-action:hover { border-color: var(--line-bright); background: rgba(59,211,159,.04); color: var(--text); }
+        .quick-action i { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; border-radius: 10px; background: rgba(59,211,159,.1); color: var(--mint); }
+        .quick-action span { font-size: 10px; font-weight: 700; }
+        .info-banner { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; padding: 12px 14px; border: 1px solid rgba(123,200,255,.14); border-radius: 12px; background: rgba(123,200,255,.045); color: #a9c5d5; font-size: 10px; line-height: 1.8; }
+        .info-banner i { margin-top: 2px; color: var(--blue); }
+        .warning-banner { border-color: rgba(215,183,107,.16); background: rgba(215,183,107,.045); color: #c7b78f; }
+        .warning-banner i { color: var(--gold); }
+        .form-card { margin-bottom: 14px; padding: 19px; border: 1px solid var(--line); border-radius: 16px; background: rgba(12,27,24,.88); }
+        .form-card h3 { display: flex; align-items: center; gap: 9px; margin: 0 0 15px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 12px; }
+        .form-card h3 i { color: var(--mint); }
+        .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+        .field { display: grid; min-width: 0; gap: 5px; }
+        .field.full { grid-column: 1 / -1; }
+        .field label { color: #aec0b7; font-size: 10px; font-weight: 700; }
+        .field small { color: var(--soft); font-size: 9px; }
+        .control {
+            width: 100%;
+            min-height: 39px;
+            padding: 9px 11px;
+            border: 1px solid rgba(195,226,214,.12);
+            border-radius: 10px;
+            outline: 0;
+            background: #091713;
+            color: var(--text);
+            font-size: 11px;
+            transition: border-color .18s ease, box-shadow .18s ease;
+        }
+        .control:focus { border-color: rgba(59,211,159,.56); box-shadow: 0 0 0 3px rgba(59,211,159,.08); }
+        textarea.control { min-height: 82px; resize: vertical; line-height: 1.8; }
+        select.control { cursor: pointer; }
+        .field-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+        .list-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 9px; margin-bottom: 12px; }
+        .list-summary { color: var(--muted); font-size: 10px; }
+        .collection { display: grid; gap: 10px; }
+        .collection-row { position: relative; min-width: 0; padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.015); }
+        .collection-row-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+        .collection-row-title { min-width: 0; overflow: hidden; color: #d8e6de; font-size: 10px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+        .row-actions { display: flex; flex: 0 0 auto; gap: 5px; }
+        .icon-button { display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.025); color: var(--muted); cursor: pointer; }
+        .icon-button:hover { border-color: var(--line-bright); color: var(--mint); }
+        .icon-button.remove:hover { border-color: rgba(255,119,120,.25); color: var(--red); }
+        .row-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+        .row-grid .control { min-height: 35px; padding: 7px 9px; font-size: 10px; }
+        .row-grid textarea.control { min-height: 60px; }
+        .administration-row .row-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+        .switch-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+        .switch-card { display: flex; min-height: 61px; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.015); }
+        .switch-copy { flex: 1; }
+        .switch-copy strong { display: block; font-size: 10px; }
+        .switch-copy span { display: block; margin-top: 2px; color: var(--soft); font-size: 9px; }
+        .switch { position: relative; width: 37px; height: 21px; flex: 0 0 37px; }
+        .switch input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+        .switch-track { position: absolute; inset: 0; border: 1px solid rgba(195,226,214,.13); border-radius: 99px; background: #17241f; cursor: pointer; transition: .2s ease; }
+        .switch-track::after { position: absolute; top: 3px; right: 3px; width: 13px; height: 13px; border-radius: 50%; background: #71847b; content: ""; transition: .2s ease; }
+        .switch input:checked + .switch-track { border-color: rgba(59,211,159,.35); background: rgba(59,211,159,.25); }
+        .switch input:checked + .switch-track::after { right: 19px; background: var(--mint); box-shadow: 0 0 9px rgba(59,211,159,.38); }
+        .image-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+        .image-card { min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.015); }
+        .image-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+        .image-head strong { font-size: 10px; }
+        .image-preview { display: grid; height: 112px; place-items: center; overflow: hidden; margin-bottom: 10px; border: 1px dashed rgba(195,226,214,.13); border-radius: 10px; background: rgba(0,0,0,.12); }
+        .image-preview img { max-width: 95%; max-height: 95%; object-fit: contain; }
+        .image-preview span { color: var(--soft); font-size: 10px; }
+        .file-control { display: none; }
+        .switch-input-label { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 10px; cursor: pointer; }
+        .import-label { cursor: pointer; }
+        .empty-state { padding: 24px; color: var(--muted); font-size: 11px; text-align: center; }
+        .toast-region { position: fixed; z-index: 50; inset: auto 20px 20px auto; display: grid; gap: 8px; width: min(360px, calc(100vw - 40px)); }
+        .toast { display: flex; align-items: center; gap: 9px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #10211c; box-shadow: var(--shadow); color: var(--text); font-size: 11px; animation: appear .2s ease both; }
+        .toast.success i { color: var(--mint); }
+        .toast.error i { color: var(--red); }
+        .toast.info i { color: var(--blue); }
+        .backdrop { display: none; }
+        .app-shell[hidden] { display: none; }
+        .login-screen {
+            display: grid;
+            min-height: 100vh;
+            place-items: center;
+            padding: 22px;
+            background:
+                radial-gradient(ellipse at 50% 0, rgba(59, 211, 159, .13), transparent 42%),
+                radial-gradient(ellipse at 90% 90%, rgba(39, 114, 94, .12), transparent 38%),
+                var(--bg);
+        }
+        .login-card {
+            width: min(100%, 410px);
+            padding: clamp(24px, 6vw, 38px);
+            border: 1px solid rgba(83, 208, 163, .17);
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(16, 35, 31, .97), rgba(9, 23, 19, .98));
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .login-logo {
+            display: grid;
+            width: 72px;
+            height: 72px;
+            place-items: center;
+            margin: 0 auto 17px;
+            border: 1px solid var(--line-bright);
+            border-radius: 22px;
+            background: rgba(59, 211, 159, .08);
+        }
+        .login-logo img { width: 54px; height: 54px; object-fit: contain; }
+        .login-eyebrow { color: var(--mint); font-size: 10px; font-weight: 800; }
+        .login-card h1 { margin: 6px 0 2px; font-size: 22px; font-weight: 900; }
+        .login-card > p { margin: 0; color: var(--muted); font-size: 11px; }
+        .login-form { margin-top: 24px; text-align: right; }
+        .login-label { display: block; margin-bottom: 7px; color: #c1d1c9; font-size: 10px; font-weight: 700; }
+        .password-wrap { position: relative; }
+        .password-input { width: 100%; min-height: 47px; padding: 10px 43px 10px 42px; border: 1px solid rgba(195,226,214,.14); border-radius: 12px; outline: 0; background: #081511; color: var(--text); font-size: 13px; letter-spacing: 1.2px; }
+        .password-input:focus { border-color: rgba(59,211,159,.6); box-shadow: 0 0 0 3px rgba(59,211,159,.08); }
+        .password-lock, .password-toggle { position: absolute; top: 50%; display: grid; width: 32px; height: 32px; place-items: center; transform: translateY(-50%); color: var(--soft); }
+        .password-lock { right: 7px; pointer-events: none; }
+        .password-toggle { left: 7px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; }
+        .password-toggle:hover { color: var(--mint); }
+        .login-submit { width: 100%; margin-top: 12px; }
+        .login-error { min-height: 18px; margin-top: 9px; color: var(--red); font-size: 10px; }
+        .login-warning { margin-top: 20px; padding: 10px 11px; border: 1px solid rgba(215,183,107,.14); border-radius: 11px; background: rgba(215,183,107,.045); color: #bcae8c; font-size: 9px; line-height: 1.8; text-align: right; }
+        .login-warning i { margin-left: 4px; color: var(--gold); }
+
+        @media (max-width: 1120px) {
+            .sidebar { width: 245px; }
+            .main { margin-right: 245px; }
+            .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+        }
+        @media (max-width: 820px) {
+            .sidebar { width: 278px; transform: translateX(100%); transition: transform .25s ease; }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-right: 0; }
+            .menu-toggle { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-2); color: var(--mint); cursor: pointer; }
+            .backdrop.show { position: fixed; z-index: 19; inset: 0; display: block; background: rgba(0,0,0,.55); backdrop-filter: blur(2px); }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .welcome { align-items: flex-start; }
+            .welcome-actions { flex-direction: row; }
+        }
+        @media (max-width: 560px) {
+            .topbar { min-height: 66px; padding: 10px 13px; }
+            .page-heading h1 { font-size: 13px; }
+            .page-heading p { font-size: 9px; }
+            .page-icon { width: 34px; height: 34px; flex-basis: 34px; }
+            .page-icon img { width: 27px; height: 27px; }
+            .top-actions { gap: 5px; }
+            .top-actions .button { width: 37px; min-height: 37px; padding: 0; font-size: 0; }
+            .top-actions .button i { font-size: 12px; }
+            .save-state { display: none; }
+            .workspace { padding: 17px 13px 40px; }
+            .welcome { min-height: 0; flex-direction: column; gap: 16px; padding: 21px; }
+            .welcome h2 { font-size: 22px; }
+            .welcome p { font-size: 10px; }
+            .welcome-actions { width: 100%; }
+            .welcome-actions .button { flex: 1; }
+            .metric-grid { gap: 9px; }
+            .metric-card { padding: 12px; }
+            .metric-value { font-size: 21px; }
+            .metric-top { font-size: 9px; }
+            .metric-icon { width: 28px; height: 28px; }
+            .field-grid, .switch-list, .image-grid { grid-template-columns: 1fr; }
+            .administration-row .row-grid, .row-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 14px; }
+            .section-heading { align-items: flex-start; }
+            .quick-actions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+            .toast-region { inset: auto 12px 12px; width: auto; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+        <div class="login-card">
+            <div class="login-logo"><img src="op-removebg-preview.png" alt="شعار المديرية"></div>
+            <span class="login-eyebrow">مديرية التربية والتعليم بالدقهلية</span>
+            <h1 id="loginTitle">تسجيل الدخول</h1>
+            <p>أدخل كلمة المرور للانتقال إلى لوحة إدارة الموقع.</p>
+            <form class="login-form" id="loginForm">
+                <label class="login-label" for="loginPassword">كلمة المرور</label>
+                <div class="password-wrap">
+                    <i class="fa-solid fa-lock password-lock" aria-hidden="true"></i>
+                    <input class="password-input" id="loginPassword" type="password" placeholder="أدخل كلمة المرور" autocomplete="current-password" required>
+                    <button class="password-toggle" id="togglePassword" type="button" aria-label="إظهار كلمة المرور" aria-pressed="false"><i class="fa-solid fa-eye"></i></button>
+                </div>
+                <button class="button primary login-submit" type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> دخول إلى لوحة الإدارة</button>
+                <div class="login-error" id="loginError" role="alert" aria-live="polite"></div>
+            </form>
+            <div class="login-warning"><i class="fa-solid fa-triangle-exclamation"></i> هذه كلمة مرور واجهة فقط؛ الموقع الثابت لا يوفر تحققًا آمنًا من خادم، ويمكن تجاوزها تقنيًا. لا تستخدمها لحماية معلومات حساسة.</div>
+        </div>
+    </section>
+    <div class="app-shell" id="appShell" hidden>
+        <aside class="sidebar" id="sidebar" aria-label="قائمة لوحة الإدارة">
+            <div class="brand">
+                <div class="brand-mark"><img src="op-removebg-preview.png" alt=""></div>
+                <div class="brand-copy"><strong>مركز إدارة الموقع</strong><span>مديرية التربية والتعليم بالدقهلية</span></div>
+            </div>
+            <div class="side-caption">مساحة العمل</div>
+            <nav class="side-nav" id="sideNav">
+                <button class="nav-button active" data-panel="overview"><i class="fa-solid fa-chart-pie"></i><span>نظرة عامة</span></button>
+                <button class="nav-button" data-panel="content"><i class="fa-solid fa-pen-to-square"></i><span>محتوى الموقع</span></button>
+                <button class="nav-button" data-panel="administrations"><i class="fa-solid fa-building-columns"></i><span>الإدارات التعليمية</span></button>
+                <button class="nav-button" data-panel="stats"><i class="fa-solid fa-chart-simple"></i><span>الإحصائيات</span></button>
+                <button class="nav-button" data-panel="services"><i class="fa-solid fa-graduation-cap"></i><span>الخدمات الإلكترونية</span></button>
+                <button class="nav-button" data-panel="quickAccess"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>الروابط المباشرة</span></button>
+                <button class="nav-button" data-panel="footer"><i class="fa-solid fa-link"></i><span>روابط وتذييل الصفحة</span></button>
+                <button class="nav-button" data-panel="display"><i class="fa-solid fa-eye"></i><span>إظهار وإخفاء الأقسام</span></button>
+                <button class="nav-button" data-panel="images"><i class="fa-regular fa-images"></i><span>الصور والشعارات</span></button>
+                <button class="nav-button" data-panel="tools"><i class="fa-solid fa-box-archive"></i><span>النسخ الاحتياطي</span></button>
+            </nav>
+            <div class="side-bottom">
+                <div class="local-note"><i class="fa-solid fa-circle-info"></i> هذه النسخة تحفظ التغييرات على هذا المتصفح فقط. نشرها للزوار يحتاج إلى قاعدة بيانات وخادم.</div>
+                <a class="side-home" href="index.html"><i class="fa-solid fa-arrow-right"></i> العودة إلى الموقع</a>
+            </div>
+        </aside>
+        <div class="backdrop" id="backdrop"></div>
+        <main class="main">
+            <header class="topbar">
+                <div class="topbar-title">
+                    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                    <div class="page-icon"><img src="op-removebg-preview.png" alt="شعار مديرية التربية والتعليم بالدقهلية"></div>
+                    <div class="page-heading"><h1 id="pageTitle">نظرة عامة</h1><p>إدارة محتوى بوابة مديرية الدقهلية</p></div>
+                </div>
+                <div class="top-actions">
+                    <span class="save-state" id="saveState"><i class="fa-solid fa-circle"></i> كل التغييرات محفوظة</span>
+                    <a class="button ghost" href="index.html" target="_blank" rel="noopener noreferrer" aria-label="معاينة الموقع"><i class="fa-solid fa-arrow-up-right-from-square"></i><span> معاينة</span></a>
+                    <button class="button primary" id="saveButton" aria-label="حفظ التغييرات"><i class="fa-solid fa-floppy-disk"></i><span> حفظ التغييرات</span></button>
+                </div>
+            </header>
+
+            <div class="workspace">
+                <section class="panel active" id="panel-overview">
+                    <div class="welcome">
+                        <div class="welcome-copy">
+                            <span class="eyebrow"><i class="fa-solid fa-circle"></i> مركز التحكم بالموقع</span>
+                            <h2>كل تفاصيل موقعك…<br>في مكان واحد.</h2>
+                            <p>عدّل المحتوى، أدر الإدارات والخدمات، أظهر أو أخفِ الأقسام، وغيّر الصور والشعارات — ثم احفظ وشاهد النتيجة على الموقع.</p>
+                        </div>
+                        <div class="welcome-actions">
+                            <button class="button primary" data-go="content"><i class="fa-solid fa-pen"></i> تعديل المحتوى</button>
+                            <a class="button" href="index.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> فتح الموقع</a>
+                        </div>
+                    </div>
+                    <div class="metric-grid">
+                        <article class="metric-card" style="--metric-color:#45d8a4;--glow:rgba(69,216,164,.09)"><div class="metric-top"><span>إدارات تعليمية</span><span class="metric-icon"><i class="fa-solid fa-building-columns"></i></span></div><div class="metric-value" id="metricAdministrations">—</div><div class="metric-hint">في دليل المحافظة</div></article>
+                        <article class="metric-card" style="--metric-color:#7bc8ff;--glow:rgba(123,200,255,.09)"><div class="metric-top"><span>خدمات إلكترونية</span><span class="metric-icon"><i class="fa-solid fa-graduation-cap"></i></span></div><div class="metric-value" id="metricServices">—</div><div class="metric-hint">بطاقات الخدمات بالموقع</div></article>
+                        <article class="metric-card" style="--metric-color:#d7b76b;--glow:rgba(215,183,107,.09)"><div class="metric-top"><span>روابط مباشرة</span><span class="metric-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></div><div class="metric-value" id="metricLinks">—</div><div class="metric-hint">منصات وروابط سريعة</div></article>
+                        <article class="metric-card" style="--metric-color:#bb9cff;--glow:rgba(187,156,255,.09)"><div class="metric-top"><span>أقسام ظاهرة</span><span class="metric-icon"><i class="fa-solid fa-layer-group"></i></span></div><div class="metric-value" id="metricSections">—</div><div class="metric-hint">من أقسام الصفحة الرئيسية</div></article>
+                    </div>
+                    <div class="section-heading"><div><h2>ابدأ من هنا</h2><p>اختصارات لأكثر أدوات الإدارة استخدامًا</p></div></div>
+                    <div class="dashboard-grid">
+                        <article class="card">
+                            <div class="card-head"><div><h3>إجراءات سريعة</h3><p>افتح القسم الذي تريد تعديله</p></div><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--gold)"></i></div>
+                            <div class="card-body"><div class="quick-actions">
+                                <button class="quick-action" data-go="administrations"><i class="fa-solid fa-building-columns"></i><span>إدارة الإدارات</span></button>
+                                <button class="quick-action" data-go="services"><i class="fa-solid fa-laptop"></i><span>تعديل الخدمات</span></button>
+                                <button class="quick-action" data-go="images"><i class="fa-regular fa-images"></i><span>تغيير الصور</span></button>
+                                <button class="quick-action" data-go="display"><i class="fa-solid fa-eye"></i><span>إظهار أو إخفاء قسم</span></button>
+                            </div></div>
+                        </article>
+                        <article class="card">
+                            <div class="card-head"><div><h3>حالة مساحة العمل</h3><p>حالة آخر تعديل في هذه الجلسة</p></div><i class="fa-solid fa-shield-halved" style="color:var(--mint)"></i></div>
+                            <div class="card-body"><div class="activity-list">
+                                <div class="activity-item"><span class="activity-dot"></span><span id="overviewSaveLabel">لا توجد تغييرات غير محفوظة</span><time id="overviewTime">—</time></div>
+                                <div class="activity-item"><span class="activity-dot"></span><span>التخزين المحلي للمتصفح متاح</span><time>محلي</time></div>
+                                <div class="activity-item"><span class="activity-dot" style="background:var(--gold);box-shadow:none"></span><span>تحتاج التعديلات للنشر كي يراها الجميع</span><time>معلومة</time></div>
+                            </div></div>
+                        </article>
+                    </div>
+                    <div class="info-banner warning-banner" style="margin-top:14px"><i class="fa-solid fa-triangle-exclamation"></i><span>تنبيه مهم: الحفظ هنا على جهازك ومتصفحك فقط، ولا يرفع الملفات إلى الموقع المنشور. كما أن لوحة ثابتة مثل هذه لا توفر تسجيل دخول آمنًا أو صلاحيات حقيقية؛ يلزم خادم وقاعدة بيانات للنشر والإدارة المشتركة.</span></div>
+                </section>
+
+                <section class="panel" id="panel-content">
+                    <div class="section-heading"><div><h2>محتوى الموقع</h2><p>عدّل النصوص الرئيسية والعناوين كما تظهر في الصفحة.</p></div></div>
+                    <div id="contentEditor"></div>
+                    <div class="form-card"><div class="list-toolbar"><div><h3 style="margin:0 0 4px;padding:0;border:0"><i class="fa-solid fa-list-check"></i> مميزات المديرية</h3><span class="list-summary">تظهر في قسم «عن المديرية».</span></div><button class="button primary small" id="addFeature"><i class="fa-solid fa-plus"></i> إضافة ميزة</button></div><div class="collection" id="featuresEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-administrations">
+                    <div class="section-heading"><div><h2>الإدارات التعليمية</h2><p>تحكم في بطاقات الدليل: الاسم، النطاق، العنوان، الصورة والرابط.</p></div></div>
+                    <div class="info-banner"><i class="fa-solid fa-circle-info"></i><span>رابط Google Maps يفتح الخريطة. اترك الرابط فارغًا لفتح صفحة الإدارة الداخلية المعتادة.</span></div>
+                    <div class="form-card"><div class="list-toolbar"><span class="list-summary" id="administrationsSummary"></span><button class="button primary small" id="addAdministration"><i class="fa-solid fa-plus"></i> إضافة إدارة</button></div><div class="collection" id="administrationsEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-stats">
+                    <div class="section-heading"><div><h2>إحصائيات الصفحة</h2><p>أضف بطاقة أو عدّل الأرقام والعناوين وترتيبها.</p></div></div>
+                    <div class="form-card"><div class="list-toolbar"><span class="list-summary">تظهر في الشريط أسفل الواجهة الرئيسية.</span><button class="button primary small" id="addStat"><i class="fa-solid fa-plus"></i> إضافة إحصائية</button></div><div class="collection" id="statsEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-services">
+                    <div class="section-heading"><div><h2>الخدمات الإلكترونية</h2><p>أدر بطاقات الخدمات التي تظهر في بوابة الخدمات التعليمية.</p></div></div>
+                    <div class="form-card"><div class="list-toolbar"><span class="list-summary">يمكنك إضافة خدمة أو حذفها دون تغيير ملفات الصفحة.</span><button class="button primary small" id="addService"><i class="fa-solid fa-plus"></i> إضافة خدمة</button></div><div class="collection" id="servicesEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-quickAccess">
+                    <div class="section-heading"><div><h2>الروابط المباشرة</h2><p>المجموعة المنفصلة أعلى بطاقات الخدمات.</p></div></div>
+                    <div class="form-card"><div class="list-toolbar"><span class="list-summary">اسم الرابط والوصف والأيقونة والعنوان.</span><button class="button primary small" id="addQuickAccess"><i class="fa-solid fa-plus"></i> إضافة رابط</button></div><div class="collection" id="quickAccessEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-footer">
+                    <div class="section-heading"><div><h2>روابط وتذييل الصفحة</h2><p>عدّل روابط أسفل الصفحة ووصف المديرية والمنصات الرسمية.</p></div></div>
+                    <div class="form-card"><h3><i class="fa-solid fa-link"></i> روابط سريعة في التذييل</h3><div class="list-toolbar"><span class="list-summary">روابط التنقل داخل الموقع.</span><button class="button primary small" id="addQuickLink"><i class="fa-solid fa-plus"></i> إضافة رابط</button></div><div class="collection" id="quickLinksEditor"></div></div>
+                    <div class="form-card"><h3><i class="fa-solid fa-graduation-cap"></i> منصات تعليمية رسمية</h3><div class="list-toolbar"><span class="list-summary">روابط خارجية تظهر في التذييل.</span><button class="button primary small" id="addPlatform"><i class="fa-solid fa-plus"></i> إضافة منصة</button></div><div class="collection" id="platformsEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-display">
+                    <div class="section-heading"><div><h2>إظهار وإخفاء الأقسام</h2><p>اخفِ قسمًا مؤقتًا من الصفحة الرئيسية من دون حذف محتواه.</p></div></div>
+                    <div class="form-card"><div class="switch-list" id="visibilityEditor"></div></div>
+                </section>
+                <section class="panel" id="panel-images">
+                    <div class="section-heading"><div><h2>الصور والشعارات</h2><p>ضع رابط صورة أو اختر ملفًا؛ استخدم ضغطًا تلقائيًا قبل التخزين.</p></div></div>
+                    <div class="info-banner warning-banner"><i class="fa-solid fa-hard-drive"></i><span>ملفات الصور تُخزَّن في بيانات المتصفح وقد تستهلك مساحته. يفضّل استخدام صور صغيرة وWebP عند الإمكان.</span></div>
+                    <div class="image-grid" id="imagesEditor"></div>
+                </section>
+                <section class="panel" id="panel-tools">
+                    <div class="section-heading"><div><h2>النسخ الاحتياطي والاستعادة</h2><p>احتفظ بنسخة من إعداداتك أو انقلها إلى متصفح آخر.</p></div></div>
+                    <div class="form-card"><h3><i class="fa-solid fa-download"></i> تصدير الإعدادات</h3><p style="color:var(--muted);font-size:10px;line-height:1.9">ينشئ ملف JSON بإعدادات الموقع المحفوظة حاليًا.</p><button class="button primary" id="exportSettings"><i class="fa-solid fa-file-arrow-down"></i> تنزيل نسخة احتياطية</button></div>
+                    <div class="form-card"><h3><i class="fa-solid fa-upload"></i> استيراد إعدادات</h3><p style="color:var(--muted);font-size:10px;line-height:1.9">اختر نسخة JSON سبق تصديرها. سيتم استبدال التغييرات الحالية في مساحة هذا المتصفح.</p><label class="button import-label" for="importFile"><i class="fa-solid fa-file-arrow-up"></i> اختيار ملف نسخة احتياطية</label><input class="file-control" id="importFile" type="file" accept="application/json,.json"></div>
+                    <div class="form-card"><h3><i class="fa-solid fa-rotate-left"></i> استعادة الإعدادات الافتراضية</h3><p style="color:var(--muted);font-size:10px;line-height:1.9">يمسح تخصيصات لوحة الإدارة من هذا المتصفح ويعيد البيانات الافتراضية للصفحة.</p><button class="button danger" id="resetSettings"><i class="fa-solid fa-trash-can"></i> حذف التخصيصات واستعادة الأصل</button></div>
+                </section>
+                <div class="field-actions"><button class="button primary" id="bottomSave"><i class="fa-solid fa-floppy-disk"></i> حفظ جميع التغييرات</button><a class="button" href="index.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> معاينة الموقع</a></div>
+            </div>
+        </main>
+    </div>
+    <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+    <script src="administration-logos.js"></script>
+    <script src="الاداره.js"></script>
+    <script>
+        (() => {
+            "use strict";
+            const PASSWORD = "zoom";
+            const AUTH_KEY = "dakahlia_admin_authenticated";
+            const screen = document.getElementById("loginScreen");
+            const app = document.getElementById("appShell");
+            const form = document.getElementById("loginForm");
+            const input = document.getElementById("loginPassword");
+            const error = document.getElementById("loginError");
+            const toggle = document.getElementById("togglePassword");
+
+            function unlock() {
+                screen.hidden = true;
+                app.hidden = false;
+                input.value = "";
+            }
+
+            if (sessionStorage.getItem(AUTH_KEY) === "1") unlock();
+            else input.focus();
+
+            toggle.addEventListener("click", () => {
+                const visible = input.type === "password";
+                input.type = visible ? "text" : "password";
+                toggle.setAttribute("aria-pressed", String(visible));
+                toggle.setAttribute("aria-label", visible ? "إخفاء كلمة المرور" : "إظهار كلمة المرور");
+                toggle.innerHTML = `<i class="fa-solid ${visible ? "fa-eye-slash" : "fa-eye"}"></i>`;
+                input.focus();
+            });
+
+            form.addEventListener("submit", event => {
+                event.preventDefault();
+                if (input.value.trim().toLowerCase() === PASSWORD) {
+                    sessionStorage.setItem(AUTH_KEY, "1");
+                    unlock();
+                    return;
+                }
+                error.textContent = "كلمة المرور غير صحيحة.";
+                input.value = "";
+                input.focus();
+            });
+        })();
+
+        (() => {
+            "use strict";
+
+            const KEY = "site_cms_v1";
+            const DEFAULTS = {
+                content: {
+                    pageTitle: "مديرية التربية والتعليم بالدقهلية | دليل الادارات والخدمات التعليمية",
+                    ministry: "جمهورية مصر العربية • وزارة التربية والتعليم",
+                    mainTitle: "مديرية التربية والتعليم بالدقهلية",
+                    tagline: "مديرية التربية والتعليم بمحافظة الدقهلية",
+                    headerCta: "بوابة الخدمات التعليمية الذكية",
+                    ctaBtnLink: "#services",
+                    noticeBadgeText: "تنبيه عاجل",
+                    noticeText: "أهلاً بكم في بوابة مديرية التربية والتعليم بمحافظة الدقهلية",
+                    heroPill: "بوابة مديرية التربية والتعليم بمحافظة الدقهلية",
+                    heroTitle: "دليل إدارات الدقهلية",
+                    heroHighlight: "في منصة تعليمية واحدة",
+                    heroDescription: "بوابة للتعرّف على الخدمات التعليمية ودليل الإدارات التعليمية بمحافظة الدقهلية، مع وصول مباشر إلى مواقع الإدارات على الخريطة والمنصات والخدمات التعليمية للطلاب والمعلمين وأولياء الأمور.",
+                    heroPrimary: "استكشف دليل الادارات",
+                    heroSecondary: "بوابة الخدمات الإلكترونية",
+                    emblemTitle: "مديرية التربية والتعليم بالدقهلية",
+                    emblemDescription: "من أجل تعليم أفضل .. لمستقبل مشرق",
+                    topSchoolsLink: "دليل الإدارات",
+                    topServicesLink: "خدمات تعليمية بمحافظة الدقهلية",
+                    filterTitle: "محرك البحث والتصفية الذكي للادارات",
+                    schoolsEyebrow: "دليل الادارات",
+                    schoolsTitle: "الإدارات المدرجة حاليًا في الدليل",
+                    servicesEyebrow: "التحول الرقمي وتيسير المعاملات",
+                    servicesTitle: "بوابة الخدمات التعليمية الذكية",
+                    aboutEyebrow: "الصرح الإداري والتربوي",
+                    aboutTitle: "عن مديرية التربية والتعليم بالدقهلية",
+                    aboutDescription: "تتولى مديرية التربية والتعليم بالدقهلية دعم العملية التعليمية ومتابعة الخدمات المقدمة للطلاب والمعلمين وأولياء الأمور في المحافظة. تهدف هذه البوابة إلى تسهيل الوصول إلى المعلومات والخدمات التعليمية، ويعرض دليل الإدارات التعليمية السبع عشرة ومواقعها الجغرافية داخل المحافظة.",
+                    aboutButton: "تصفح ادارات المدرجة",
+                    aboutButtonLink: "#schools",
+                    aboutOverlayTitle: "مديرية التربية والتعليم بالدقهلية",
+                    aboutAddress: "محافظة الدقهلية",
+                    footerBrandDescription: "بوابة تعليمية للتعريف بمديرية التربية والتعليم بالدقهلية وخدماتها ودليل الإدارات المدرجة بالمحافظة. نسعى إلى تسهيل وصول الطلاب والمعلمين وأولياء الأمور إلى المعلومات التعليمية.",
+                    quickLinksTitle: "روابط سريعة",
+                    platformsTitle: "منصات تعليمية رسمية",
+                    scopeTitle: "نطاق الخدمات",
+                    scopeLocation: "محافظة الدقهلية",
+                    footerCopyright: "جميع الحقوق محفوظة © 2026 مديرية التربية والتعليم بمحافظة الدقهلية."
+                },
+                stats: [
+                    { icon: "fa-building-columns", number: "17", label: "إدارة تعليمية بمحافظة الدقهلية" },
+                    { icon: "fa-user-graduate", number: "+25,000", label: "خدمات تعليمية للطلاب وأولياء الأمور" },
+                    { icon: "fa-chalkboard-user", number: "+2,100", label: "خدمات تعليمية للمعلمين والإداريين" },
+                    { icon: "fa-award", number: "100%", label: "منصات وخدمات تعليمية" }
+                ],
+                services: [
+                    { icon: "fa-book-open-reader", category: "المناهج والتقييمات", title: "المكتبة الإلكترونية والتقييمات الأسبوعية", description: "الوصول المباشر إلى منصة التقييمات والأداءات الصفية والمصادر التعليمية الرقمية والمناهج المعتمدة من وزارة التربية والتعليم لكافة المراحل والصفوف.", link: "https://ellibrary.moe.gov.eg/Performance_Assessments/", linkText: "دخول المكتبة والتقييمات" },
+                    { icon: "fa-trophy", category: "الأنشطة والمسابقات", title: "رعاية الموهوبين والأنشطة الطلابية", description: "التسجيل في المسابقات الثقافية والعلمية، ودوري أوائل الطلبة، ومسابقات الروبوت والذكاء الاصطناعي، والمعارض الفنية على مستوى المحافظة.", link: "#schools", linkText: "استعراض الأنشطة والمسابقات" },
+                    { icon: "fa-file-signature", category: "الخدمات الإدارية", title: "خدمات التنسيق والتحويلات الإلكترونية", description: "تقديم ومتابعة طلبات التنسيق والتحويلات المدرسية عبر بوابات وزارة التربية والتعليم ومركز المعلومات.", link: "https://emis.gov.eg/", linkText: "دخول بوابة الخدمات" },
+                    { icon: "fa-square-poll-vertical", category: "النتائج والشهادات", title: "كشوف وبيانات نتائج الامتحانات", description: "الاستعلام عن نتائج سنوات النقل والشهادة الإعدادية بمحافظة الدقهلية برقم الجلوس، واستخراج بيانات الدرجات والشهادات الرسمية.", link: "https://edudk.net/", linkText: "استعلام النتائج" },
+                    { icon: "fa-tv", category: "التعليم عن بعد", title: "منصة مدرستنا والبث المباشر", description: "حصص تعليمية مرئية ومراجعات نهائية لكافة المراحل عبر منصة وقنوات مدرستنا الرسمية المعتمدة.", link: "https://madrasetna.moe.gov.eg/", linkText: "مشاهدة الحصص التعليمية" },
+                    { icon: "fa-user-tie", category: "خدمات الكادر التعليمي", title: "الخدمات الإلكترونية للمعلم والإداري", description: "طباعة صحيفة الأحوال الإلكترونية للمعلم والإداري، ومتابعة الترقيات والتدريبات المهنية المعتمدة لدى الأكاديمية المهنية للمعلمين.", link: "https://academy.emis.gov.eg/", linkText: "بوابة المعلم والأكاديمية" }
+                ],
+                quickAccess: [
+                    { text: "المكتبة والتقييمات", subtitle: "التقييمات والأداءات الأسبوعية", icon: "fa-book-open-reader", href: "https://ellibrary.moe.gov.eg/Performance_Assessments/" },
+                    { text: "التنسيق والتحويلات", subtitle: "بوابة خدمات وزارة التعليم", icon: "fa-file-signature", href: "https://emis.gov.eg/" },
+                    { text: "نتائج الامتحانات", subtitle: "نتائج طلاب الدقهلية", icon: "fa-square-poll-vertical", href: "https://edudk.net/" },
+                    { text: "منصة مدرستنا", subtitle: "حصص ومراجعات تعليمية", icon: "fa-tv", href: "https://madrasetna.moe.gov.eg/" },
+                    { text: "بوابة المعلم والأكاديمية", subtitle: "خدمات المعلمين والتدريب", icon: "fa-chalkboard-user", href: "https://academy.emis.gov.eg/" }
+                ],
+                features: ["بنية تحتية وشبكات ألياف ضوئية", "شاشات وفصول تفاعلية ذكية", "مراكز تدريب وتطوير تكنولوجي معتمدة", "رعاية متكاملة للفائقين والمبتكرين"],
+                quickLinks: [
+                    { text: "الصفحة الرئيسية", href: "#hero" }, { text: "دليل الإدارات", href: "#schools" },
+                    { text: "بوابة الخدمات التعليمية الذكية", href: "#services" }, { text: "عن المديرية", href: "#about" }
+                ],
+                platforms: [
+                    { text: "وزارة التربية والتعليم", href: "https://moe.gov.eg/" },
+                    { text: "المكتبة الإلكترونية والتقييمات", href: "https://ellibrary.moe.gov.eg/Performance_Assessments/" },
+                    { text: "بنك المعرفة المصري", href: "https://www.ekb.eg/" },
+                    { text: "منصة مدرستنا التعليمية", href: "https://madrasetna.moe.gov.eg/" },
+                    { text: "مركز معلومات الوزارة (EMIS)", href: "https://emis.gov.eg/" }
+                ],
+                visibility: { notice: true, hero: true, stats: true, administrations: true, services: true, about: true, footer: true },
+                images: {}
+            };
+            const SECTION_INFO = [
+                ["notice", "شريط الأخبار العلوي", "التنبيه والساعة والروابط السريعة"],
+                ["hero", "الواجهة الرئيسية", "العنوان والشعار والأزرار"],
+                ["stats", "شريط الإحصائيات", "الأرقام والمؤشرات"],
+                ["administrations", "دليل الإدارات", "البحث وبطاقات الإدارات"],
+                ["services", "الخدمات التعليمية", "الروابط وبطاقات الخدمات"],
+                ["about", "عن المديرية", "النبذة والمميزات"],
+                ["footer", "تذييل الصفحة", "الروابط ومعلومات التواصل"]
+            ];
+            const CONTENT_GROUPS = [
+                { title: "هوية الموقع والشريط العلوي", icon: "fa-id-card", fields: [
+                    ["pageTitle","عنوان صفحة الموقع","text"],["ministry","اسم الوزارة أعلى الصفحة","text"],
+                    ["mainTitle","اسم المديرية في الشعار","text"],["tagline","السطر التعريفي","text"],
+                    ["noticeBadgeText","شارة شريط الإعلان","text"],["noticeText","نص الإعلان المتحرك","text"],
+                    ["topSchoolsLink","رابط دليل الإدارات","text"],["topServicesLink","رابط الخدمات","text"],
+                    ["headerCta","نص زر الخدمات في القائمة","text"],["ctaBtnLink","وجهة زر الخدمات","text"]
+                ]},
+                { title: "واجهة الموقع الرئيسية", icon: "fa-panorama", fields: [
+                    ["heroPill","الشارة التعريفية","text"],["heroTitle","عنوان الواجهة","text"],
+                    ["heroHighlight","النص المميز في العنوان","text"],["heroDescription","الوصف الرئيسي","textarea"],
+                    ["heroPrimary","نص الزر الأول","text"],["heroSecondary","نص الزر الثاني","text"],
+                    ["emblemTitle","عنوان بطاقة الشعار","text"],["emblemDescription","وصف بطاقة الشعار","text"]
+                ]},
+                { title: "دليل الإدارات والخدمات", icon: "fa-compass", fields: [
+                    ["filterTitle","عنوان البحث والتصفية","text"],["schoolsEyebrow","شارة قسم الإدارات","text"],
+                    ["schoolsTitle","عنوان قسم الإدارات","text"],["servicesEyebrow","الشارة التعريفية للخدمات","text"],
+                    ["servicesTitle","عنوان قسم الخدمات","text"]
+                ]},
+                { title: "عن المديرية والتذييل", icon: "fa-landmark", fields: [
+                    ["aboutEyebrow","الشارة التعريفية لقسم عن المديرية","text"],["aboutTitle","عنوان قسم عن المديرية","text"],
+                    ["aboutDescription","نبذة عن المديرية","textarea"],["aboutButton","نص زر قسم المديرية","text"],
+                    ["aboutButtonLink","وجهة زر قسم المديرية","text"],["aboutOverlayTitle","عنوان بطاقة المقر","text"],
+                    ["aboutAddress","عنوان المقر","text"],["footerBrandDescription","وصف المديرية في التذييل","textarea"],
+                    ["quickLinksTitle","عنوان الروابط السريعة","text"],["platformsTitle","عنوان المنصات","text"],
+                    ["scopeTitle","عنوان نطاق الخدمات","text"],["scopeLocation","موقع المديرية في التذييل","text"],
+                    ["footerCopyright","نص حقوق النشر","text"]
+                ]}
+            ];
+            const IMAGE_INFO = [
+                ["brandLogo","شعار المديرية","الشعار في رأس الصفحة والتذييل."],
+                ["eagle","شعار النسر","الشعار الحكومي بجانب شعار المديرية."],
+                ["emblem","صورة بطاقة الواجهة","تُستخدم في البطاقة الرئيسية."],
+                ["aboutImage","صورة قسم عن المديرية","الصورة الجانبية لنبذة المديرية."],
+                ["heroBackground","خلفية الواجهة","صورة خلفية لقسم البداية."]
+            ];
+            const TITLES = {
+                overview: "نظرة عامة", content: "محتوى الموقع", administrations: "الإدارات التعليمية",
+                stats: "الإحصائيات", services: "الخدمات الإلكترونية", quickAccess: "الروابط المباشرة",
+                footer: "روابط وتذييل الصفحة", display: "إظهار وإخفاء الأقسام", images: "الصور والشعارات", tools: "النسخ الاحتياطي"
+            };
+            const clone = value => JSON.parse(JSON.stringify(value));
+            let settings = readStored();
+            let dirty = false;
+            let lastSaved = null;
+            let fieldSequence = 0;
+
+            function readStored() {
+                try {
+                    const stored = JSON.parse(localStorage.getItem(KEY) || "null");
+                    if (!stored || typeof stored !== "object" || Array.isArray(stored)) {
+                        return { ...clone(DEFAULTS), administrations: getDefaultAdministrations() };
+                    }
+                    const objectOrEmpty = value => value && typeof value === "object" && !Array.isArray(value) ? value : {};
+                    const itemArray = (value, fallback) => Array.isArray(value)
+                        ? value.filter(item => item && typeof item === "object" && !Array.isArray(item)).map(item => ({ ...item }))
+                        : clone(fallback);
+                    return {
+                        ...clone(DEFAULTS),
+                        ...stored,
+                        content: { ...clone(DEFAULTS.content), ...objectOrEmpty(stored.content) },
+                        images: { ...clone(DEFAULTS.images), ...objectOrEmpty(stored.images) },
+                        visibility: { ...clone(DEFAULTS.visibility), ...objectOrEmpty(stored.visibility) },
+                        administrations: itemArray(stored.administrations, getDefaultAdministrations()),
+                        stats: itemArray(stored.stats, DEFAULTS.stats),
+                        services: itemArray(stored.services, DEFAULTS.services),
+                        quickAccess: itemArray(stored.quickAccess, DEFAULTS.quickAccess),
+                        features: Array.isArray(stored.features) ? stored.features.filter(item => typeof item === "string") : clone(DEFAULTS.features),
+                        quickLinks: itemArray(stored.quickLinks, DEFAULTS.quickLinks),
+                        platforms: itemArray(stored.platforms, DEFAULTS.platforms)
+                    };
+                } catch (error) {
+                    console.error("تعذر تحميل إعدادات الموقع.", error);
+                    toast("error", "تعذر قراءة الإعدادات المحفوظة. سيتم عرض البيانات الافتراضية.");
+                    return clone(DEFAULTS);
+                }
+            }
+
+            function getDefaultAdministrations() {
+                const list = window.defaultDakahliaAdministrationData || window.dakahliaAdministrationData;
+                return Array.isArray(list) ? clone(list) : [];
+            }
+
+            function toast(type, message) {
+                const item = document.createElement("div");
+                item.className = `toast ${type}`;
+                const icon = document.createElement("i");
+                icon.className = `fa-solid ${type === "success" ? "fa-circle-check" : type === "error" ? "fa-triangle-exclamation" : "fa-circle-info"}`;
+                const text = document.createElement("span");
+                text.textContent = message;
+                item.append(icon, text);
+                document.getElementById("toastRegion").append(item);
+                window.setTimeout(() => item.remove(), 4200);
+            }
+
+            function markDirty() {
+                dirty = true;
+                document.getElementById("saveState").innerHTML = '<i class="fa-solid fa-circle" style="color:var(--gold)"></i> تغييرات غير محفوظة';
+                document.getElementById("overviewSaveLabel").textContent = "تغييرات بانتظار الحفظ";
+                document.getElementById("overviewTime").textContent = "الآن";
+            }
+
+            function updateMetrics() {
+                document.getElementById("metricAdministrations").textContent = settings.administrations.length;
+                document.getElementById("metricServices").textContent = settings.services.length;
+                document.getElementById("metricLinks").textContent = settings.quickAccess.length;
+                document.getElementById("metricSections").textContent = SECTION_INFO.filter(([key]) => settings.visibility[key] !== false).length;
+                document.getElementById("administrationsSummary").textContent = `${settings.administrations.length} إدارة في الدليل`;
+            }
+
+            function activatePanel(name) {
+                document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === `panel-${name}`));
+                document.querySelectorAll(".nav-button").forEach(button => button.classList.toggle("active", button.dataset.panel === name));
+                document.getElementById("pageTitle").textContent = TITLES[name] || TITLES.overview;
+                closeSidebar();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+
+            function closeSidebar() {
+                document.getElementById("sidebar").classList.remove("open");
+                document.getElementById("backdrop").classList.remove("show");
+                document.getElementById("menuToggle").setAttribute("aria-expanded", "false");
+            }
+
+            function makeField(labelText, value, options = {}) {
+                const wrapper = document.createElement("div");
+                wrapper.className = `field${options.full ? " full" : ""}`;
+                const id = `editor-field-${++fieldSequence}`;
+                const label = document.createElement("label");
+                label.htmlFor = id;
+                label.textContent = labelText;
+                const input = document.createElement(options.multiline ? "textarea" : "input");
+                input.id = id;
+                input.className = "control";
+                input.value = value == null ? "" : String(value);
+                if (!options.multiline) input.type = options.type || "text";
+                if (options.placeholder) input.placeholder = options.placeholder;
+                if (options.rows) input.rows = options.rows;
+                wrapper.append(label, input);
+                return { wrapper, input };
+            }
+
+            function renderContent() {
+                const editor = document.getElementById("contentEditor");
+                editor.replaceChildren();
+                CONTENT_GROUPS.forEach(group => {
+                    const card = document.createElement("div");
+                    card.className = "form-card";
+                    const heading = document.createElement("h3");
+                    const icon = document.createElement("i");
+                    icon.className = `fa-solid ${group.icon}`;
+                    heading.append(icon, document.createTextNode(group.title));
+                    const grid = document.createElement("div");
+                    grid.className = "field-grid";
+                    group.fields.forEach(([key, label, type]) => {
+                        const field = makeField(label, settings.content[key], { multiline: type === "textarea", full: type === "textarea" });
+                        field.input.addEventListener("input", () => { settings.content[key] = field.input.value; markDirty(); });
+                        grid.append(field.wrapper);
+                    });
+                    card.append(heading, grid);
+                    editor.append(card);
+                });
+            }
+
+            function renderCollection(containerId, arrayKey, fields, options = {}) {
+                const container = document.getElementById(containerId);
+                container.replaceChildren();
+                if (!settings[arrayKey].length) {
+                    const empty = document.createElement("div");
+                    empty.className = "empty-state";
+                    empty.textContent = "لا توجد عناصر هنا. استخدم زر الإضافة لإنشاء عنصر جديد.";
+                    container.append(empty);
+                }
+                settings[arrayKey].forEach((item, index) => {
+                    const row = document.createElement("article");
+                    row.className = `collection-row${options.administration ? " administration-row" : ""}`;
+                    const head = document.createElement("div");
+                    head.className = "collection-row-head";
+                    const nameKey = options.titleKey || fields[0].key;
+                    const title = document.createElement("span");
+                    title.className = "collection-row-title";
+                    title.textContent = item[nameKey] || `${options.label} ${index + 1}`;
+                    const actions = document.createElement("div");
+                    actions.className = "row-actions";
+                    [["↑","up","تحريك لأعلى"],["↓","down","تحريك لأسفل"],["×","remove","حذف"]].forEach(([symbol, action, label]) => {
+                        const button = document.createElement("button");
+                        button.type = "button";
+                        button.className = `icon-button${action === "remove" ? " remove" : ""}`;
+                        button.setAttribute("aria-label", label);
+                        button.title = label;
+                        button.textContent = symbol;
+                        button.disabled = (action === "up" && index === 0) || (action === "down" && index === settings[arrayKey].length - 1);
+                        button.addEventListener("click", () => {
+                            if (action === "remove") {
+                                settings[arrayKey].splice(index, 1);
+                            } else {
+                                const target = action === "up" ? index - 1 : index + 1;
+                                [settings[arrayKey][index], settings[arrayKey][target]] = [settings[arrayKey][target], settings[arrayKey][index]];
+                            }
+                            markDirty();
+                            renderCollection(containerId, arrayKey, fields, options);
+                            updateMetrics();
+                        });
+                        actions.append(button);
+                    });
+                    head.append(title, actions);
+                    const grid = document.createElement("div");
+                    grid.className = "row-grid";
+                    fields.forEach(fieldInfo => {
+                        const currentValue = options.features ? item :
+                            (options.administration && fieldInfo.key === "featuresText"
+                                ? (Array.isArray(item.features) ? item.features.join("\n") : "")
+                                : item[fieldInfo.key]);
+                        const field = makeField(fieldInfo.label, currentValue, { multiline: fieldInfo.multiline, full: fieldInfo.full });
+                        field.input.addEventListener("input", () => {
+                            if (options.features) settings[arrayKey][index] = field.input.value;
+                            else if (options.administration && fieldInfo.key === "featuresText") {
+                                settings.administrations[index].features = field.input.value.split("\n").map(value => value.trim()).filter(Boolean);
+                            }
+                            else settings[arrayKey][index][fieldInfo.key] = field.input.value;
+                            if (fieldInfo.key === options.titleKey || options.features) title.textContent = field.input.value || `${options.label} ${index + 1}`;
+                            markDirty();
+                        });
+                        grid.append(field.wrapper);
+                    });
+                    row.append(head, grid);
+                    container.append(row);
+                });
+            }
+
+            const STAT_FIELDS = [
+                { key: "icon", label: "الأيقونة (مثال: fa-school)" },
+                { key: "number", label: "القيمة أو الرقم" },
+                { key: "label", label: "الوصف" }
+            ];
+            const SERVICE_FIELDS = [
+                { key: "title", label: "اسم الخدمة" }, { key: "category", label: "التصنيف" },
+                { key: "description", label: "وصف الخدمة", multiline: true, full: true },
+                { key: "linkText", label: "نص الرابط" }, { key: "link", label: "الرابط" },
+                { key: "icon", label: "الأيقونة (مثال: fa-book)" }
+            ];
+            const QUICK_FIELDS = [
+                { key: "text", label: "اسم الرابط" }, { key: "subtitle", label: "الوصف المختصر" },
+                { key: "href", label: "وجهة الرابط" }, { key: "icon", label: "الأيقونة" }
+            ];
+            const FOOT_LINK_FIELDS = [{ key: "text", label: "اسم الرابط" }, { key: "href", label: "وجهة الرابط" }];
+            const ADMIN_FIELDS = [
+                { key: "name", label: "اسم الإدارة" }, { key: "area", label: "المدينة أو النطاق" },
+                { key: "location", label: "المقر والعنوان" }, { key: "link", label: "رابط صفحة أو خريطة" },
+                { key: "image", label: "مسار الصورة (مثال: re.jpg)" }, { key: "principal", label: "المسؤول / البيان" },
+                { key: "code", label: "كود الإدارة" }, { key: "studentsCount", label: "بيان الطلاب" },
+                { key: "description", label: "نبذة", multiline: true }, { key: "featuresText", label: "مميزات الإدارة (كل ميزة في سطر)", multiline: true }
+            ];
+
+            function renderAdministrationCollection() {
+                renderCollection("administrationsEditor", "administrations", ADMIN_FIELDS, { label: "إدارة", titleKey: "name", administration: true });
+                updateMetrics();
+            }
+
+            function renderVisibility() {
+                const container = document.getElementById("visibilityEditor");
+                container.replaceChildren();
+                SECTION_INFO.forEach(([key, title, description]) => {
+                    const card = document.createElement("label");
+                    card.className = "switch-card";
+                    const copy = document.createElement("span");
+                    copy.className = "switch-copy";
+                    const strong = document.createElement("strong");
+                    strong.textContent = title;
+                    const detail = document.createElement("span");
+                    detail.textContent = description;
+                    copy.append(strong, detail);
+                    const switchWrap = document.createElement("span");
+                    switchWrap.className = "switch";
+                    const input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.checked = settings.visibility[key] !== false;
+                    input.setAttribute("aria-label", `إظهار ${title}`);
+                    const track = document.createElement("span");
+                    track.className = "switch-track";
+                    input.addEventListener("change", () => {
+                        settings.visibility[key] = input.checked;
+                        markDirty();
+                        updateMetrics();
+                    });
+                    switchWrap.append(input, track);
+                    card.append(copy, switchWrap);
+                    container.append(card);
+                });
+            }
+
+            function renderImages() {
+                const container = document.getElementById("imagesEditor");
+                container.replaceChildren();
+                IMAGE_INFO.forEach(([key, title, description]) => {
+                    const card = document.createElement("article");
+                    card.className = "image-card";
+                    const header = document.createElement("div");
+                    header.className = "image-head";
+                    const label = document.createElement("strong");
+                    label.textContent = title;
+                    header.append(label);
+                    const preview = document.createElement("div");
+                    preview.className = "image-preview";
+                    if (settings.images[key]) {
+                        const image = document.createElement("img");
+                        image.src = settings.images[key];
+                        image.alt = title;
+                        preview.append(image);
+                    } else {
+                        const placeholder = document.createElement("span");
+                        placeholder.textContent = "الصورة الافتراضية للموقع";
+                        preview.append(placeholder);
+                    }
+                    const urlField = makeField("رابط الصورة", settings.images[key] || "", { placeholder: "https://example.com/image.webp" });
+                    urlField.input.addEventListener("input", () => {
+                        settings.images[key] = urlField.input.value.trim();
+                        const previewImage = preview.querySelector("img");
+                        if (settings.images[key]) {
+                            if (previewImage) previewImage.src = settings.images[key];
+                            else {
+                                preview.replaceChildren();
+                                const image = document.createElement("img");
+                                image.src = settings.images[key];
+                                image.alt = title;
+                                preview.append(image);
+                            }
+                        } else {
+                            preview.replaceChildren();
+                            const placeholder = document.createElement("span");
+                            placeholder.textContent = "الصورة الافتراضية للموقع";
+                            preview.append(placeholder);
+                        }
+                        markDirty();
+                    });
+                    const fileLabel = document.createElement("label");
+                    fileLabel.className = "button small";
+                    fileLabel.innerHTML = '<i class="fa-solid fa-upload"></i> اختيار ملف صورة';
+                    const file = document.createElement("input");
+                    file.className = "file-control";
+                    file.type = "file";
+                    file.accept = "image/png,image/jpeg,image/webp,image/gif";
+                    file.addEventListener("change", async () => {
+                        const selected = file.files && file.files[0];
+                        if (!selected) return;
+                        if (!selected.type.startsWith("image/")) {
+                            toast("error", "اختر ملف صورة صالحًا.");
+                            file.value = "";
+                            return;
+                        }
+                        try {
+                            settings.images[key] = await compressImage(selected);
+                            urlField.input.value = "";
+                            preview.replaceChildren();
+                            const image = document.createElement("img");
+                            image.src = settings.images[key];
+                            image.alt = title;
+                            preview.append(image);
+                            markDirty();
+                            toast("success", "تم تجهيز الصورة. احفظ التغييرات لتطبيقها.");
+                        } catch (error) {
+                            console.error("تعذر تجهيز الصورة.", error);
+                            toast("error", "تعذر معالجة الصورة المختارة.");
+                        }
+                        file.value = "";
+                    });
+                    fileLabel.append(file);
+                    const remove = document.createElement("button");
+                    remove.type = "button";
+                    remove.className = "button ghost small";
+                    remove.innerHTML = '<i class="fa-solid fa-rotate-left"></i> الافتراضي';
+                    remove.addEventListener("click", () => {
+                        delete settings.images[key];
+                        renderImages();
+                        markDirty();
+                    });
+                    const note = document.createElement("small");
+                    note.style.cssText = "display:block;margin:7px 0;color:var(--soft);font-size:9px";
+                    note.textContent = description;
+                    const controls = document.createElement("div");
+                    controls.className = "field-actions";
+                    controls.append(fileLabel, remove);
+                    card.append(header, preview, urlField.wrapper, note, controls);
+                    container.append(card);
+                });
+            }
+
+            function compressImage(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onerror = () => reject(new Error("تعذر قراءة الصورة."));
+                    reader.onload = () => {
+                        const image = new Image();
+                        image.onerror = () => reject(new Error("صيغة الصورة غير مدعومة."));
+                        image.onload = () => {
+                            const scale = Math.min(1, 1400 / Math.max(image.naturalWidth, image.naturalHeight));
+                            const canvas = document.createElement("canvas");
+                            canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+                            canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+                            const context = canvas.getContext("2d");
+                            if (!context) {
+                                reject(new Error("تعذر معالجة الصورة على هذا المتصفح."));
+                                return;
+                            }
+                            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                            resolve(canvas.toDataURL("image/webp", .78));
+                        };
+                        image.src = String(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            function renderAllEditors() {
+                renderContent();
+                renderAdministrationCollection();
+                renderCollection("statsEditor", "stats", STAT_FIELDS, { label: "إحصائية", titleKey: "label" });
+                renderCollection("servicesEditor", "services", SERVICE_FIELDS, { label: "خدمة", titleKey: "title" });
+                renderCollection("quickAccessEditor", "quickAccess", QUICK_FIELDS, { label: "رابط", titleKey: "text" });
+                renderCollection("quickLinksEditor", "quickLinks", FOOT_LINK_FIELDS, { label: "رابط", titleKey: "text" });
+                renderCollection("platformsEditor", "platforms", FOOT_LINK_FIELDS, { label: "منصة", titleKey: "text" });
+                renderCollection("featuresEditor", "features", [{ key: "feature", label: "الميزة", full: true }], { label: "ميزة", features: true });
+                renderVisibility();
+                renderImages();
+                updateMetrics();
+            }
+
+            function addItem(key, item, containerId, fields, options = {}) {
+                settings[key].push(item);
+                markDirty();
+                renderCollection(containerId, key, fields, options);
+                updateMetrics();
+            }
+
+            function saveSettings() {
+                try {
+                    localStorage.setItem(KEY, JSON.stringify(settings));
+                    dirty = false;
+                    lastSaved = new Date();
+                    document.getElementById("saveState").innerHTML = '<i class="fa-solid fa-circle"></i> كل التغييرات محفوظة';
+                    document.getElementById("overviewSaveLabel").textContent = "تم حفظ التغييرات على هذا المتصفح";
+                    document.getElementById("overviewTime").textContent = lastSaved.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+                    toast("success", "تم حفظ الإعدادات على هذا المتصفح. افتح الموقع أو حدّثه لمشاهدة النتيجة.");
+                } catch (error) {
+                    console.error("تعذر حفظ إعدادات الموقع.", error);
+                    toast("error", "تعذر الحفظ؛ مساحة التخزين قد تكون ممتلئة. جرّب صورة أصغر أو رابط صورة.");
+                }
+            }
+
+            function bindActions() {
+                document.getElementById("sideNav").addEventListener("click", event => {
+                    const button = event.target.closest("[data-panel]");
+                    if (button) activatePanel(button.dataset.panel);
+                });
+                document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () => activatePanel(button.dataset.go)));
+                document.getElementById("menuToggle").addEventListener("click", () => {
+                    const open = document.getElementById("sidebar").classList.toggle("open");
+                    document.getElementById("backdrop").classList.toggle("show", open);
+                    document.getElementById("menuToggle").setAttribute("aria-expanded", String(open));
+                });
+                document.getElementById("backdrop").addEventListener("click", closeSidebar);
+                document.getElementById("saveButton").addEventListener("click", saveSettings);
+                document.getElementById("bottomSave").addEventListener("click", saveSettings);
+                document.getElementById("addAdministration").addEventListener("click", () => {
+                    const id = settings.administrations.reduce((max, item) => Math.max(max, Number(item.id) || 0), 0) + 1;
+                    settings.administrations.push({ id, name: "إدارة تعليمية جديدة", type: "administration", typeName: "إدارة تعليمية", location: "", area: "", code: "غير متاح", studentsCount: "إدارة تعليمية", principal: "", image: "re.jpg", link: "", description: "", features: [] });
+                    markDirty(); renderAdministrationCollection();
+                });
+                document.getElementById("addStat").addEventListener("click", () => addItem("stats", { icon: "fa-chart-column", number: "0", label: "إحصائية جديدة" }, "statsEditor", STAT_FIELDS, { label: "إحصائية", titleKey: "label" }));
+                document.getElementById("addService").addEventListener("click", () => addItem("services", { icon: "fa-star", category: "خدمات تعليمية", title: "خدمة جديدة", description: "", link: "#", linkText: "عرض الخدمة" }, "servicesEditor", SERVICE_FIELDS, { label: "خدمة", titleKey: "title" }));
+                document.getElementById("addQuickAccess").addEventListener("click", () => addItem("quickAccess", { text: "رابط جديد", subtitle: "", icon: "fa-arrow-up-right-from-square", href: "#" }, "quickAccessEditor", QUICK_FIELDS, { label: "رابط", titleKey: "text" }));
+                document.getElementById("addQuickLink").addEventListener("click", () => addItem("quickLinks", { text: "رابط جديد", href: "#" }, "quickLinksEditor", FOOT_LINK_FIELDS, { label: "رابط", titleKey: "text" }));
+                document.getElementById("addPlatform").addEventListener("click", () => addItem("platforms", { text: "منصة جديدة", href: "https://" }, "platformsEditor", FOOT_LINK_FIELDS, { label: "منصة", titleKey: "text" }));
+                document.getElementById("addFeature").addEventListener("click", () => addItem("features", "ميزة جديدة", "featuresEditor", [{ key: "feature", label: "الميزة", full: true }], { label: "ميزة", features: true }));
+                document.getElementById("exportSettings").addEventListener("click", () => {
+                    const file = new Blob([JSON.stringify(settings, null, 2)], { type: "application/json" });
+                    const url = URL.createObjectURL(file);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "dakahlia-site-settings.json";
+                    link.click();
+                    URL.revokeObjectURL(url);
+                    toast("success", "تم تنزيل نسخة الإعدادات.");
+                });
+                document.getElementById("importFile").addEventListener("change", async event => {
+                    const file = event.target.files && event.target.files[0];
+                    if (!file) return;
+                    try {
+                        const imported = JSON.parse(await file.text());
+                        if (!imported || typeof imported !== "object" || Array.isArray(imported)) throw new Error("ملف النسخة غير صالح.");
+                        const objectOrEmpty = value => value && typeof value === "object" && !Array.isArray(value) ? value : {};
+                        const itemArray = (value, fallback) => Array.isArray(value)
+                            ? value.filter(item => item && typeof item === "object" && !Array.isArray(item)).map(item => ({ ...item }))
+                            : clone(fallback);
+                        settings = {
+                            ...clone(DEFAULTS), ...imported,
+                            content: { ...clone(DEFAULTS.content), ...objectOrEmpty(imported.content) },
+                            images: { ...clone(DEFAULTS.images), ...objectOrEmpty(imported.images) },
+                            visibility: { ...clone(DEFAULTS.visibility), ...objectOrEmpty(imported.visibility) },
+                            administrations: itemArray(imported.administrations, getDefaultAdministrations()),
+                            stats: itemArray(imported.stats, DEFAULTS.stats),
+                            services: itemArray(imported.services, DEFAULTS.services),
+                            quickAccess: itemArray(imported.quickAccess, DEFAULTS.quickAccess),
+                            features: Array.isArray(imported.features) ? imported.features.filter(item => typeof item === "string") : clone(DEFAULTS.features),
+                            quickLinks: itemArray(imported.quickLinks, DEFAULTS.quickLinks),
+                            platforms: itemArray(imported.platforms, DEFAULTS.platforms)
+                        };
+                        renderAllEditors(); markDirty(); toast("info", "تم تحميل النسخة إلى المحرر. اضغط حفظ لتطبيقها.");
+                    } catch (error) {
+                        console.error("تعذر استيراد النسخة الاحتياطية.", error);
+                        toast("error", "تعذر استيراد الملف. تأكد أنه نسخة JSON صالحة.");
+                    }
+                    event.target.value = "";
+                });
+                document.getElementById("resetSettings").addEventListener("click", () => {
+                    if (!window.confirm("سيتم حذف كل التعديلات المحفوظة على هذا المتصفح. هل تريد المتابعة؟")) return;
+                    try {
+                        localStorage.removeItem(KEY);
+                        settings = clone(DEFAULTS);
+                        settings.administrations = getDefaultAdministrations();
+                        renderAllEditors();
+                        dirty = false;
+                        document.getElementById("saveState").innerHTML = '<i class="fa-solid fa-circle"></i> تم استعادة الإعدادات الافتراضية';
+                        toast("success", "تمت استعادة البيانات الافتراضية.");
+                    } catch (error) {
+                        console.error("تعذر استعادة إعدادات الموقع.", error);
+                        toast("error", "تعذر استعادة الإعدادات الافتراضية.");
+                    }
+                });
+                window.addEventListener("beforeunload", event => {
+                    if (dirty) {
+                        event.preventDefault();
+                        event.returnValue = "";
+                    }
+                });
+            }
+
+            bindActions();
+            renderAllEditors();
+            document.getElementById("overviewTime").textContent = "جاهز";
+        })();
+    </script>
+</body>
+</html>
