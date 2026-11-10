@@ -16,6 +16,19 @@
     const content = settings.content || {};
     const images = settings.images || {};
 
+    if (content.pageTitle === "مديرية التربية والتعليم بالدقهلية | دليل الادارات والخدمات التعليمية") {
+        content.pageTitle = "مديرية التربية والتعليم بالدقهلية | دليلك التعليمي";
+    }
+    if (content.heroTitle === "دليل إدارات الدقهلية") {
+        content.heroTitle = "دليلك التعليمي";
+    }
+    if (content.heroTitle === "دليلك التعليمي") {
+        content.heroTitle = "دَلِيلَكَ التَّعْلِيمِيّ";
+    }
+    if (content.heroHighlight === "في منصة تعليمية واحدة") {
+        content.heroHighlight = "منصة تعليمية موحدة للإدارات التعليمية بمحافظة الدقهلية";
+    }
+
     function safeImage(value) {
         const source = String(value || "").trim();
         if (/^data:image\/(?:png|jpe?g|webp|gif);base64,/i.test(source)) return source;

@@ -627,16 +627,25 @@ button, input, select {
 .hero-title {
     font-size: clamp(26px, 3.8vw, 44px);
     font-weight: 900;
-    line-height: 1.3;
+    line-height: 65px;
     color: #ffffff;
     letter-spacing: -0.5px;
 }
 
 .hero-title span {
     display: block;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin-top: 0.18em;
+    color: #ffe08a;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    font-size: clamp(16px, 2.2vw, 25px);
+    font-weight: 800;
+    line-height: 1.5;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.hero-title .hero-ministry-note {
+    font-size: clamp(14px, 1.8vw, 20px);
 }
 
 .hero-desc {

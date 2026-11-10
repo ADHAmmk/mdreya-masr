@@ -576,7 +576,7 @@
             const KEY = "site_cms_v1";
             const DEFAULTS = {
                 content: {
-                    pageTitle: "مديرية التربية والتعليم بالدقهلية | دليل الادارات والخدمات التعليمية",
+                    pageTitle: "مديرية التربية والتعليم بالدقهلية | دليلك التعليمي",
                     ministry: "جمهورية مصر العربية • وزارة التربية والتعليم",
                     mainTitle: "مديرية التربية والتعليم بالدقهلية",
                     tagline: "مديرية التربية والتعليم بمحافظة الدقهلية",
@@ -585,8 +585,8 @@
                     noticeBadgeText: "تنبيه عاجل",
                     noticeText: "أهلاً بكم في بوابة مديرية التربية والتعليم بمحافظة الدقهلية",
                     heroPill: "بوابة مديرية التربية والتعليم بمحافظة الدقهلية",
-                    heroTitle: "دليل إدارات الدقهلية",
-                    heroHighlight: "في منصة تعليمية واحدة",
+                    heroTitle: "دَلِيلَكَ التَّعْلِيمِيّ",
+                    heroHighlight: "منصة تعليمية موحدة للإدارات التعليمية بمحافظة الدقهلية",
                     heroDescription: "بوابة للتعرّف على الخدمات التعليمية ودليل الإدارات التعليمية بمحافظة الدقهلية، مع وصول مباشر إلى مواقع الإدارات على الخريطة والمنصات والخدمات التعليمية للطلاب والمعلمين وأولياء الأمور.",
                     heroPrimary: "استكشف دليل الادارات",
                     heroSecondary: "بوابة الخدمات الإلكترونية",
@@ -715,10 +715,23 @@
                     const itemArray = (value, fallback) => Array.isArray(value)
                         ? value.filter(item => item && typeof item === "object" && !Array.isArray(item)).map(item => ({ ...item }))
                         : clone(fallback);
+                    const content = { ...clone(DEFAULTS.content), ...objectOrEmpty(stored.content) };
+                    if (content.pageTitle === "مديرية التربية والتعليم بالدقهلية | دليل الادارات والخدمات التعليمية") {
+                        content.pageTitle = DEFAULTS.content.pageTitle;
+                    }
+                    if (content.heroTitle === "دليل إدارات الدقهلية") {
+                        content.heroTitle = DEFAULTS.content.heroTitle;
+                    }
+                    if (content.heroTitle === "دليلك التعليمي") {
+                        content.heroTitle = DEFAULTS.content.heroTitle;
+                    }
+                    if (content.heroHighlight === "في منصة تعليمية واحدة") {
+                        content.heroHighlight = DEFAULTS.content.heroHighlight;
+                    }
                     return {
                         ...clone(DEFAULTS),
                         ...stored,
-                        content: { ...clone(DEFAULTS.content), ...objectOrEmpty(stored.content) },
+                        content,
                         images: { ...clone(DEFAULTS.images), ...objectOrEmpty(stored.images) },
                         visibility: { ...clone(DEFAULTS.visibility), ...objectOrEmpty(stored.visibility) },
                         administrations: itemArray(stored.administrations, getDefaultAdministrations()),

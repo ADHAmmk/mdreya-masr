@@ -5,6 +5,9 @@
     document.addEventListener('DOMContentLoaded', () => {
         try {
             const content = JSON.parse(localStorage.getItem('admin_content') || '{}');
+            if (content.heroTitle === 'دليل إدارات الدقهلية' || content.heroTitle === 'دليلك التعليمي') {
+                content.heroTitle = 'دَلِيلَكَ التَّعْلِيمِيّ';
+            }
 
             // Helper
             const setText = (selector, value, attr) => {
@@ -40,7 +43,7 @@
                 if (titleEl) {
                     const t = content.heroTitle || 'جميع مدارس السنبلاوين التعليمية ';
                     const s = content.heroTitleSpan || 'في منصة ذكية واحدة';
-                    titleEl.innerHTML = `${t}<span>${s}</span>`;
+                    titleEl.innerHTML = `${t}<span>${s}</span><span class="hero-ministry-note">مع إمكانية التحديث وتطبيقها على مستوى وزارة التربية والتعليم</span>`;
                 }
             }
             if (content.heroDesc) setText('.hero-desc', content.heroDesc);
