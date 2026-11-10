@@ -100,7 +100,6 @@
     };
 
     const schools = data.schools.filter(school => school.administration === admin.area);
-    const unassignedSchools = admin.area === "شرق المنصورة" || admin.area === "غرب المنصورة" ? data.unassigned : [];
     const description = `بوابة ${admin.name} بمحافظة الدقهلية. تعرّف على المدارس الواردة في البيانات المتاحة والخدمات والمنصات التعليمية.`;
     const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${admin.name}، محافظة الدقهلية، مصر`)}`;
     document.title = `${admin.name} | البوابة الرسمية ودليل المدارس`;
@@ -206,9 +205,16 @@
 
         const media = document.createElement("div");
         media.className = "card-media administration-media";
-        const schoolIcon = document.createElement("i");
-        schoolIcon.className = "fa-solid fa-school";
-        media.append(schoolIcon);
+        if (school.image) {
+            const image = document.createElement("img");
+            image.src = school.image;
+            image.alt = school.name;
+            media.append(image);
+        } else {
+            const schoolIcon = document.createElement("i");
+            schoolIcon.className = "fa-solid fa-school";
+            media.append(schoolIcon);
+        }
 
         const typeTag = document.createElement("span");
         typeTag.className = "card-type-tag";
@@ -352,18 +358,6 @@
     backdrop.addEventListener("click", closeMenu);
     navLinks.querySelectorAll('a[href^="#"]').forEach(link => link.addEventListener("click", closeMenu));
 
-    const unassignedSection = document.getElementById("unassignedSection");
-    const unassignedNotice = document.getElementById("unassignedNotice");
-    if (unassignedSchools.length) {
-        unassignedSection.hidden = false;
-        unassignedNotice.textContent = `هذه المدارس وردت للمنصورة دون تحديد هل تتبع إدارة شرق أم غرب؛ لذلك تظهر منفصلة ولا تُحسب ضمن مدارس الإدارة المعروضة بالأعلى.`;
-        const unassignedGrid = document.getElementById("unassignedSchoolsGrid");
-        const fragment = document.createDocumentFragment();
-        unassignedSchools.forEach((school, index) => fragment.append(createSchoolCard(school, index)));
-        unassignedGrid.append(fragment);
-        unassignedGrid.querySelectorAll(".school-card").forEach(reveal);
-    }
-
     const backToTop = document.getElementById("backToTop");
     const scrollProgress = document.createElement("div");
     scrollProgress.className = "scroll-progress";
@@ -382,9 +376,14 @@
     document.documentElement.setAttribute("data-theme", savedTheme);
     const updateThemeIcon = (theme) => {
         const track = document.querySelector(".theme-toggle-track");
-        if (track) return; // new toggle — handled by CSS
-        document.querySelectorAll(".theme-toggle-btn i").forEach(i => {
-            i.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        if (!track) {
+            document.querySelectorAll(".theme-toggle-btn i").forEach(i => {
+                i.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+            });
+        }
+        document.querySelectorAll(".theme-toggle-btn").forEach(button => {
+            button.setAttribute("aria-label", theme === "dark" ? "التبديل إلى الوضع النهاري" : "التبديل إلى الوضع الليلي");
+            button.setAttribute("title", theme === "dark" ? "وضع النهار" : "وضع الليل");
         });
     };
     updateThemeIcon(savedTheme);
@@ -394,6 +393,7 @@
             const next = current === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", next);
             localStorage.setItem("site_theme_v1", next);
+            localStorage.setItem("dakahlia_theme", next);
             updateThemeIcon(next);
         });
     });

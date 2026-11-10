@@ -1,7 +1,21 @@
 window.dakahliaSchoolData = {
     schools: [
         { id: "w-01", administration: "غرب المنصورة", name: "أحمد حسن غنيم", type: "ثانوي عام", source: "خبر توزيع شرائح التابلت - 2020", review: true },
-        { id: "e-01", administration: "شرق المنصورة", name: "الملك الكامل الثانوية العسكرية", type: "ثانوي عام", source: "خبر توزيع شرائح التابلت - 2020", review: true },
+        { id: "e-01", administration: "شرق المنصورة", name: "جيهان السادات الثانوية بنات", type: "ثانوي عام - بنات", image: "school-jehan-al-sadat.png", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-02", administration: "شرق المنصورة", name: "مختار عبد العال الثانوية المشتركة", type: "ثانوي عام - مشتركة", image: "school-mokhtar-abdelal.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-03", administration: "شرق المنصورة", name: "محلة دمنة الثانوية المشتركة", type: "ثانوي عام - مشتركة", image: "school-mahallat-damanah.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-04", administration: "شرق المنصورة", name: "الدنابيق الثانوية المشتركة", type: "ثانوي عام - مشتركة", image: "school-danabik.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-05", administration: "شرق المنصورة", name: "الزهراء للغات الثانوية المشتركة", type: "رسمي لغات - مشتركة", image: "school-alzahraa-languages.png", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-06", administration: "شرق المنصورة", name: "السيدة خديجة الثانوية بنات", type: "ثانوي عام - بنات", image: "school-sayed-khadija.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-07", administration: "شرق المنصورة", name: "السلام الخاصة الثانوية المشتركة بالمنصورة", type: "ثانوي خاص - مشتركة", image: "school-al-salam-private.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-08", administration: "شرق المنصورة", name: "محمد أنيس الثانوية المشتركة", type: "ثانوي عام - مشتركة", image: "school-mohamed-anis.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-09", administration: "شرق المنصورة", name: "منشأة السلام الثانوية المشتركة", type: "ثانوي عام - مشتركة", image: "school-manshaet-al-salam.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-10", administration: "شرق المنصورة", name: "الملك الكامل الثانوية العسكرية بنين", type: "ثانوي عسكري - بنين", image: "school-king-kamel-military.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-11", administration: "شرق المنصورة", name: "الملك الكامل الثانوية بنين", type: "ثانوي عام - بنين", image: "school-king-kamel-boys.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-12", administration: "شرق المنصورة", name: "الثانوية الفنية بالريدانية", type: "ثانوي فني", image: "school-redania-technical.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-13", administration: "شرق المنصورة", name: "بدواي الثانوية الفنية بنات", type: "ثانوي فني - بنات", image: "school-bedawai-technical.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-14", administration: "شرق المنصورة", name: "سلامون الثانوية الصناعية بنين", type: "ثانوي فني صناعي - بنين", image: "school-salamoun-industrial.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
+        { id: "e-15", administration: "شرق المنصورة", name: "حسين حماد الثانوية الفنية بنات", type: "ثانوي فني - بنات", image: "school-hussein-hammad.jpg", source: "قائمة مدارس إدارة شرق المنصورة التعليمية", review: false },
         { id: "t-01", administration: "طلخا", name: "أحمد حسن الزيات الثانوية", type: "ثانوي عام", source: "خبر توزيع شرائح التابلت - 2020", review: true },
         { id: "b-01", administration: "بلقاس", name: "بلقاس بنين", type: "ثانوي عام", source: "خبر توزيع شرائح التابلت - 2020", review: true },
         { id: "n-01", administration: "نبروه", name: "أشرف جاويش", type: "ثانوي عام", source: "خبر توزيع شرائح التابلت - 2020", review: true },
@@ -26,7 +40,6 @@ window.dakahliaSchoolData = {
         { id: "mn-02", administration: "منية النصر", name: "أحمد عبده الشرباصي الثانوية بنين", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "ma-02", administration: "المطرية", name: "المطرية الثانوية بنات", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "l-03", administration: "المنزلة", name: "المنزلة الثانوية بنين", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
-        { id: "e-02", administration: "شرق المنصورة", name: "الملك الكامل الثانوية بنين", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "b-02", administration: "بلقاس", name: "بلقاس الثانوية بنين", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "be-02", administration: "بني عبيد", name: "بني عبيد الثانوية المشتركة", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "ta-02", administration: "تمي الأمديد", name: "تمي الأمديد الثانوية المشتركة", type: "ثانوي عام", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
@@ -37,7 +50,6 @@ window.dakahliaSchoolData = {
         { id: "ms-03", administration: "ميت سلسيل", name: "علي حسن عبد الوهاب الثانوية بنين", type: "ثانوي عام", source: "خبر صحفي عن زيارة مدارس الإدارة - 2024", review: true },
         { id: "g-03", administration: "الجمالية", name: "الجمالية الثانوية التجارية المشتركة", type: "ثانوي فني تجاري", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "ta-03", administration: "تمي الأمديد", name: "الربع الثانوية التجارية", type: "ثانوي فني تجاري", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
-        { id: "e-03", administration: "شرق المنصورة", name: "الشهيد عبدالواحد البنا التجارية", type: "ثانوي فني تجاري", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "w-02", administration: "غرب المنصورة", name: "الفردوس التجارية", type: "ثانوي فني تجاري", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
         { id: "mn-03", administration: "منية النصر", name: "الكردي الفنية المتقدمة التجارية", type: "ثانوي فني تجاري", source: "دليل مدارس مصر - يلزم مراجعة الوضع الحالي", review: true },
 
@@ -59,10 +71,5 @@ window.dakahliaSchoolData = {
         { id: "s-site-16", administration: "السنبلاوين", name: "صبح كاعوه الثانوية المشتركة", type: "ثانوي عام - مشتركة", area: "قرى السنبلاوين", location: "قرية برهمتوش - مركز السنبلاوين", source: "بوابة إدارة السنبلاوين", review: false },
         { id: "s-site-17", administration: "السنبلاوين", name: "حسين عثمان الثانوية المشتركة بشبرا سندى", type: "ثانوي عام - مشتركة", area: "قرى السنبلاوين", location: "قرية شبرا سندي - مركز السنبلاوين", source: "بوابة إدارة السنبلاوين", review: false },
         { id: "s-site-18", administration: "السنبلاوين", name: "البلامون الثانوية المشتركة", type: "ثانوي عام - مشتركة", area: "قرى السنبلاوين", location: "قرية البلامون - مركز السنبلاوين", source: "بوابة إدارة السنبلاوين", review: false }
-    ],
-    unassigned: [
-        { id: "m-u-01", name: "المنصورة الثانوية الجديدة بنات", type: "ثانوي عام", location: "مدينة المنصورة - الإدارة التعليمية التابعة غير محددة", mapArea: "المنصورة", source: "دليل مدارس مصر - يلزم تحديد الإدارة التابعة", review: true },
-        { id: "m-u-02", name: "المنصورة الثانوية بنين", type: "ثانوي عام", location: "مدينة المنصورة - الإدارة التعليمية التابعة غير محددة", mapArea: "المنصورة", source: "دليل مدارس مصر - يلزم تحديد الإدارة التابعة", review: true },
-        { id: "m-u-03", name: "المنصورة الثانوية للبنات", type: "ثانوي عام", location: "مدينة المنصورة - الإدارة التعليمية التابعة غير محددة", mapArea: "المنصورة", source: "دليل مدارس مصر - يلزم تحديد الإدارة التابعة", review: true }
     ]
 };
