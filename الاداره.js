@@ -586,9 +586,11 @@ function renderSchoolCard(school) {
     const adminLogo = school.type === "administration" && window.dakahliaAdministrationLogos
         ? window.dakahliaAdministrationLogos[String(school.id)]
         : "";
-    const imagePath = typeof school.image === "string" &&
-        (/^https?:\/\//i.test(school.image) || /^(?:\.{1,2}\/)?[^:<>\"']+\.(?:png|jpe?g|webp|gif)$/i.test(school.image.trim()))
-        ? school.image.trim()
+    const configuredImage = typeof school.image === "string" ? school.image.trim() : "";
+    const imagePath = /^data:image\/(?:png|jpe?g|webp|gif);base64,/i.test(configuredImage) ||
+        /^https?:\/\//i.test(configuredImage) ||
+        /^(?:\.{1,2}\/)?[^:<>\"']+\.(?:png|jpe?g|webp|gif)$/i.test(configuredImage)
+        ? configuredImage
         : "re.jpg";
     const name = escapeCardText(school.name);
     const location = escapeCardText(school.location);
