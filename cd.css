@@ -2918,3 +2918,901 @@ button, input, select {
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background: rgba(44, 212, 185, 0.4);
 }
+
+/* ==========================================================================
+   LEGENDARY & LUXURY UI ENHANCEMENTS (الإصدار الفاخر والأسطوري)
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes heroAurora {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.5; }
+    50% { transform: translate(30px, -20px) scale(1.15) rotate(180deg); opacity: 0.8; }
+    100% { transform: translate(0, 0) scale(1) rotate(360deg); opacity: 0.5; }
+}
+
+@keyframes floatEmblem {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1.5deg); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(212, 163, 44, 0.35), 0 0 30px rgba(16, 185, 129, 0.2); }
+    50% { box-shadow: 0 0 25px rgba(212, 163, 44, 0.6), 0 0 45px rgba(16, 185, 129, 0.35); }
+}
+
+@keyframes shimmerSweep {
+    0% { transform: translateX(150%) skewX(-20deg); }
+    100% { transform: translateX(-150%) skewX(-20deg); }
+}
+
+@keyframes radarPing {
+    0% { transform: scale(0.9); opacity: 0.9; }
+    70% { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes badgeGlowPulse {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(212, 163, 44, 0.4)); }
+    50% { filter: drop-shadow(0 0 8px rgba(212, 163, 44, 0.8)); }
+}
+
+/* --------------------------------------------------------------------------
+   1. TOP NOTICE BAR (البار العلوي التنبيهي)
+   -------------------------------------------------------------------------- */
+.top-notice-bar {
+    background: linear-gradient(90deg, #021a17 0%, #06342e 50%, #021a17 100%) !important;
+    border-bottom: 1.5px solid rgba(212, 163, 44, 0.4) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+.notice-badge {
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 50%, #9e7514 100%) !important;
+    color: #03201d !important;
+    font-weight: 900 !important;
+    box-shadow: 0 0 14px rgba(212, 163, 44, 0.5) !important;
+    animation: badgeGlowPulse 2.5s infinite ease-in-out;
+}
+
+.top-bar-date {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 3px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(212, 163, 44, 0.3);
+    color: #ffd978 !important;
+    position: relative;
+}
+
+.top-bar-date::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    margin-right: 6px;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.top-bar-links a {
+    position: relative;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    transition: all 0.25s ease;
+}
+
+.top-bar-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffd978 !important;
+    transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   2. HEADER & NAVIGATION (الهيدر وقائمة التنقل الفاخرة)
+   -------------------------------------------------------------------------- */
+.header-main {
+    background: rgba(3, 40, 36, 0.94) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 2px solid rgba(212, 163, 44, 0.45) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35) !important;
+}
+
+.brand-logo {
+    border: 2px solid #e0ba4a !important;
+    box-shadow: 0 0 16px rgba(212, 163, 44, 0.5), inset 0 0 8px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brand-logo:hover {
+    transform: scale(1.08) rotate(5deg);
+}
+
+.brand-eagle {
+    filter: drop-shadow(0 0 8px rgba(212, 163, 44, 0.45)) !important;
+    transition: transform 0.3s ease;
+}
+
+.brand-eagle:hover {
+    transform: scale(1.06);
+}
+
+.main-title {
+    background: linear-gradient(135deg, #ffffff 30%, #fcebc2 70%, #dfb448 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: -0.2px;
+}
+
+.sub-ministry {
+    color: #a4d8d1 !important;
+    font-weight: 700 !important;
+}
+
+.tagline {
+    color: #e5be53 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-links li a {
+    border-radius: var(--radius-full) !important;
+    padding: 8px 16px !important;
+    position: relative;
+    overflow: hidden;
+    font-weight: 700 !important;
+}
+
+.nav-links li a:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.nav-links li a.active {
+    background: linear-gradient(135deg, rgba(212, 163, 44, 0.25) 0%, rgba(10, 75, 68, 0.4) 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(212, 163, 44, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(212, 163, 44, 0.2) !important;
+}
+
+.nav-links li a.active::after {
+    display: none !important;
+}
+
+.btn-header-cta {
+    background: linear-gradient(135deg, #e8c568 0%, #c4962c 50%, #9e7514 100%) !important;
+    color: #04221e !important;
+    font-weight: 900 !important;
+    border-radius: var(--radius-full) !important;
+    padding: 10px 22px !important;
+    box-shadow: 0 4px 20px rgba(212, 163, 44, 0.45) !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-header-cta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(200%) skewX(-25deg);
+    animation: shimmerSweep 4s infinite linear;
+}
+
+.btn-header-cta:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 28px rgba(212, 163, 44, 0.65) !important;
+    filter: brightness(1.1);
+}
+
+.theme-toggle-btn {
+    border-color: rgba(212, 163, 44, 0.4) !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
+.theme-toggle-thumb {
+    background: linear-gradient(135deg, #ffd978, #d4a32c) !important;
+    box-shadow: 0 2px 8px rgba(212, 163, 44, 0.6) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. HERO SECTION (قسم الواجهة الأسطوري)
+   -------------------------------------------------------------------------- */
+.hero-section {
+    background: linear-gradient(135deg, #021a17 0%, #063731 40%, #0a4f47 75%, #052924 100%) !important;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(212, 163, 44, 0.3);
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 163, 44, 0.22) 0%, rgba(16, 185, 129, 0.12) 50%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    animation: heroAurora 16s ease-in-out infinite;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+    bottom: -25%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(44, 212, 185, 0.1) 50%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+    animation: heroAurora 20s ease-in-out infinite reverse;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-pill {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.45) !important;
+    color: #ffe699 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 0 12px rgba(212, 163, 44, 0.15) !important;
+    position: relative;
+}
+
+.hero-pill::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    margin-left: 6px;
+    box-shadow: 0 0 10px #10b981;
+}
+
+.hero-title {
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-title span {
+    background: linear-gradient(135deg, #ffffff 0%, #ffeaa7 50%, #e5be53 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+.hero-title .hero-ministry-note {
+    background: linear-gradient(135deg, #c5dedb 0%, #ffd978 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.hero-desc {
+    color: #e0f2ef !important;
+    font-size: clamp(15px, 1.5vw, 17px) !important;
+    line-height: 1.9 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.hero-buttons .btn-primary {
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 50%, #9e7514 100%) !important;
+    color: #021a17 !important;
+    font-weight: 900 !important;
+    font-size: 15.5px !important;
+    padding: 14px 32px !important;
+    border-radius: var(--radius-full) !important;
+    box-shadow: 0 8px 30px rgba(212, 163, 44, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-buttons .btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transform: translateX(250%) skewX(-20deg);
+    animation: shimmerSweep 3.5s infinite linear;
+}
+
+.hero-buttons .btn-primary:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 0 14px 40px rgba(212, 163, 44, 0.65) !important;
+}
+
+.hero-buttons .btn-secondary {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 15.5px !important;
+    padding: 14px 28px !important;
+    border-radius: var(--radius-full) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hero-buttons .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-color: #f7d571 !important;
+    color: #ffd978 !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Floating 3D Emblem Card */
+.hero-emblem-wrap {
+    animation: floatEmblem 5s ease-in-out infinite;
+}
+
+.hero-emblem-glow {
+    width: 360px !important;
+    height: 360px !important;
+    background: radial-gradient(circle, rgba(212, 163, 44, 0.38) 0%, rgba(16, 185, 129, 0.2) 50%, transparent 70%) !important;
+    filter: blur(45px) !important;
+}
+
+.hero-emblem-card {
+    background: rgba(3, 38, 34, 0.75) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 2px solid rgba(212, 163, 44, 0.5) !important;
+    border-radius: 28px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(212, 163, 44, 0.15) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-emblem-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #d4a32c, #f7d571, #10b981);
+}
+
+.hero-emblem-card img {
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45)) !important;
+}
+
+.hero-emblem-card h4 {
+    font-size: 19px !important;
+    background: linear-gradient(135deg, #ffffff 40%, #ffd978 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-emblem-card p {
+    color: #ffd978 !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. STATS RIBBON (شريط الإحصائيات الفخم)
+   -------------------------------------------------------------------------- */
+.stats-ribbon {
+    margin: -44px auto 52px !important;
+}
+
+.stats-grid {
+    background: var(--bg-card) !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.3) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 20px 50px rgba(0, 40, 36, 0.15) !important;
+    padding: 24px 32px !important;
+}
+
+.stat-item {
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    padding: 12px 18px !important;
+    border-radius: 14px;
+}
+
+.stat-item:hover {
+    transform: translateY(-6px) scale(1.02) !important;
+    background: var(--primary-soft);
+}
+
+.stat-icon {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+    color: #ffd978 !important;
+    font-size: 22px !important;
+    box-shadow: 0 8px 20px rgba(10, 75, 68, 0.25) !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.4) !important;
+    transition: transform 0.4s ease;
+}
+
+.stat-item:hover .stat-icon {
+    transform: rotate(8deg) scale(1.1);
+    background: linear-gradient(135deg, #d4a32c 0%, #f7d571 100%) !important;
+    color: #03201d !important;
+}
+
+.stat-number {
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, var(--primary) 0%, #c4962c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--text-secondary) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. FILTER & SEARCH SECTION (مركز البحث والتصفية الذكي)
+   -------------------------------------------------------------------------- */
+.filter-card {
+    background: var(--bg-card) !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.35) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 15px 45px rgba(0, 40, 36, 0.1) !important;
+    padding: 24px 28px !important;
+}
+
+.filter-title {
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    color: var(--text-primary) !important;
+}
+
+.filter-title i {
+    color: #d4a32c !important;
+    font-size: 20px;
+}
+
+.filter-count-badge {
+    background: linear-gradient(135deg, rgba(212, 163, 44, 0.2) 0%, rgba(10, 75, 68, 0.15) 100%) !important;
+    border: 1px solid rgba(212, 163, 44, 0.45) !important;
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+    padding: 6px 16px !important;
+    border-radius: var(--radius-full) !important;
+}
+
+.search-input-wrap input {
+    border-radius: var(--radius-full) !important;
+    border: 1.5px solid var(--border-color) !important;
+    padding: 12px 48px 12px 42px !important;
+    font-size: 14.5px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.search-input-wrap input:focus {
+    border-color: #d4a32c !important;
+    box-shadow: 0 0 0 4px rgba(212, 163, 44, 0.2), 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.search-input-wrap .search-icon {
+    color: #d4a32c !important;
+    font-size: 17px !important;
+}
+
+.custom-select {
+    border-radius: var(--radius-full) !important;
+    border: 1.5px solid var(--border-color) !important;
+    padding: 12px 40px 12px 20px !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+.custom-select:focus {
+    border-color: #d4a32c !important;
+    box-shadow: 0 0 0 4px rgba(212, 163, 44, 0.2) !important;
+}
+
+.view-btn {
+    border-radius: 12px !important;
+    border: 1.5px solid var(--border-color) !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 16px !important;
+    transition: all 0.25s ease !important;
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 100%) !important;
+    color: #03201d !important;
+    border-color: #d4a32c !important;
+    box-shadow: 0 4px 15px rgba(212, 163, 44, 0.4) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. ADMINISTRATION CARDS (بطاقات الإدارات التعليمية الفاخرة)
+   -------------------------------------------------------------------------- */
+.school-card {
+    border-radius: 22px !important;
+    border: 1.5px solid var(--border-color) !important;
+    box-shadow: 0 8px 28px rgba(0, 40, 36, 0.08) !important;
+    background: var(--bg-card) !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    overflow: hidden !important;
+}
+
+.school-card:hover {
+    transform: translateY(-10px) !important;
+    border-color: #d4a32c !important;
+    box-shadow: 0 24px 55px rgba(0, 40, 36, 0.18), 0 0 20px rgba(212, 163, 44, 0.2) !important;
+}
+
+.card-media {
+    height: 205px !important;
+}
+
+.card-media img:first-child {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.school-card:hover .card-media img:first-child {
+    transform: scale(1.1) !important;
+}
+
+.card-media-overlay {
+    background: linear-gradient(180deg, rgba(2, 26, 23, 0.15) 0%, rgba(2, 26, 23, 0.85) 100%) !important;
+}
+
+.admin-logo-wrapper {
+    width: 64px !important;
+    height: 64px !important;
+    border: 3px solid #d4a32c !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+    background: #ffffff !important;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.school-card:hover .admin-logo-wrapper {
+    transform: scale(1.15) rotate(6deg) !important;
+    border-color: #f7d571 !important;
+}
+
+.card-type-tag {
+    background: rgba(3, 30, 26, 0.88) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(212, 163, 44, 0.4) !important;
+    color: #ffffff !important;
+    padding: 5px 12px !important;
+    font-weight: 800 !important;
+}
+
+.card-status-badge {
+    background: rgba(3, 30, 26, 0.88) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(16, 185, 129, 0.4) !important;
+    color: #e6faf7 !important;
+    padding: 5px 12px !important;
+    font-weight: 800 !important;
+}
+
+.status-dot {
+    background: #10b981 !important;
+    box-shadow: 0 0 10px #10b981 !important;
+}
+
+.card-body {
+    padding: 26px 24px 22px !important;
+    gap: 16px !important;
+}
+
+.card-number-badge {
+    color: #c4962c !important;
+    font-weight: 900 !important;
+    font-size: 12px !important;
+}
+
+.card-title {
+    font-size: 19px !important;
+    font-weight: 900 !important;
+}
+
+.card-meta-list {
+    background: var(--bg-card-secondary) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 14px !important;
+    padding: 14px 16px !important;
+}
+
+.meta-icon {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+    background: rgba(10, 75, 68, 0.12) !important;
+    color: var(--primary) !important;
+    border: 1px solid rgba(10, 75, 68, 0.15) !important;
+    font-size: 13px !important;
+}
+
+.card-actions .btn-card-visit {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+    padding: 11px 18px !important;
+    border-radius: var(--radius-full) !important;
+    box-shadow: 0 4px 14px rgba(10, 75, 68, 0.25) !important;
+    border: 1px solid rgba(212, 163, 44, 0.4) !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.card-actions .btn-card-visit:hover {
+    background: linear-gradient(135deg, #d4a32c 0%, #f7d571 100%) !important;
+    color: #03201d !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 163, 44, 0.4) !important;
+}
+
+.card-actions .btn-card-map {
+    background: var(--bg-card-secondary) !important;
+    border: 1.5px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+    font-size: 13px !important;
+    padding: 11px 14px !important;
+    border-radius: var(--radius-full) !important;
+    transition: all 0.3s ease !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.card-actions .btn-card-map:hover {
+    border-color: #d4a32c !important;
+    color: #c4962c !important;
+    background: var(--bg-card) !important;
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   7. SERVICES SECTION (بوابة الخدمات التعليمية الذكية)
+   -------------------------------------------------------------------------- */
+.services-section {
+    background: linear-gradient(180deg, var(--bg-card-secondary) 0%, var(--bg-main) 100%) !important;
+}
+
+.services-quick-access {
+    border-radius: 26px !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.35) !important;
+    box-shadow: 0 15px 45px rgba(0, 40, 36, 0.08) !important;
+}
+
+.platform-card {
+    border-radius: 18px !important;
+    border: 1.5px solid var(--border-color) !important;
+    box-shadow: 0 6px 18px rgba(0, 40, 36, 0.05) !important;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.platform-card:hover {
+    transform: translateY(-6px) scale(1.02) !important;
+    border-color: #d4a32c !important;
+    box-shadow: 0 16px 36px rgba(0, 40, 36, 0.12), 0 0 15px rgba(212, 163, 44, 0.25) !important;
+}
+
+.platform-icon-box {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+    color: #ffd978 !important;
+    border: 1px solid rgba(212, 163, 44, 0.4) !important;
+    font-size: 22px !important;
+    transition: all 0.3s ease !important;
+}
+
+.platform-card:hover .platform-icon-box {
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 100%) !important;
+    color: #03201d !important;
+    transform: rotate(6deg);
+}
+
+.service-card {
+    border-radius: 22px !important;
+    border: 1.5px solid var(--border-color) !important;
+    box-shadow: 0 8px 25px rgba(0, 40, 36, 0.06) !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.service-card::before {
+    height: 4px !important;
+    background: linear-gradient(90deg, #d4a32c, #f7d571, #10b981) !important;
+}
+
+.service-card:hover {
+    transform: translateY(-8px) !important;
+    border-color: #d4a32c !important;
+    box-shadow: 0 20px 45px rgba(0, 40, 36, 0.15) !important;
+}
+
+.service-icon-wrap {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, var(--primary-soft) 0%, rgba(212, 163, 44, 0.15) 100%) !important;
+    color: var(--primary) !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.35) !important;
+    font-size: 24px !important;
+}
+
+.service-card:hover .service-icon-wrap {
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 100%) !important;
+    color: #03201d !important;
+    transform: scale(1.1) rotate(6deg) !important;
+}
+
+.service-link {
+    font-size: 14.5px !important;
+    color: var(--primary) !important;
+}
+
+.service-link:hover {
+    color: #c4962c !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. ABOUT SECTION (عن المديرية)
+   -------------------------------------------------------------------------- */
+.about-card {
+    border-radius: 28px !important;
+    border: 1.5px solid rgba(212, 163, 44, 0.35) !important;
+    box-shadow: 0 20px 55px rgba(0, 40, 36, 0.1) !important;
+}
+
+.about-feat-item {
+    background: var(--bg-card-secondary);
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    transition: all 0.25s ease;
+}
+
+.about-feat-item:hover {
+    border-color: #d4a32c;
+    transform: translateX(-4px);
+}
+
+.about-feat-item i {
+    color: #10b981 !important;
+}
+
+.about-overlay-card {
+    border-radius: 20px !important;
+    border: 2px solid rgba(212, 163, 44, 0.5) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER (الفوتر الملكي الفاخر)
+   -------------------------------------------------------------------------- */
+.footer-main {
+    background: linear-gradient(180deg, #021815 0%, #010d0b 100%) !important;
+    border-top: 3px solid #d4a32c !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.footer-custom-credits {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 163, 44, 0.35);
+    border-radius: 16px;
+    padding: 12px 20px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #f7d571 0%, #d4a32c 100%) !important;
+    color: #03201d !important;
+    box-shadow: 0 8px 25px rgba(212, 163, 44, 0.5) !important;
+    border: 2px solid #ffffff !important;
+    font-size: 18px !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.back-to-top:hover {
+    transform: translateY(-6px) scale(1.1) !important;
+    box-shadow: 0 14px 35px rgba(212, 163, 44, 0.7) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. DARK THEME OVERRIDES (الوضع الليلي الخارق)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .top-notice-bar {
+    background: linear-gradient(90deg, #010a09 0%, #041a17 50%, #010a09 100%) !important;
+}
+
+[data-theme="dark"] .header-main {
+    background: rgba(4, 18, 16, 0.95) !important;
+    border-bottom-color: rgba(229, 193, 88, 0.4) !important;
+}
+
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, #010c0b 0%, #051f1c 50%, #092e29 100%) !important;
+}
+
+[data-theme="dark"] .hero-emblem-card {
+    background: rgba(8, 28, 25, 0.85) !important;
+    border-color: rgba(229, 193, 88, 0.5) !important;
+}
+
+[data-theme="dark"] .stats-grid,
+[data-theme="dark"] .filter-card,
+[data-theme="dark"] .services-quick-access,
+[data-theme="dark"] .about-card {
+    background: #091c1a !important;
+    border-color: rgba(44, 212, 185, 0.25) !important;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .school-card,
+[data-theme="dark"] .platform-card,
+[data-theme="dark"] .service-card {
+    background: #0b221f !important;
+    border-color: rgba(44, 212, 185, 0.2) !important;
+}
+
+[data-theme="dark"] .school-card:hover,
+[data-theme="dark"] .platform-card:hover,
+[data-theme="dark"] .service-card:hover {
+    border-color: #f7d571 !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 193, 88, 0.25) !important;
+}
+
+[data-theme="dark"] .card-meta-list {
+    background: #061513 !important;
+    border-color: rgba(44, 212, 185, 0.12) !important;
+}
+
+[data-theme="dark"] .meta-icon {
+    background: rgba(44, 212, 185, 0.15) !important;
+    color: #2cd4b9 !important;
+    border-color: rgba(44, 212, 185, 0.3) !important;
+}
+
+[data-theme="dark"] .stat-number {
+    background: linear-gradient(135deg, #ffffff 0%, #f7d571 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+

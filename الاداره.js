@@ -53,7 +53,7 @@
             }
             if (content.heroBtnSecondary) {
                 const btn = document.querySelector('.hero-buttons .btn-secondary');
-                if (btn) btn.innerHTML = `<i class="fa-solid fa-grid-2"></i> ${content.heroBtnSecondary}`;
+                if (btn) btn.innerHTML = `<i class="fa-solid fa-layer-group"></i> ${content.heroBtnSecondary}`;
             }
             if (content.emblumTitle) {
                 const el = document.querySelector('.hero-emblem-card h4');
@@ -81,7 +81,7 @@
             }
             if (content.servicesSectionSub) {
                 const els = document.querySelectorAll('.section-subtitle');
-                if (els[1]) els[1].innerHTML = `<i class="fa-solid fa-sparkles"></i> ${content.servicesSectionSub}`;
+                if (els[1]) els[1].innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> ${content.servicesSectionSub}`;
             }
             if (content.servicesSectionMain) {
                 const els = document.querySelectorAll('.section-main-title');
