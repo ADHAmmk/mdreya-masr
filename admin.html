@@ -199,7 +199,7 @@
             gap: 8px;
         }
 
-        /* App Layout */
+       
         .app-shell { display: flex; min-height: 100vh; }
         .sidebar {
             position: fixed;
@@ -324,7 +324,7 @@
         }
         .side-link:hover { color: var(--gold-light); background: rgba(255, 255, 255, 0.04); }
 
-        /* Main Workspace */
+       
         .main {
             flex: 1;
             min-height: 100vh;
@@ -409,7 +409,7 @@
             box-shadow: 0 0 10px var(--gold);
         }
 
-        /* Buttons */
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -472,7 +472,7 @@
             border-radius: 9px;
         }
 
-        /* Workspace Content */
+        
         .workspace {
             padding: 28px clamp(16px, 3vw, 36px) 60px;
             max-width: 1500px;
@@ -483,7 +483,7 @@
         .panel.active { display: block; }
         @keyframes panelFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Cards & Section Containers */
+        
         .dash-card {
             background: var(--surface);
             border: 1.5px solid var(--line);
@@ -1077,7 +1077,7 @@
         }
         .img-preview-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-        /* Toast notifications */
+        
         .toast-region {
             position: fixed;
             bottom: 24px;
@@ -1127,7 +1127,7 @@
 </head>
 <body>
 
-    <!-- 1. LOGIN SCREEN -->
+    
     <section class="login-screen" id="loginScreen">
         <div class="login-card">
             <div class="login-logo">
@@ -1376,7 +1376,7 @@
                     </div>
                 </section>
 
-                <!-- 2. ADMINISTRATIONS PANEL (دليل الإدارات) -->
+                
                 <section class="panel" id="panel-administrations">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1404,12 +1404,12 @@
                             </div>
                         </div>
 
-                        <!-- Administrations Cards Container (3 Columns Grid) -->
+                       
                         <div class="admins-cards-grid" id="adminsListContainer"></div>
                     </div>
                 </section>
 
-                <!-- 3. SITE CONTENT PANEL (نصوص ومحتوى الموقع) -->
+               
                 <section class="panel" id="panel-content">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1426,7 +1426,7 @@
                     </div>
                 </section>
 
-                <!-- 4. SERVICES PANEL (الخدمات الإلكترونية) -->
+                
                 <section class="panel" id="panel-services">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1489,7 +1489,7 @@
                     </div>
                 </section>
 
-                <!-- 7. FEATURES PANEL (مميزات المديرية) -->
+                
                 <section class="panel" id="panel-features">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1510,7 +1510,7 @@
                     </div>
                 </section>
 
-                <!-- 8. VISIBILITY PANEL (إظهار وإخفاء الأقسام) -->
+               
                 <section class="panel" id="panel-visibility">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1527,7 +1527,7 @@
                     </div>
                 </section>
 
-                <!-- 9. IMAGES PANEL (الصور والشعارات) -->
+                
                 <section class="panel" id="panel-images">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1544,7 +1544,7 @@
                     </div>
                 </section>
 
-                <!-- 10. BACKUP & EXPORT (النسخ الاحتياطي) -->
+                
                 <section class="panel" id="panel-backup">
                     <div class="dash-card">
                         <div class="dash-card-header">
@@ -1587,7 +1587,7 @@
                             </div>
                         </div>
 
-                        <!-- Change Password Card -->
+                      
                         <div class="dash-card" style="margin-top:20px;border-color:var(--line-gold);background:var(--surface-2);">
                             <div class="dash-card-header" style="margin-bottom:14px;padding-bottom:12px;">
                                 <div class="dash-card-header-info">
@@ -1698,7 +1698,7 @@
         </div>
     </div>
 
-    <!-- 4. MODAL: EDIT / ADD SERVICE -->
+    
     <div class="modal-backdrop" id="serviceModal">
         <div class="modal-dialog" style="width:min(100%, 650px);">
             <div class="modal-header">
@@ -1741,7 +1741,7 @@
         </div>
     </div>
 
-    <!-- 5. MODAL: EDIT / ADD QUICK LINK -->
+   
     <div class="modal-backdrop" id="quickLinkModal">
         <div class="modal-dialog" style="width:min(100%, 600px);">
             <div class="modal-header">
@@ -1776,7 +1776,7 @@
         </div>
     </div>
 
-    <!-- 6. MODAL: EDIT / ADD STAT -->
+   
     <div class="modal-backdrop" id="statModal">
         <div class="modal-dialog" style="width:min(100%, 550px);">
             <div class="modal-header">
@@ -1807,7 +1807,7 @@
         </div>
     </div>
 
-    <!-- Toast Notifications Region -->
+   
     <div class="toast-region" id="toastRegion"></div>
 
     <!-- Scripts -->
@@ -1820,7 +1820,7 @@
         // Auth
         const PASSWORD_KEY = "admin_master_password";
         const AUTH_SESSION_KEY = "dakahlia_admin_logged_in";
-        const getPassword = () => localStorage.getItem(PASSWORD_KEY) || "adham";
+        const getPassword = () => localStorage.getItem(PASSWORD_KEY) || "Dakahlia";
         
         const loginScreen = document.getElementById("loginScreen");
         const appShell = document.getElementById("appShell");
@@ -1868,7 +1868,7 @@
 
         checkAuth();
 
-        // CMS Store
+       
         const STORAGE_KEY = "site_cms_v1";
         const DEFAULTS = {
             content: {
@@ -2022,7 +2022,7 @@
             }
         });
 
-        // Tabs Navigation
+      
         const titles = {
             overview: ["نظرة عامة", "لوحة التحكم المركزية ببوابة مديرية التربية والتعليم بالدقهلية"],
             administrations: ["دليل الإدارات التعليمية", "إضافة، تعديل، حذف، أو إعادة ترتيب الإدارات الـ 17"],
@@ -2080,9 +2080,7 @@
             document.getElementById("adminListCount").textContent = adminsCount;
         }
 
-        // ==========================================
-        // 1. ADMINISTRATIONS (دليل الإدارات)
-        // ==========================================
+       
         const adminSearchInput = document.getElementById("adminSearchInput");
         adminSearchInput.addEventListener("input", renderAdministrations);
 
@@ -2354,7 +2352,7 @@
                 .filter(Boolean);
 
             if (idVal) {
-                // Edit
+                
                 const admin = state.administrations.find(a => String(a.id) === String(idVal));
                 if (admin) {
                     admin.name = name;
@@ -2370,7 +2368,7 @@
                     toast("success", `تم تحديث بيانات "${admin.name}".`);
                 }
             } else {
-                // Add new
+               
                 const nextId = state.administrations.reduce((max, a) => Math.max(max, Number(a.id) || 0), 0) + 1;
                 state.administrations.push({
                     id: nextId,
@@ -2396,9 +2394,7 @@
             updateCounts();
         });
 
-        // ==========================================
-        // 2. CONTENT (محتوى الموقع)
-        // ==========================================
+     
         const contentGroups = [
             {
                 title: "الهوية والشريط العلوي وشريط الأخبار",
@@ -2490,9 +2486,6 @@
             });
         }
 
-        // ==========================================
-        // 3. SERVICES (الخدمات الإلكترونية)
-        // ==========================================
         function renderServices() {
             const container = document.getElementById("servicesListContainer");
             container.innerHTML = "";
@@ -2607,9 +2600,7 @@
             updateCounts();
         });
 
-        // ==========================================
-        // 4. QUICK LINKS (المنصات والروابط المباشرة)
-        // ==========================================
+        
         function renderQuickLinks() {
             const container = document.getElementById("quickLinksListContainer");
             container.innerHTML = "";
@@ -2717,9 +2708,7 @@
             updateCounts();
         });
 
-        // ==========================================
-        // 5. STATS (شريط الإحصائيات)
-        // ==========================================
+        
         function renderStats() {
             const container = document.getElementById("statsListContainer");
             container.innerHTML = "";
@@ -2806,9 +2795,7 @@
             renderStats();
         });
 
-        // ==========================================
-        // 6. FEATURES (مميزات المديرية)
-        // ==========================================
+       
         function renderFeatures() {
             const container = document.getElementById("featuresListContainer");
             container.innerHTML = "";
@@ -2851,9 +2838,7 @@
             toast("success", "تمت إضافة سطر جديد للمميزات.");
         });
 
-        // ==========================================
-        // 7. VISIBILITY (إظهار وإخفاء الأقسام)
-        // ==========================================
+       
         const visibilitySections = [
             { key: "notice", title: "شريط التنبيهات والأخبار العلوي", desc: "الشريط في أعلى الموقع الذي يحتوي على التنبيه العاجل والساعة" },
             { key: "hero", title: "قسم الواجهة الرئيسية (Hero Section)", desc: "العناوين والشعار العائم والأزرار الرئيسية" },
@@ -2893,9 +2878,7 @@
             toast("info", `تم ${val ? 'إظهار' : 'إخفاء'} قسم "${key}".`);
         };
 
-        // ==========================================
-        // 8. IMAGES & LOGOS (الصور والشعارات)
-        // ==========================================
+        
         const imagesMeta = [
             { key: "brandLogo", title: "شعار المديرية الرسمي", desc: "يظهر في الهيدر، الفوتر، وقائمة الهاتف" },
             { key: "eagle", title: "شعار النسر المصري (الوزارة)", desc: "يظهر بجانب شعار المديرية في أعلى وأسفل الموقع" },
@@ -2994,9 +2977,8 @@
             input.value = "";
         };
 
-        // ==========================================
-        // 9. BACKUP & RESTORE
-        // ==========================================
+      
+        
         document.getElementById("btnExportJson").addEventListener("click", () => {
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
             const dl = document.createElement("a");
@@ -3044,7 +3026,7 @@
             toast("info", "تمت استعادة الإعدادات والبيانات الأصلية للموقع.");
         });
 
-        // Change Master Password Handler
+      
         const changePasswordForm = document.getElementById("changePasswordForm");
         if (changePasswordForm) {
             changePasswordForm.addEventListener("submit", (e) => {
@@ -3099,7 +3081,7 @@
 
         renderAll();
 
-        // Warn before leaving if dirty
+        
         window.addEventListener("beforeunload", (e) => {
             if (isDirty) {
                 e.preventDefault();
